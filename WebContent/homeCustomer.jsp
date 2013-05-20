@@ -7,6 +7,6 @@
 		<title>BGS-Shop/homeCustomer</title>
 	</head>
 	<body>
-		<h1>Customer</h1>
+		<p><i>Ciao, ${cliente.username}!</i></p>
 	</body>
 </html>

@@ -7,6 +7,6 @@
 		<title>BGS-Shop/homeAdmin</title>
 	</head>
 	<body>
-		<h1>Admin</h1>
+		<p><i>Ciao, ${cliente.username}!</i></p>
 	</body>
 </html>
