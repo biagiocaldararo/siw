@@ -8,5 +8,8 @@
 	</head>
 	<body>
 		<p><i>Ciao, ${cliente.username}!</i></p>
+		<form action="vaiInserimentoProdotto" method="get">
+			<input type="submit" name="submit" value="Inserisci Prodotto"/>
+		</form>
 	</body>
 </html>
