@@ -73,12 +73,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 					this.connection.close();
 			} 
 			catch (SQLException e) {
-				try {
-					throw new PersistenceException(e.getMessage());
-				} 
-				catch (PersistenceException e1) {
-					e1.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
 
@@ -113,12 +108,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 					this.connection.close();
 			} 
 			catch (SQLException e) {
-				try {
-					throw new PersistenceException(e.getMessage());
-				} 
-				catch (PersistenceException e1) {
-					e1.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
 
@@ -153,12 +143,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 					this.connection.close();
 			} 
 			catch (SQLException e) {
-				try {
-					throw new PersistenceException(e.getMessage());
-				} 
-				catch (PersistenceException e1) {
-					e1.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
 
@@ -194,12 +179,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 					this.connection.close();
 			} 
 			catch (SQLException e) {
-				try {
-					throw new PersistenceException(e.getMessage());
-				} 
-				catch (PersistenceException e1) {
-					e1.printStackTrace();
-				}
+				e.printStackTrace();
 			}
 		}
 
