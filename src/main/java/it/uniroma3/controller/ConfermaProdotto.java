@@ -40,7 +40,9 @@ public class ConfermaProdotto extends HttpServlet {
 		FacadeProdotto facade = new FacadeProdotto();
 		
 		if (risposta.equals("si"))
-		    if(facade.inserisciProdotto((String)sessione.getAttribute("nome"),(String)sessione.getAttribute("descrizione"),(double)sessione.getAttribute("prezzo")))
+		    if (facade.inserisciProdotto((String)sessione.getAttribute("nome"),
+		    						     (String)sessione.getAttribute("descrizione"),
+		    						     (Double)sessione.getAttribute("prezzo")))
 		    	destinazione = "/inserimentoCompletato.jsp";
 		    else 
 		    	destinazione = "/erroreInserimento.jsp";
