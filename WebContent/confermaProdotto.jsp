@@ -4,12 +4,16 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BGS-Shop/homeAdmin</title>
+		<title>BGS-Shop/confermaProdotto</title>
 	</head>
 	<body>
-		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
-		<form action="vaiInserimentoProdotto" method="get">
-			<input type="submit" name="submit" value="Inserisci Prodotto"/>
+		<form action="confermaProdotto" method="get">
+			<b> Sicuro di voler inserire questo prodotto? </b>
+			<p> Nome: ${nome}</p>
+			<p> Descrizione: ${descrizione}</p>
+			<p> Prezzo: ${prezzo}</p>
+			<input type="submit" name="risp" value="si" />
+			<input type="submit" name="risp" value="no" />
 		</form>
 	</body>
 </html>

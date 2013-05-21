@@ -9,4 +9,9 @@ public class FacadeProdotto {
 		ProdottoDAOPostgres p = new ProdottoDAOPostgres();
 		return p.findAll();
 	}
+	
+	public boolean inserisciProdotto(String nome, String descrizione, double prezzo){
+		return true;
+	}
+	
 }

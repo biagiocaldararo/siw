@@ -7,7 +7,7 @@
 		<title>BGS-Shop/inserisciProdotto</title>
 	</head>
 	<body>
-		<p><i>Ciao, ${cliente.username}!</i></p>
+		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
 		<form action="inserisciProdotto" method="get">
 			<h1> Inserimento Prodotto</h1>
 			
