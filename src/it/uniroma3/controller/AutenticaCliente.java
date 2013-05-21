@@ -1,7 +1,5 @@
 package it.uniroma3.controller;
 
-import it.uniroma3.model.*;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AutenticaCliente
@@ -39,27 +36,15 @@ public class AutenticaCliente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String destinazione = "/loginFallito.jsp";
+		LoginAction login = new LoginAction();
+		boolean esito = login.esegui(request);
+		
+		if (esito)
+			destinazione = "/homeAdmin.jsp";
+			
 		ServletContext application = getServletContext();
-		HttpSession sessione = request.getSession();
-		RequestDispatcher rd;
-		
-		FacadeCliente facade= new FacadeCliente();
-		ClienteHelper helper = new ClienteHelper(request, facade.trovaUtente(request.getParameter("username")));
-		
-		String destinazione = "/home.jsp";
-		
-		if(helper.login()){
-			Cliente c = helper.getCliente();
-			if(c.getRuolo().equals("admin"))
-				destinazione = "/homeAdmin.jsp";
-			else
-				destinazione = "/homeCustomer.jsp";
-			sessione.setAttribute("cliente", c);
-		}
-		
-		rd = application.getRequestDispatcher(destinazione);
-		
+		RequestDispatcher rd = application.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
 	}
-
 }
