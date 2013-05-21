@@ -1,9 +1,7 @@
 package it.uniroma3.persistence.postgres;
 
 import java.sql.*;
-
 import java.util.*;
-
 import it.uniroma3.model.*;
 import it.uniroma3.persistence.*;
 
