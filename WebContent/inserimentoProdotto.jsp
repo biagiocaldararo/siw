@@ -20,9 +20,10 @@
 			<p> Prezzo* <input type="text" name="prezzo"/>
 			<font color="red">${errori["prezzo"]}</font></p>
 			
-			<p><input type="submit" name="sumbit" value="invia" /></p>
+			<p><input type="submit" name="submit" value="Inserisci" /></p>
 			
 			<p><i> * Campo obligatorio </i></p>
 		</form>
+		<a href="homeAdmin.jsp"><input type="button" value="Home"/></a>
 	</body>
 </html>

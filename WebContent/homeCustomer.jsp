@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ page import="it.uniroma3.model.*" %>
+<%
+   Cliente cliente = (Cliente) session.getAttribute("cliente");
+   boolean autorizzato = true;
+   if (cliente!=null)
+       autorizzato &= (cliente.getRuolo().equals("customer"));
+   else 
+   	   autorizzato = false;
+   if (!autorizzato) {
+	   out.clear();
+	   RequestDispatcher rd = application.getRequestDispatcher("/loginFallito.jsp");
+   	   rd.forward(request, response);
+   	   return;
+   }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
