@@ -1,7 +1,6 @@
 @CHARSET "ISO-8859-1";
 
 table {
-	border: double; /* tipo bordo: dotted, dashed, solid, double */
 	border-width: 2px; /* spessore bordo */
-	padding: 1.5em;	/* spazio tra il testo e i bordi:	padding-top:25px; padding-bottom:25px; padding-right:50px; padding-left:50px; */
+	padding: 0.5em;	/* spazio tra il testo e i bordi:	padding-bottom:25px; padding-right:50px;*/
 }

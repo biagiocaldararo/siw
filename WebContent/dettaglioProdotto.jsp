@@ -12,5 +12,6 @@
 		<p><b>Nome: </b>${prodotto.nome}</p>
 		<p><b>Descrizione: </b>${prodotto.descrizione}</p>
 		<p><b>Prezzo: </b>${prodotto.prezzo}</p>
+		<a href="catalogoProdotti.jsp"><input type="button" value="Catalogo Prodotti"/></a>
 	</body>
 </html>

@@ -26,5 +26,6 @@
 			</c:forEach>
 			</table>
 		</form>
+		<a href="home.jsp"><input type="button" value ="Home"/></a>
 	</body>
 </html>
