@@ -20,8 +20,10 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 		
 		try {
 			this.connection = data.getConnection();
+			long cod = ProductCodBroker.getCod(this.connection);
+			prodotto.setCod(cod);
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, prodotto.getCod());
+			this.statement.setLong(1, cod);
 			this.statement.setString(2, prodotto.getNome());
 			this.statement.setString(3, prodotto.getDescrizione());
 			this.statement.setDouble(4, prodotto.getPrezzo());

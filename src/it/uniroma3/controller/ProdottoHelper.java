@@ -4,31 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.*;
 
+import it.uniroma3.model.*;
+
 public class ProdottoHelper {
 	private HttpServletRequest request;
-	private String nome;
-	private String descrizione;
-	private double prezzo;
+	private Prodotto prodotto;
 	private Map<String,String> errori;
 	
 	public ProdottoHelper(HttpServletRequest request){
 		this.request = request;
-		this.nome = request.getParameter("nome");
-		this.descrizione = request.getParameter("descrizione");
-		this.prezzo = 0;
+		this.prodotto = new Prodotto(-1, request.getParameter("nome"), request.getParameter("descrizione"), 0);
 		this.errori = new HashMap<String,String>();
 	}
 	
-	public String getNome(){
-		return this.nome;
-	}
-	
-	public String getDescrizione(){
-		return this.descrizione;
-	}
-	
-	public double getPrezzo(){
-		return this.prezzo;
+	public Prodotto getProdotto() {
+		return prodotto;
 	}
 	
 	public Map<String,String> getErrori(){
@@ -37,15 +27,17 @@ public class ProdottoHelper {
 	
 	public boolean convalida(){		
 		boolean tuttoOk = true;
+		String nome = this.prodotto.getNome();
+		String desc = this.prodotto.getDescrizione();
 		String stringPrezzo = request.getParameter("prezzo");
 		String campoObbligatorio = "Campo obligatorio";
 		String errorePrezzo = "Valore non valido";
 		
-		if (this.nome == null || this.nome.isEmpty()){
+		if (nome == null || nome.isEmpty()){
 			this.errori.put("nome", campoObbligatorio);
 		    tuttoOk = false;
 		}
-		if (this.descrizione == null || this.descrizione.isEmpty()){
+		if (desc == null || desc.isEmpty()){
 			this.errori.put("descrizione", campoObbligatorio);
 			tuttoOk = false;
 		}
@@ -55,8 +47,8 @@ public class ProdottoHelper {
 		}
 		else {
 			try {
-				this.prezzo = Double.valueOf(stringPrezzo);
-				if (this.prezzo <= 0){
+				this.prodotto.setPrezzo(Double.valueOf(stringPrezzo));
+				if (this.prodotto.getPrezzo() <= 0){
 					this.errori.put("prezzo", errorePrezzo);
 					tuttoOk = false;
 				}

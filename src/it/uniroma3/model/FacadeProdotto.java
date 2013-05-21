@@ -10,8 +10,9 @@ public class FacadeProdotto {
 		return p.findAll();
 	}
 	
-	public boolean inserisciProdotto(String nome, String descrizione, double prezzo){
-		return true;
+	public boolean inserisciProdotto(Prodotto prodotto){
+		ProdottoDAOPostgres p = new ProdottoDAOPostgres();
+		return p.insert(prodotto);
 	}
 	
 }
