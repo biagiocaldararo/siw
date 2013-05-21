@@ -7,6 +7,22 @@
 		<title>BGS-Shop/inserisciProdotto</title>
 	</head>
 	<body>
-		<h1>Inserisci Prodotto</h1>
+		<p><i>Ciao, ${cliente.username}!</i></p>
+		<form action="inserisciProdotto" method="get">
+			<h1> Inserimento Prodotto</h1>
+			
+			<p> Nome* <input type="text" name="nome"/>
+			<font color="red">${errori["nome"]}</font></p>
+				                    	
+			<p> Descrizione* <input type="text" name="descrizione"/>
+			<font color="red">${errori["descrizione"]}</font></p>             				
+			
+			<p> Prezzo* <input type="text" name="prezzo"/>
+			<font color="red">${errori["prezzo"]}</font></p>
+			
+			<p><input type="submit" name="sumbit" value="invia" /></p>
+			
+			<p><i> * Campo obligatorio </i></p>
+		</form>
 	</body>
 </html>
