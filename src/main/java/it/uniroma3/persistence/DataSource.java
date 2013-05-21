@@ -3,15 +3,14 @@ package it.uniroma3.persistence;
 import java.sql.*;
 
 public class DataSource {
-	private String dbURI = "jdbc:postgresql://localhost/BGS-Shop";
-	private String userName = "postgres";
-	private String password = "postgres";
+	private String dbURI = "jdbc:sqlite:bgsshop.sqlite";
 
 	public Connection getConnection() throws PersistenceException {
+		// System.out.println(System.getProperty("user.dir"));
 		Connection connection = null;
 		try {
-		    Class.forName("org.postgresql.Driver");
-		    connection = DriverManager.getConnection(dbURI,userName, password);
+		    Class.forName("org.sqlite.JDBC");
+		    connection = DriverManager.getConnection(dbURI);
 		} catch (ClassNotFoundException e) {
 			throw new PersistenceException(e.getMessage());
 		} catch(SQLException e) {
