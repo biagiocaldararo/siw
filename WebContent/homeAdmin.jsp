@@ -3,15 +3,17 @@
 <%@ page import="java.util.*" %>
 <%@ page import="it.uniroma3.model.*" %>
 <%
-	Cliente cliente = (Cliente) session.getAttribute("cliente");
+   Cliente cliente = (Cliente) session.getAttribute("cliente");
    boolean autorizzato = true;
    if (cliente!=null)
        autorizzato &= (cliente.getRuolo().equals("admin"));
    else 
    	   autorizzato = false;
    if (!autorizzato) {
+	   out.clear();
 	   RequestDispatcher rd = application.getRequestDispatcher("/homeCustomer.jsp");
    	   rd.forward(request, response);
+   	   return;
    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

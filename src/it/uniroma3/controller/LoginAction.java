@@ -7,10 +7,10 @@ import it.uniroma3.model.*;
 
 public class LoginAction {
 	public boolean esegui(HttpServletRequest request){
-		FacadeAutenticazione facade = new FacadeAutenticazione();
+		FacadeAutenticazione authService = new FacadeAutenticazione();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Cliente cliente = facade.login(username, password);
+		Cliente cliente = authService.login(username, password);
 		boolean autenticato = false;
 		
 		if(cliente!=null){

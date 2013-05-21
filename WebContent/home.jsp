@@ -10,8 +10,8 @@
 		<form action="login" method="post">
 			<p>Username <input type="text" name="username"/>
 			   Password  <input type="password" name="password"/>
-			   <input type="submit" name="submit" value="Accedi"/></p>
-			<p><font color="red">${errore}</font></p>
+			   <input type="submit" name="submit" value="Accedi"/>
+			</p>
 		</form>
 		<h1>BGS-Shop</h1>
 		<h2>Buy Great Solutions</h2>
