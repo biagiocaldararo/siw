@@ -24,8 +24,6 @@
 	</head>
 	<body>
 		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
-		<form action="vaiInserimentoProdotto" method="get">
-			<input type="submit" name="submit" value="Inserisci Prodotto"/>
-		</form>
+		<a href="inserimentoProdotto.jsp"><input type="button" value="Inserisci Prodotto"/></a>
 	</body>
 </html>

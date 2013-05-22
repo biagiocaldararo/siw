@@ -40,9 +40,7 @@ public class InserimentoProdotto extends HttpServlet {
 		
 		if(helper.convalida()){
 			destinazione = "/confermaProdotto.jsp";
-			sessione.setAttribute("nome", helper.getNome());
-			sessione.setAttribute("descrizione", helper.getDescrizione());
-			sessione.setAttribute("prezzo", helper.getPrezzo());
+			sessione.setAttribute("prodotto", helper.getProdotto());
 		}
 
 		rd = application.getRequestDispatcher(destinazione);

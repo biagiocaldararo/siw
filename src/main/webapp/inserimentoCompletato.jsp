@@ -4,16 +4,16 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BGS-Shop/confermaProdotto</title>
+		<title> Inserimento Completato </title>
 	</head>
 	<body>
-		<form action="confermaProdotto" method="get">
-			<b> Sicuro di voler inserire questo prodotto? </b>
+		<form action="continuaInserimento" method="get">
+			<h1> Inserimento Completato! </h1>
+			<h2> Specifiche del Prodotto:</h2>
 			<p> Nome: ${prodotto.nome}</p>
 			<p> Descrizione: ${prodotto.descrizione}</p>
 			<p> Prezzo: ${prodotto.prezzo}</p>
-			<input type="submit" name="risp" value="si" />
-			<input type="submit" name="risp" value="no" />
 		</form>
+		<a href="inserimentoProdotto.jsp"><input type="button" value="Inserisci un altro Prodotto"/></a>
 	</body>
 </html>
