@@ -13,18 +13,15 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	@Override
 	public boolean insert(Prodotto prodotto) {
 		this.data = new DataSource();
-		String insert = "insert into prodotto(cod, nome, descrizione, prezzo) values (?,?,?,?)";
+		String insert = "insert into prodotto(nome, descrizione, prezzo) values (?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
-			long cod = ProductCodBroker.getCod(this.connection);
-			prodotto.setCod(cod);
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, cod);
-			this.statement.setString(2, prodotto.getNome());
-			this.statement.setString(3, prodotto.getDescrizione());
-			this.statement.setDouble(4, prodotto.getPrezzo());
+			this.statement.setString(1, prodotto.getNome());
+			this.statement.setString(2, prodotto.getDescrizione());
+			this.statement.setDouble(3, prodotto.getPrezzo());
 			inserito = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
