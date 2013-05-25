@@ -15,6 +15,7 @@
 				<th><b>Prodotto</b></th>
 				<th><b>Quantità</b></th>
 				<th><b>Costo</b></th>
+				<th></th>
 			</tr>
 			<c:forEach var="rigaOrdine" items ="${ordineCorrente.righeOrdine}">
 				<tr>
@@ -22,11 +23,14 @@
 					<td> ${rigaOrdine.prodotto.nome} </td>
 					<td> ${rigaOrdine.quantita} </td>
 					<td> ${rigaOrdine.costo} </td>
+					<form action="rimuoviDalCarrello.do" method="post">
+						<td><input type="submit" name="${rigaOrdine.prodotto.cod}" value="Rimuovi dal Carrello"/></td>
+					</form>
 			   	</tr>
 			</c:forEach>
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
 		</table>
 		<p></p>
-		<form><input type="button" value="Indietro" onClick="history.go(-1);"></form>
+		<a href="nuovoOrdine.jsp"><input type="button" value ="Indietro"/></a>
 		</body>
 </html>

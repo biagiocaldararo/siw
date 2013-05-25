@@ -62,6 +62,13 @@ public class Ordine {
 		RigaOrdine rigaOrdine = new RigaOrdine(this, prodotto, quantita);
 		this.righeOrdine.add(rigaOrdine);
 	}
+	
+	public void eliminaRiga(long cod){
+		for(RigaOrdine riga: this.righeOrdine){
+			if(riga.getProdotto().getCod()==cod)
+				righeOrdine.remove(riga);
+		}
+	}
 
 	public double getImporto() {
 		this.setImporto(0);
