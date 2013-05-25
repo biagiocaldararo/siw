@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
-		<form action="inserisciProdotto" method="get">
+		<form action="inserisciProdotto.do" method="post">
 			<h1> Inserimento Prodotto</h1>
 			
 			<p> Nome* <input type="text" name="nome"/>

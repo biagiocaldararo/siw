@@ -4,14 +4,11 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BGS-Shop/Product</title>
+		<title>BGS-Shop/error</title>
 	</head>
 	<body>
-		<h1>Specifiche del Prodotto</h1>
-		<p><b>Cod: </b>${prodotto.cod}</p>
-		<p><b>Nome: </b>${prodotto.nome}</p>
-		<p><b>Descrizione: </b>${prodotto.descrizione}</p>
-		<p><b>Prezzo: </b>${prodotto.prezzo}</p>
-		<form><input type="button" value="Indietro" onClick="history.go(-1);"></form>
+		<h1>Errore!</h1>
+		<p>Ops.. qualcosa è andato storto!</p>
+		<a href="home.jsp"><input type="button" value="Home"/></a>
 	</body>
 </html>

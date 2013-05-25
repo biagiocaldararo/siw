@@ -11,27 +11,28 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	private DataSource data;
 	private PreparedStatement statement;
 	private Connection connection;
+	private CodBroker broker = new ProductCodBroker();
 
 	@Override
 	public boolean insert(Prodotto prodotto) {
-		this.data = new DataSource();
-		String insert = "insert into prodotto(nome, descrizione, prezzo) values (?,?,?)";
+		this.data = new DataSourcePostgres();
+		String insert = "insert into prodotto(cod, nome, descrizione, prezzo) values (?,?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
+			long cod = this.broker.getCod(this.connection);
+			prodotto.setCod(cod);
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setString(1, prodotto.getNome());
-			this.statement.setString(2, prodotto.getDescrizione());
-			this.statement.setDouble(3, prodotto.getPrezzo());
+			this.statement.setLong(1, cod);
+			this.statement.setString(2, prodotto.getNome());
+			this.statement.setString(3, prodotto.getDescrizione());
+			this.statement.setDouble(4, prodotto.getPrezzo());
 			inserito = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -49,7 +50,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 
 	@Override
 	public boolean delete(Prodotto prodotto) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String delete = "delete from prodotto where cod=?";
 		int eliminato = 0;
 		
@@ -62,9 +63,6 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -82,7 +80,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 
 	@Override
 	public boolean update(Prodotto prodotto) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String update = "update prodotto set nome =?, descrizione=?, prezzo=? where cod=?";
 		int aggiornato= 0;
 		
@@ -98,9 +96,6 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -118,7 +113,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 
 	@Override
 	public Prodotto findByCod(long cod) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String query= "select cod, nome, descrizione, prezzo from prodotto where cod=?";
 		Prodotto prodotto = null;	
 		
@@ -133,9 +128,6 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 		catch (SQLException e) {
 			e.printStackTrace();				
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();	
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -153,7 +145,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	
 	@Override
 	public List<Prodotto> findAll() {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String query= "select cod, nome, descrizione, prezzo from prodotto";
 		List<Prodotto> prodotti = new LinkedList<Prodotto>();	
 		
@@ -169,9 +161,6 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 		catch (SQLException e) {
 			e.printStackTrace();				
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();	
-		}
 		finally {
 			try {
 				if (this.statement != null) 

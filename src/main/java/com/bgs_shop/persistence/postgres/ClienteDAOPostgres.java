@@ -15,7 +15,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 
 	@Override
 	public boolean insert(Cliente cliente) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String insert = "insert into cliente(username, password, ruolo) values (?,?,?)";
 		int inserito = 0;
 		
@@ -30,9 +30,6 @@ public class ClienteDAOPostgres implements ClienteDAO {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -50,7 +47,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 
 	@Override
 	public boolean delete(Cliente cliente) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String delete = "delete from cliente where username=?";
 		int eliminato = 0;
 		
@@ -63,9 +60,6 @@ public class ClienteDAOPostgres implements ClienteDAO {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -83,7 +77,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 
 	@Override
 	public boolean update(Cliente cliente) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String update = "update cliente set password=?, ruolo=? where username=?";
 		int aggiornato= 0;
 		
@@ -98,9 +92,6 @@ public class ClienteDAOPostgres implements ClienteDAO {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -118,7 +109,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 
 	@Override
 	public Cliente findByUsername(String username) {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String query= "select username, password, ruolo from cliente where username=?";
 		Cliente cliente = null;	
 		
@@ -133,9 +124,6 @@ public class ClienteDAOPostgres implements ClienteDAO {
 		catch (SQLException e) {
 			e.printStackTrace();				
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();	
-		}
 		finally {
 			try {
 				if (this.statement != null) 
@@ -153,7 +141,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 	
 	@Override
 	public List<Cliente> findAll() {
-		this.data = new DataSource();
+		this.data = new DataSourcePostgres();
 		String query= "select username, password, ruolo from cliente";
 		List<Cliente> clienti = new LinkedList<Cliente>();	
 		
@@ -169,9 +157,6 @@ public class ClienteDAOPostgres implements ClienteDAO {
 		catch (SQLException e) {
 			e.printStackTrace();				
 		} 
-		catch (PersistenceException e) {
-			e.printStackTrace();	
-		}
 		finally {
 			try {
 				if (this.statement != null) 

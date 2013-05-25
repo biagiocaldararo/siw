@@ -6,11 +6,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>BGS-Shop/store</title>
-		<link rel="stylesheet" type="text/css" href="catalogoProdottiStyle.css" />
 	</head>
 	<body>
 		<h1>Catalogo Prodotti</h1>
-		<form action="dettagliProdotto" method="get">
+		<form action="dettagliProdotto.do" method="post">
 			<table border = "4">
 				<tr>
 					<th><b>Codice Prodotto</b></th>
@@ -26,6 +25,7 @@
 			</c:forEach>
 			</table>
 		</form>
+		<p></p>
 		<a href="home.jsp"><input type="button" value ="Home"/></a>
 	</body>
 </html>

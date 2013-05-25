@@ -7,7 +7,7 @@
 		<title>BGS-Shop/confermaProdotto</title>
 	</head>
 	<body>
-		<form action="confermaProdotto" method="get">
+		<form action="confermaProdotto.do" method="post">
 			<b> Sicuro di voler inserire questo prodotto? </b>
 			<p> Nome: ${prodotto.nome}</p>
 			<p> Descrizione: ${prodotto.descrizione}</p>

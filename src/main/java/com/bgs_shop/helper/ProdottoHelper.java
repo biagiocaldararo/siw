@@ -1,44 +1,33 @@
-package com.bgs_shop.controller;
+package com.bgs_shop.helper;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.bgs_shop.model.*;
-
 import java.util.*;
 
-
-public class ProdottoHelper {
-	private HttpServletRequest request;
-	private Prodotto prodotto;
+public class ProdottoHelper extends Helper{
+	private String nome;
+	private String descrizione;
+	private double prezzo;
 	private Map<String,String> errori;
 	
 	public ProdottoHelper(HttpServletRequest request){
-		this.request = request;
-		this.prodotto = new Prodotto(-1, request.getParameter("nome"), request.getParameter("descrizione"), 0);
+		super(request);
+		this.nome = request.getParameter("nome");
+		this.descrizione = request.getParameter("descrizione");
+		this.prezzo = 0;
 		this.errori = new HashMap<String,String>();
-	}
-	
-	public Prodotto getProdotto() {
-		return prodotto;
-	}
-	
-	public Map<String,String> getErrori(){
-		return this.errori;
 	}
 	
 	public boolean convalida(){		
 		boolean tuttoOk = true;
-		String nome = this.prodotto.getNome();
-		String desc = this.prodotto.getDescrizione();
 		String stringPrezzo = request.getParameter("prezzo");
 		String campoObbligatorio = "Campo obligatorio";
 		String errorePrezzo = "Valore non valido";
 		
-		if (nome == null || nome.isEmpty()){
+		if (this.nome == null || nome.isEmpty()){
 			this.errori.put("nome", campoObbligatorio);
 		    tuttoOk = false;
 		}
-		if (desc == null || desc.isEmpty()){
+		if (this.descrizione == null || this.descrizione.isEmpty()){
 			this.errori.put("descrizione", campoObbligatorio);
 			tuttoOk = false;
 		}
@@ -48,8 +37,8 @@ public class ProdottoHelper {
 		}
 		else {
 			try {
-				this.prodotto.setPrezzo(Double.valueOf(stringPrezzo));
-				if (this.prodotto.getPrezzo() <= 0){
+				this.prezzo = Double.valueOf(stringPrezzo);
+				if (this.prezzo <= 0){
 					this.errori.put("prezzo", errorePrezzo);
 					tuttoOk = false;
 				}

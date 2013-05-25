@@ -7,7 +7,7 @@
 		<title>BGS-Shop/home</title>
 	</head>
 	<body>
-		<form action="login" method="post">
+		<form action="login.do" method="post">
 			<p>Username <input type="text" name="username"/>
 			   Password  <input type="password" name="password"/>
 			   <input type="submit" name="submit" value="Accedi"/>
@@ -15,7 +15,7 @@
 		</form>
 		<h1>BGS-Shop</h1>
 		<h2>Buy Great Solutions</h2>
-		<form action="consultaProdotti" method="get">
+		<form action="consultaProdotti.do" method="post">
 			<input type="submit" name="submit" value="Catalogo Prodotti"/>	
 		</form>
 	</body>

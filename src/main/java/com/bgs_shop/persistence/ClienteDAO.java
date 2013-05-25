@@ -1,6 +1,5 @@
 package com.bgs_shop.persistence;
 
-
 import java.util.List;
 
 import com.bgs_shop.model.*;

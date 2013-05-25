@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BGS-Shop/loginFailed</title>
+		<title>BGS-Shop/loginFallito</title>
 	</head>
 	<body>
 		<h1>Login Fallito!</h1>

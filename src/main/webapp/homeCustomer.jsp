@@ -5,15 +5,13 @@
 <%
    Cliente cliente = (Cliente) session.getAttribute("cliente");
    boolean autorizzato = true;
+   
    if (cliente!=null)
        autorizzato &= (cliente.getRuolo().equals("customer"));
-   else 
-   	   autorizzato = false;
+   
    if (!autorizzato) {
-	   out.clear();
 	   RequestDispatcher rd = application.getRequestDispatcher("/loginFallito.jsp");
    	   rd.forward(request, response);
-   	   return;
    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,6 +21,9 @@
 		<title>BGS-Shop/homeCustomer</title>
 	</head>
 	<body>
-		<p><i>Ciao, ${cliente.username}!</i></p>
+		<form action="nuovoOrdine.do" method="post">
+			<p><i>Ciao, ${cliente.username}!</i></p>
+		    <input type="submit" name="submit" value="Nuovo Ordine"/>
+		</form>
 	</body>
 </html>
