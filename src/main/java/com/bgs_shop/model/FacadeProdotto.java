@@ -1,8 +1,9 @@
-package it.uniroma3.model;
+package com.bgs_shop.model;
 
 import java.util.*;
 
-import it.uniroma3.persistence.postgres.*;
+import com.bgs_shop.persistence.postgres.*;
+
 
 public class FacadeProdotto {
 	public List<Prodotto> getProdotti(){

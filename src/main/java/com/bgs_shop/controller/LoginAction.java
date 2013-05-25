@@ -1,9 +1,10 @@
-package it.uniroma3.controller;
+package com.bgs_shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import it.uniroma3.model.*;
+import com.bgs_shop.model.*;
+
 
 public class LoginAction {
 	public boolean esegui(HttpServletRequest request){

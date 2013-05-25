@@ -1,6 +1,5 @@
-package it.uniroma3.controller;
+package com.bgs_shop.controller;
 
-import it.uniroma3.model.*;
 import java.util.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.bgs_shop.model.*;
 
 /**
  * Servlet implementation class DettagliProdotto

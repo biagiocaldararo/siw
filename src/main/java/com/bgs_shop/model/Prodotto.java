@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package com.bgs_shop.model;
 
 public class Prodotto {
 	private long cod;

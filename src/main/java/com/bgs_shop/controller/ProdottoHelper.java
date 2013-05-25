@@ -1,10 +1,11 @@
-package it.uniroma3.controller;
+package com.bgs_shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bgs_shop.model.*;
+
 import java.util.*;
 
-import it.uniroma3.model.*;
 
 public class ProdottoHelper {
 	private HttpServletRequest request;

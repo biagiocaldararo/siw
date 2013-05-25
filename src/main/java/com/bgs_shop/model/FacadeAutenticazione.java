@@ -1,6 +1,6 @@
-package it.uniroma3.model;
+package com.bgs_shop.model;
 
-import it.uniroma3.persistence.postgres.*;
+import com.bgs_shop.persistence.postgres.*;
 
 public class FacadeAutenticazione {
 	public Cliente login (String username, String password){

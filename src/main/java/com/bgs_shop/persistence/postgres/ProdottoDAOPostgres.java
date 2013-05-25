@@ -1,9 +1,11 @@
-package it.uniroma3.persistence.postgres;
+package com.bgs_shop.persistence.postgres;
 
 import java.sql.*;
 import java.util.*;
-import it.uniroma3.model.*;
-import it.uniroma3.persistence.*;
+
+import com.bgs_shop.model.*;
+import com.bgs_shop.persistence.*;
+
 
 public class ProdottoDAOPostgres implements ProdottoDAO {
 	private DataSource data;

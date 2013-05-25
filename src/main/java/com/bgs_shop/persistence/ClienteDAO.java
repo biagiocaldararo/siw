@@ -1,8 +1,9 @@
-package it.uniroma3.persistence;
+package com.bgs_shop.persistence;
 
-import it.uniroma3.model.*;
 
 import java.util.List;
+
+import com.bgs_shop.model.*;
 
 public interface ClienteDAO {	
 	boolean insert(Cliente cliente); 

@@ -1,6 +1,4 @@
-package it.uniroma3.controller;
-
-import it.uniroma3.model.*;
+package com.bgs_shop.controller;
 
 import java.io.IOException;
 
@@ -13,17 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bgs_shop.model.*;
+
+
 /**
- * Servlet implementation class CatalogoProdotti
+ * Servlet implementation class GestisciConferma
  */
-@WebServlet("/consultaProdotti")
-public class ConsultaProdotti extends HttpServlet {
+@WebServlet("/confermaProdotto")
+public class ConfermaProdotto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultaProdotti() {
+    public ConfermaProdotto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +33,20 @@ public class ConsultaProdotti extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String risposta = request.getParameter("risp");
 		ServletContext application = getServletContext();
 		RequestDispatcher rd;
 		HttpSession sessione = request.getSession();
+		String destinazione = "/inserimentoProdotto.jsp";
 		FacadeProdotto facade = new FacadeProdotto();
 		
-		sessione.setAttribute("prodotti", facade.getProdotti());
-		rd = application.getRequestDispatcher("/catalogoProdotti.jsp");
-		
+		if (risposta.equals("si"))
+		    if (facade.inserisciProdotto((Prodotto) sessione.getAttribute("prodotto")))
+		    	destinazione = "/inserimentoCompletato.jsp";
+		    else 
+		    	destinazione = "/erroreInserimento.jsp";
+		   
+		rd = application.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
 	}
 

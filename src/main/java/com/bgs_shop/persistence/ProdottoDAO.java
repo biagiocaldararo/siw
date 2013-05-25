@@ -1,8 +1,9 @@
-package it.uniroma3.persistence;
+package com.bgs_shop.persistence;
 
 import java.util.*; 
 
-import it.uniroma3.model.*;
+import com.bgs_shop.model.*;
+
 
 public interface ProdottoDAO {	
 	boolean insert(Prodotto prodotto); 

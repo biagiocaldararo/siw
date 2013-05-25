@@ -1,4 +1,4 @@
-package it.uniroma3.persistence;
+package com.bgs_shop.persistence;
 
 import java.sql.*;
 

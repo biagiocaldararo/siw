@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="it.uniroma3.model.*" %>
+<%@ page import="com.bgs_shop.model.*" %>
 <%
    Cliente cliente = (Cliente) session.getAttribute("cliente");
    boolean autorizzato = true;

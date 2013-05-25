@@ -1,4 +1,4 @@
-package it.uniroma3.model;
+package com.bgs_shop.model;
 
 public class Cliente {
 	private String username;
