@@ -40,7 +40,7 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 				rigaCorrente.aggiornaRiga(nuovaQuantita);
 			}
 			else
-				ordineCorrente.aggiungiRiga(prodottoCorrente, Integer.valueOf(request.getParameter("quantit�")));
+				ordineCorrente.aggiungiRiga(prodottoCorrente, Integer.valueOf(request.getParameter("quantita")));
 		}
 		
 		sessione.setAttribute("numeroProdotti", ordineCorrente.getNumeroProdotti());

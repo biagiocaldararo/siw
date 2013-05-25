@@ -18,23 +18,23 @@ public class RigaOrdineHelper extends Helper {
 	@Override
 	public boolean convalida() {
 		boolean tuttoOk = true;
-		String stringQuantita = request.getParameter("quantit�");
+		String stringQuantita = request.getParameter("quantita");
 		String errore = "Valore non valido";
 		
 		if (stringQuantita == null || stringQuantita.isEmpty()){
-			this.errori.put("quantit�", errore);
+			this.errori.put("quantita", errore);
 			tuttoOk = false;
 		}
 		else {
 			try {
 				this.quantita = Integer.valueOf(stringQuantita);
 				if (this.quantita <= 0){
-					this.errori.put("quantit�", errore);
+					this.errori.put("quantita", errore);
 					tuttoOk = false;
 				}
 			}
 			catch (NumberFormatException e){
-				this.errori.put("quantit�", errore);
+				this.errori.put("quantita", errore);
 				tuttoOk = false;
 			}
 		}

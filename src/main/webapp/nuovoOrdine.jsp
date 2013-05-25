@@ -27,7 +27,7 @@
 					<td><input type="submit" name="${prodotto.cod}" value="Dettagli"/></td>
 				</form>
 				<form action="aggiungiAlCarrello.do" method="post">
-				    <td><input type="text" name="quantità" value="1"/></td>
+				    <td><input type="text" name="quantita" value="1"/></td>
 					<td><input type="submit" name ="${prodotto.cod}" value="Aggiungi al Carrello"/></td>
 				</form>
 			</tr>
