@@ -9,7 +9,9 @@
 	</head>
 	<body>
 		<h1>Catalogo Prodotti</h1>
-		<p><i>Carrello: (${numeroProdotti})</i></p>
+		<p>
+			<a href="carrello.jsp"><input type="button" value ="Il tuo Carrello (${numeroProdotti})"/></a>
+		</p>
 		<p><font color="red">${errori["quantita"]}</font></p>
 		<table border = "4">
 			<tr>
@@ -33,7 +35,5 @@
 			</tr>
 		</c:forEach>
 		</table>
-		<p></p>
-		<a href="carrello.jsp"><input type="button" value ="Il tuo Carrello"/></a>
 	</body>
 </html>

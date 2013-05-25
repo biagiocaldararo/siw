@@ -56,6 +56,7 @@ public class Controller extends HttpServlet {
 		this.comandi.put("/nuovoOrdine.do","com.bgs_shop.action.AzioneNuovoOrdine");
 		this.comandi.put("/aggiungiAlCarrello.do","com.bgs_shop.action.AzioneAggiungiProdottoAOrdine");
 		this.comandi.put("/rimuoviDalCarrello.do","com.bgs_shop.action.AzioneRimuoviProdottoDalCarrello");
+		this.comandi.put("/confermaOrdine.do","com.bgs_shop.action.AzioneConfermaOrdine");
 		this.esiti= new HashMap<String, String>();
 		this.esiti.put("loginFallito","/loginFallito.jsp");
 		this.esiti.put("homeAdmin","/homeAdmin.jsp");
@@ -63,9 +64,10 @@ public class Controller extends HttpServlet {
 		this.esiti.put("dettaglioProdotto","/dettaglioProdotto.jsp");
 		this.esiti.put("inserimentoProdotto","/inserimentoProdotto.jsp");
 		this.esiti.put("confermaProdotto","/confermaProdotto.jsp");
-		this.esiti.put("inserimentoCompletato","/inserimentoCompletato.jsp");
+		this.esiti.put("inserimentoProdottoCompletato","/inserimentoProdottoCompletato.jsp");
 		this.esiti.put("erroreInserimento","/erroreInserimento.jsp");
 		this.esiti.put("nuovoOrdine","/nuovoOrdine.jsp");
 		this.esiti.put("carrello","/carrello.jsp");
+		this.esiti.put("inserimentoOrdineCompletato","/inserimentoOrdineCompletato.jsp");
 	}
 }

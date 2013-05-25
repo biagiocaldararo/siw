@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import com.bgs_shop.persistence.CodBroker;
 
-public class ProductCodBroker implements CodBroker{
-	private static final String query = "select nextval('sequenza_prodotto') as cod;";
+public class OrderCodBroker implements CodBroker {
+	private static final String query = "select nextval('sequenza_ordine') as cod;";
 	
 	@Override
 	public long getCod(Connection connection) {
@@ -25,4 +26,5 @@ public class ProductCodBroker implements CodBroker{
 		
 		return cod;
 	}
+
 }

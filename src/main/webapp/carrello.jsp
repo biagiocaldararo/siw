@@ -31,6 +31,9 @@
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
 		</table>
 		<p></p>
-		<a href="nuovoOrdine.jsp"><input type="button" value ="Indietro"/></a>
+		<p>
+			<a href="nuovoOrdine.jsp"><input type="button" value ="Indietro"/></a>
+			<a href="confermaOrdine.jsp"><input type="button" value ="Procedi all'Acquisto"/></a>
+		</p>
 		</body>
 </html>

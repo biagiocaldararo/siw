@@ -12,8 +12,8 @@
 			<p> Nome: ${prodotto.nome}</p>
 			<p> Descrizione: ${prodotto.descrizione}</p>
 			<p> Prezzo: ${prodotto.prezzo}</p>
-			<input type="submit" name="risp" value="si" />
-			<input type="submit" name="risp" value="no" />
+			<input type="submit" name="risp" value="Si" />
+			<input type="submit" name="risp" value="No" />
 		</form>
 	</body>
 </html>

@@ -10,16 +10,16 @@ public class AzioneConfermaProdotto extends Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
-		String risposta = request.getParameter("risp");
 		HttpSession sessione = request.getSession();
 		String destinazione = "inserimentoProdotto";
-		FacadeProdotto facade = new FacadeProdotto();
 		
-		if (risposta.equals("si"))
+		if (request.getParameter("risp").equals("Si")){
+			FacadeProdotto facade = new FacadeProdotto();
 		    if(facade.inserisciProdotto((Prodotto) sessione.getAttribute("prodotto")))
-		    	destinazione = "inserimentoCompletato";
+		    	destinazione = "inserimentoProdottoCompletato";
 		    else 
 		    	destinazione = "erroreInserimento";
+		}
 		
 		return destinazione;   
 	}
