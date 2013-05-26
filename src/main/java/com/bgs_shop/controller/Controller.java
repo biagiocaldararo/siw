@@ -69,5 +69,6 @@ public class Controller extends HttpServlet {
 		this.esiti.put("nuovoOrdine","/nuovoOrdine.jsp");
 		this.esiti.put("carrello","/carrello.jsp");
 		this.esiti.put("inserimentoOrdineCompletato","/inserimentoOrdineCompletato.jsp");
+		this.esiti.put("homeCustomer","/homeCustomer.jsp");
 	}
 }
