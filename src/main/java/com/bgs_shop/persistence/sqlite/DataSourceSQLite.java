@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.bgs_shop.persistence.DataSource;
 
-public class DataSourceSQLlite implements DataSource {
+public class DataSourceSQLite implements DataSource {
 	private String dbURI = "jdbc:sqlite:bgsshop.sqlite";
 
 	@Override
