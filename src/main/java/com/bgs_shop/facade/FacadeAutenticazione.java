@@ -1,12 +1,13 @@
 package com.bgs_shop.facade;
 
 import com.bgs_shop.model.*;
-import com.bgs_shop.persistence.postgres.*;
+import com.bgs_shop.persistence.ClienteDAO;
+import com.bgs_shop.persistence.sqlite.ClienteDAOSQLite;
 
 
 public class FacadeAutenticazione {
 	public Cliente login (String username, String password){
-		ClienteDAOPostgres dao = new ClienteDAOPostgres();
+		ClienteDAO dao = new ClienteDAOSQLite();
 		Cliente cliente = dao.findByUsername(username);
 		boolean autenticato = true;
 		

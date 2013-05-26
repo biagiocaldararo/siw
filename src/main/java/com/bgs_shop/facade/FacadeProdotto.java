@@ -1,19 +1,19 @@
 package com.bgs_shop.facade;
 
 import java.util.*;
-
-import com.bgs_shop.model.*;
-import com.bgs_shop.persistence.postgres.*;
+import com.bgs_shop.model.Prodotto;
+import com.bgs_shop.persistence.ProdottoDAO;
+import com.bgs_shop.persistence.sqlite.ProdottoDAOSQLite;
 
 
 public class FacadeProdotto {
 	public List<Prodotto> getProdotti(){
-		ProdottoDAOPostgres p = new ProdottoDAOPostgres();
-		return p.findAll();
+		ProdottoDAO dao = new ProdottoDAOSQLite();
+		return dao.findAll();
 	}
 	
 	public boolean inserisciProdotto(Prodotto prodotto){
-		ProdottoDAOPostgres p = new ProdottoDAOPostgres();
-		return p.insert(prodotto);
+		ProdottoDAO dao = new ProdottoDAOSQLite();
+		return dao.insert(prodotto);
 	}	
 }

@@ -19,7 +19,7 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	@Override
 	public boolean insert(Ordine ordine) {
 		this.data = new DataSourceSQLite();
-		String insert = "insert into ordine(data, stato, importo) values (?,?,?,?)";
+		String insert = "insert into ordine(data, stato, importo) values (?,?,?)";
 		int inserito = 0;
 		
 		try {
