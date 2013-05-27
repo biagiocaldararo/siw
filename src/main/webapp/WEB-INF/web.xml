@@ -4,7 +4,7 @@
   <servlet>
     <servlet-name>Controller</servlet-name>
     <servlet-class>     
-     	com.bgs_shop.controller.Controller
+     	com.bgsshop.controller.Controller
   	</servlet-class>
   </servlet>
   
