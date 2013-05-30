@@ -9,6 +9,6 @@
 	<body>
 		<h1>Inserimento Ordine Completato!</h1>
 		<p> Il tuo ordine  è stato inserito correttamente!<p>
-		<a href="homeCustomer.jsp"><input type="button" value ="Home"/></a>
+		<a href="homeCustomer.jsp">Home</a>
 	</body>
 </html>

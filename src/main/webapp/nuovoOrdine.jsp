@@ -25,12 +25,11 @@
 			<tr>
 				<td> ${prodotto.cod} </td>
 				<td> ${prodotto.nome} </td>
-				<form action="dettagliProdotto.do" method="post">
-					<td><input type="submit" name="${prodotto.cod}" value="Dettagli"/></td>
-				</form>
+				<td><a href="dettagliProdotto.do?cod=${prodotto.cod}">Dettagli</a></td>
 				<form action="aggiungiAlCarrello.do" method="post">
-				    <td><input type="text" name="quantita" value="1"/></td>
-					<td><input type="submit" name ="${prodotto.cod}" value="Aggiungi al Carrello"/></td>
+				    <td><input type="text" name="quantita" value="1"/>
+				    	<input type="hidden" name="cod" value="${prodotto.cod}" /></td>
+					<td><input type="submit" value="Aggiungi al Carrello"/></td>
 				</form>
 			</tr>
 		</c:forEach>

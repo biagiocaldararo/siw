@@ -9,7 +9,6 @@
 	</head>
 	<body>
 		<h1>Catalogo Prodotti</h1>
-		<form action="dettagliProdotto.do" method="post">
 			<table border = "4">
 				<tr>
 					<th><b>Codice Prodotto</b></th>
@@ -18,14 +17,12 @@
 				</tr>			
 			<c:forEach var="prodotto" items ="${prodotti}">
 				<tr>
-					<td> ${prodotto.cod} </td>
-					<td> ${prodotto.nome} </td>
-					<td><input type="submit" name="${prodotto.cod}" value="Dettagli"/></td>
+					<td>${prodotto.cod}</td>
+					<td>${prodotto.nome}</td>
+					<td><a href="dettagliProdotto.do?cod=${prodotto.cod}">Dettagli</a></td>
 			   	</tr>
 			</c:forEach>
 			</table>
-		</form>
-		<p></p>
 		<a href="home.jsp"><input type="button" value ="Home"/></a>
 	</body>
 </html>

@@ -13,10 +13,8 @@ public class AzioneNuovoOrdine extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		HttpSession sessione = request.getSession();
 		
-		if(sessione.getAttribute("prodotti")==null){
-			FacadeProdotto facade = new FacadeProdotto();
-			sessione.setAttribute("prodotti", facade.getProdotti());
-		}
+		FacadeProdotto facade = new FacadeProdotto();
+		request.setAttribute("prodotti", facade.getProdotti());
 		
 		Ordine ordineCorrente = new Ordine((Cliente) sessione.getAttribute("cliente"));
 		sessione.setAttribute("ordineCorrente", ordineCorrente);

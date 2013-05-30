@@ -15,5 +15,9 @@ public class FacadeProdotto {
 	public boolean inserisciProdotto(Prodotto prodotto){
 		ProdottoDAO dao = new ProdottoDAOSQLite();
 		return dao.insert(prodotto);
-	}	
+	}
+	
+	public Prodotto findByCod(long cod) {
+		return new ProdottoDAOSQLite().findByCod(cod);
+	}
 }

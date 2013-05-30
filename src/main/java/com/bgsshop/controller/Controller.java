@@ -16,7 +16,7 @@ public class Controller extends HttpServlet {
 	private Map<String, String> comandi; 
 	private Map<String, String> esiti; 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String prossimaPagina = null;
 		String comando = request.getServletPath();
 		String nomeAzione = this.comandi.get(comando);
@@ -44,7 +44,15 @@ public class Controller extends HttpServlet {
 		ServletContext application  = getServletContext();
 		RequestDispatcher rd = application.getRequestDispatcher(prossimaPagina);
 		rd.forward(request, response);		
-	} 
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
 	public void init() {
 		this.comandi = new HashMap<String, String>();

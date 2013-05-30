@@ -1,22 +1,26 @@
 package com.bgsshop.action;
 
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import com.bgsshop.facade.FacadeProdotto;
 import com.bgsshop.model.Prodotto;
 
 public class AzioneDettagliProdotto extends Azione {
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
-		HttpSession sessione = request.getSession();
+
+		long cod;
+		try {
+			cod = Long.parseLong(request.getParameter("cod"));
+		} catch (NumberFormatException e) {
+			return "dettaglioProdotto";
+		}
 		
-		for(Prodotto p: (List<Prodotto>) sessione.getAttribute("prodotti"))
-			if(request.getParameter(Long.toString(p.getCod()))!=null)
-				sessione.setAttribute("prodotto", p);
+		Prodotto p = new FacadeProdotto().findByCod(cod);
 		
+		request.setAttribute("prodotto", p);
 		return "dettaglioProdotto";
 	}
 }

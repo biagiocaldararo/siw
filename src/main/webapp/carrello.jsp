@@ -19,21 +19,19 @@
 			</tr>
 			<c:forEach var="rigaOrdine" items ="${ordineCorrente.righeOrdine}">
 				<tr>
-					<td> ${rigaOrdine.prodotto.cod} </td>
-					<td> ${rigaOrdine.prodotto.nome} </td>
-					<td> ${rigaOrdine.quantita} </td>
-					<td> ${rigaOrdine.costo} </td>
-					<form action="rimuoviDalCarrello.do" method="post">
-						<td><input type="submit" name="${rigaOrdine.prodotto.cod}" value="Rimuovi dal Carrello"/></td>
-					</form>
+					<td>${rigaOrdine.prodotto.cod}</td>
+					<td>${rigaOrdine.prodotto.nome}</td>
+					<td>${rigaOrdine.quantita}</td>
+					<td>${rigaOrdine.costo}</td>
+					<td><a href="rimuoviDalCarrello.do?cod=${rigaOrdine.prodotto.cod}">Rimuovi dal Carrello</a></td>
 			   	</tr>
 			</c:forEach>
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
 		</table>
 		<p></p>
 		<p>
-			<a href="nuovoOrdine.jsp"><input type="button" value ="Indietro"/></a>
-			<a href="confermaOrdine.jsp"><input type="button" value ="Procedi all'Acquisto"/></a>
+			<a href="javascript:history.back();">Indietro</a>
+			<a href="confermaOrdine.jsp">Procedi all'Acquisto</a>
 		</p>
 		</body>
 </html>

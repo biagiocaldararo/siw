@@ -15,8 +15,6 @@
 		</form>
 		<h1>BGS-Shop</h1>
 		<h2>Buy Great Solutions</h2>
-		<form action="consultaProdotti.do" method="post">
-			<input type="submit" name="submit" value="Catalogo Prodotti"/>	
-		</form>
+		<a href="consultaProdotti.do">Catalogo Prodotti</a>
 	</body>
 </html>

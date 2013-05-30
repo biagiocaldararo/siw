@@ -24,6 +24,6 @@
 			
 			<p><i> * Campo obligatorio </i></p>
 		</form>
-		<a href="homeAdmin.jsp"><input type="button" value="Home"/></a>
+		<a href="homeAdmin.jsp">Home</a>
 	</body>
 </html>
