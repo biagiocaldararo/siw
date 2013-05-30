@@ -61,22 +61,20 @@ public class Ordine {
 	public void aggiungiRiga(Prodotto prodotto, int quantita){
 		RigaOrdine rigaOrdine = new RigaOrdine(this, prodotto, quantita);
 		this.righeOrdine.add(rigaOrdine);
+		this.importo += rigaOrdine.getCosto();
 	}
 	
 	public void eliminaRiga(long cod){
 		for(RigaOrdine riga: this.righeOrdine){
-			if(riga.getProdotto().getCod()==cod)
+			if(riga.getProdotto().getCod()==cod) {
 				righeOrdine.remove(riga);
+				this.importo -= riga.getCosto();
+			}
 		}
 	}
 
 	public double getImporto() {
-		this.setImporto(0);
-		
-		for(RigaOrdine r: this.righeOrdine)
-			this.importo += r.getCosto();
-		
-		return this.importo;
+		return importo;
 	}
 
 	public void setImporto(double importo) {
