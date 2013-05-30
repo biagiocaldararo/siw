@@ -21,7 +21,6 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 		Ordine ordineCorrente = (Ordine) sessione.getAttribute("ordineCorrente");
 		RigaOrdine rigaCorrente = null;
 		Prodotto prodottoCorrente = null;
-		int quantitaCorrente = Integer.valueOf(request.getParameter("quantita"));
 		boolean trovato = false;
 		
 		if(helper.convalida()){
@@ -36,6 +35,7 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 				}	
 			
 			if(trovato){
+				int quantitaCorrente = Integer.valueOf(request.getParameter("quantita"));
 				int nuovaQuantita = rigaCorrente.getQuantita() + quantitaCorrente;
 				rigaCorrente.aggiornaRiga(nuovaQuantita);
 			}
