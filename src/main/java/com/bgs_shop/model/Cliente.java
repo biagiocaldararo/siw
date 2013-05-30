@@ -1,13 +1,22 @@
 package com.bgs_shop.model;
 
+import com.bgs_shop.persistence.AutomaticDAO;
+import com.bgs_shop.persistence.Column;
+import com.bgs_shop.persistence.Column.ColumnType;
+import com.bgs_shop.persistence.DAO;
+
 public class Cliente {
-	private String username;
-	private String password;
+	
+	@Column(ColumnType.ID) private Long id;
+	@Column private String username;
+	@Column private String password;
 	private String nome;
 	private String cognome;
 	private String email;
 	private String indirizzo;
-	private String ruolo;
+	@Column private String ruolo;
+	
+	public static DAO<Cliente> dao = new AutomaticDAO<Cliente>(Cliente.class);
 	
 	public Cliente(){
 	};
@@ -16,6 +25,14 @@ public class Cliente {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setRuolo(ruolo);
+	}
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -72,6 +89,11 @@ public class Cliente {
 
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("<User(%s, %s):%d>", username, ruolo, id);
 	}
 }
 
