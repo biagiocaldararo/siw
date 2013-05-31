@@ -13,6 +13,6 @@ public class AzioneCatalogo extends Azione {
 		FacadeProdotto facade = new FacadeProdotto();
 		request.setAttribute("prodotti", facade.getProdotti());
 
-		return "catalogoProdotti";
+		return "catalogo.jsp";
 	}
 }

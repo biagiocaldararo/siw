@@ -6,21 +6,26 @@ import javax.servlet.http.HttpServletRequest;
 import com.bgsshop.facade.FacadeProdotto;
 import com.bgsshop.model.Prodotto;
 
-public class AzioneDettagliProdotto extends Azione {
+public class AzioneDettaglioProdotto extends Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
+		
+		String[] parametri = (String[]) request.getAttribute("parametri");
 
 		long cod;
 		try {
-			cod = Long.parseLong(request.getParameter("cod"));
+			cod = Long.parseLong(parametri[0]);
 		} catch (NumberFormatException e) {
-			return "dettaglioProdotto";
+			return "notfound.jsp";
 		}
 		
+		// TODO: questo metodo dovrebbe sollevare un'eccezione se non trova il prodotto.
 		Prodotto p = new FacadeProdotto().findByCod(cod);
+		if (p == null)
+			return "notfound.jsp";
 		
 		request.setAttribute("prodotto", p);
-		return "dettaglioProdotto";
+		return "dettaglioProdotto.jsp";
 	}
 }
