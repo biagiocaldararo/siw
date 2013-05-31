@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import com.bgsshop.facade.FacadeProdotto;
 import com.bgsshop.model.Prodotto;
 
-public class AzioneConfermaProdotto extends Azione {
+public class AzioneConfermaProdotto implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

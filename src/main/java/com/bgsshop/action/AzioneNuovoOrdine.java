@@ -7,7 +7,7 @@ import com.bgsshop.facade.FacadeProdotto;
 import com.bgsshop.model.Cliente;
 import com.bgsshop.model.Ordine;
 
-public class AzioneNuovoOrdine extends Azione {
+public class AzioneNuovoOrdine implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

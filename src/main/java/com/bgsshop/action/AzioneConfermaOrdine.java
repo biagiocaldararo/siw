@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.bgsshop.facade.FacadeOrdine;
 import com.bgsshop.model.Ordine;
 
-public class AzioneConfermaOrdine extends Azione {
+public class AzioneConfermaOrdine implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

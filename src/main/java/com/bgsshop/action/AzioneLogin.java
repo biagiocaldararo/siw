@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.bgsshop.facade.*;
 import com.bgsshop.model.*;
 
-public class AzioneLogin extends Azione{
+public class AzioneLogin implements Azione{
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

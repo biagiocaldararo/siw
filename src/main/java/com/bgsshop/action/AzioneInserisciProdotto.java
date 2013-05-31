@@ -7,7 +7,7 @@ import com.bgsshop.helper.Helper;
 import com.bgsshop.helper.ProdottoHelper;
 import com.bgsshop.model.Prodotto;
 
-public class AzioneInserisciProdotto extends Azione {
+public class AzioneInserisciProdotto implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

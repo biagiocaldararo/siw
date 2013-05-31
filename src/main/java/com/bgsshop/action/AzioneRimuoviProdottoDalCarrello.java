@@ -8,7 +8,7 @@ import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
 import com.bgsshop.model.RigaOrdine;
 
-public class AzioneRimuoviProdottoDalCarrello extends Azione {
+public class AzioneRimuoviProdottoDalCarrello implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {

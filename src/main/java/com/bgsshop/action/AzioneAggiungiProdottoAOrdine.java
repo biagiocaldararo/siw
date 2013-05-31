@@ -11,7 +11,7 @@ import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
 import com.bgsshop.model.RigaOrdine;
 
-public class AzioneAggiungiProdottoAOrdine extends Azione {
+public class AzioneAggiungiProdottoAOrdine implements Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
