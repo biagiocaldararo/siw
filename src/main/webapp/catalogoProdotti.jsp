@@ -17,9 +17,9 @@
 				</tr>			
 			<c:forEach var="prodotto" items ="${prodotti}">
 				<tr>
-					<td>${prodotto.cod}</td>
+					<td>${prodotto.id}</td>
 					<td>${prodotto.nome}</td>
-					<td><a href="dettagliProdotto.do?cod=${prodotto.cod}">Dettagli</a></td>
+					<td><a href="dettagliProdotto.do?cod=${prodotto.id}">Dettagli</a></td>
 			   	</tr>
 			</c:forEach>
 			</table>

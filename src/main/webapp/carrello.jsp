@@ -19,11 +19,11 @@
 			</tr>
 			<c:forEach var="rigaOrdine" items ="${ordineCorrente.righeOrdine}">
 				<tr>
-					<td>${rigaOrdine.prodotto.cod}</td>
+					<td>${rigaOrdine.prodotto.id}</td>
 					<td>${rigaOrdine.prodotto.nome}</td>
 					<td>${rigaOrdine.quantita}</td>
 					<td>${rigaOrdine.costo}</td>
-					<td><a href="rimuoviDalCarrello.do?cod=${rigaOrdine.prodotto.cod}">Rimuovi dal Carrello</a></td>
+					<td><a href="rimuoviDalCarrello.do?cod=${rigaOrdine.prodotto.id}">Rimuovi dal Carrello</a></td>
 			   	</tr>
 			</c:forEach>
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
