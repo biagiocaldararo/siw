@@ -11,7 +11,7 @@ ruolo varchar(8) not null);
 CREATE TABLE ordine (
 id integer not null primary key asc autoincrement,
 cliente integer not null references cliente(id),
-data datetime not null,
+data varchar not null,
 stato varchar(6) not null,
 importo float not null);
 

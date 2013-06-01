@@ -64,7 +64,7 @@ public class Ordine {
 		this.importo += rigaOrdine.getCosto();
 	}
 	
-	public void eliminaRiga(long cod){
+	public void eliminaRiga(long id){
 		for(RigaOrdine riga: this.righeOrdine){
 			if(riga.getProdotto().getId()==id) {
 				righeOrdine.remove(riga);

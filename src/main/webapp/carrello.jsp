@@ -23,14 +23,14 @@
 					<td>${rigaOrdine.prodotto.nome}</td>
 					<td>${rigaOrdine.quantita}</td>
 					<td>${rigaOrdine.costo}</td>
-					<td><a href="rimuoviDalCarrello.do?cod=${rigaOrdine.prodotto.id}">Rimuovi dal Carrello</a></td>
+					<td><a href="rimuoviDalCarrello.do?id=${rigaOrdine.prodotto.id}">Rimuovi dal Carrello</a></td>
 			   	</tr>
 			</c:forEach>
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
 		</table>
 		<p></p>
 		<p>
-			<a href="javascript:history.back();">Indietro</a>
+			<a href="nuovoOrdine.jsp">Indietro</a>
 			<a href="confermaOrdine.jsp">Procedi all'Acquisto</a>
 		</p>
 		</body>

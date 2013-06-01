@@ -17,17 +17,18 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	private Connection connection;
 
 	@Override
-	public boolean insert(Ordine ordine) {
+	public boolean insert(Ordine ordine, long idCliente) {
 		this.data = new DataSourceSQLite();
-		String insert = "insert into ordine(data, stato, importo) values (?,?,?)";
+		String insert = "insert into ordine(cliente, data, stato, importo) values (?,?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setString(1, new Date().toString());
-			this.statement.setString(2, ordine.getStato());
-			this.statement.setDouble(3, ordine.getImporto());
+			this.statement.setLong(1, idCliente);
+			this.statement.setString(2, new Date().toString());
+			this.statement.setString(3, ordine.getStato());
+			this.statement.setDouble(4, ordine.getImporto());
 			inserito = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {

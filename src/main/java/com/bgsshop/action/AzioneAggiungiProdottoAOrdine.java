@@ -22,7 +22,7 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 		RigaOrdine rigaCorrente = null;
 		boolean trovato = false;
 		
-		request.setAttribute("prodotti", new FacadeProdotto().getProdotti());
+		//sessione.setAttribute("prodotti", new FacadeProdotto().getProdotti());
 		
 		if(helper.convalida()){
 			long id;

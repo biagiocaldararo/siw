@@ -14,7 +14,7 @@ public class AzioneNuovoOrdine extends Azione {
 		HttpSession sessione = request.getSession();
 		
 		FacadeProdotto facade = new FacadeProdotto();
-		request.setAttribute("prodotti", facade.getProdotti());
+		sessione.setAttribute("prodotti", facade.getProdotti());
 		
 		Ordine ordineCorrente = new Ordine((Cliente) sessione.getAttribute("cliente"));
 		sessione.setAttribute("ordineCorrente", ordineCorrente);
