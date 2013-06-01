@@ -11,14 +11,14 @@ public class AzioneDettagliProdotto extends Azione {
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
 
-		long cod;
+		long id;
 		try {
-			cod = Long.parseLong(request.getParameter("cod"));
+			id = Long.parseLong(request.getParameter("id"));
 		} catch (NumberFormatException e) {
 			return "dettaglioProdotto";
 		}
 		
-		Prodotto p = new FacadeProdotto().findByCod(cod);
+		Prodotto p = new FacadeProdotto().findById(id);
 		
 		request.setAttribute("prodotto", p);
 		return "dettaglioProdotto";

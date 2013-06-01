@@ -10,6 +10,6 @@ public interface OrdineDAO {
 	boolean insert(Ordine Ordine); 
 	boolean delete(Ordine Ordine); 
 	boolean update(Ordine Ordine);
-	Prodotto findByCod(long cod);
+	Prodotto findById(long id);
  	List<Ordine> findByCliente(Cliente cliente);
 }

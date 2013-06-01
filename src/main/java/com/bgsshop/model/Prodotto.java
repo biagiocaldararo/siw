@@ -1,7 +1,7 @@
 package com.bgsshop.model;
 
 public class Prodotto {
-	private long cod;
+	private long id;
 	private String nome;
 	private String descrizione;
 	private double prezzo;
@@ -9,19 +9,19 @@ public class Prodotto {
 	public Prodotto(){
 	}
 	
-	public Prodotto(long cod, String nome, String descrizione, double prezzo){
-		this.setCod(cod);
+	public Prodotto(long id, String nome, String descrizione, double prezzo){
+		this.setId(id);
 		this.setNome(nome);
 		this.setDescrizione(descrizione);
 		this.setPrezzo(prezzo);
 	}
 
-	public long getCod() {
-		return cod;
+	public long getId() {
+		return id;
 	}
 
-	public void setCod(long cod) {
-		this.cod = cod;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

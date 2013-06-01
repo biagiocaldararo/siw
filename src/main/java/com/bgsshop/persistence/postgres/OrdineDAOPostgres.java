@@ -8,7 +8,7 @@ import java.util.List;
 import com.bgsshop.model.Cliente;
 import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
-import com.bgsshop.persistence.CodBroker;
+import com.bgsshop.persistence.IdBroker;
 import com.bgsshop.persistence.DataSource;
 import com.bgsshop.persistence.OrdineDAO;
 
@@ -16,20 +16,20 @@ public class OrdineDAOPostgres implements OrdineDAO {
 	private DataSource data;
 	private PreparedStatement statement;
 	private Connection connection;
-	private CodBroker broker = new OrderCodBroker();
+	private IdBroker broker = new OrderIdBroker();
 
 	@Override
 	public boolean insert(Ordine ordine) {
 		this.data = new DataSourcePostgres();
-		String insert = "insert into ordine(cod, data, stato, importo) values (?,?,?,?)";
+		String insert = "insert into ordine(id, data, stato, importo) values (?,?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
-			long cod = this.broker.getCod(this.connection);
-			ordine.setCod(cod);
+			long id = this.broker.getId(this.connection);
+			ordine.setId(id);
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, cod);
+			this.statement.setLong(1, id);
 			this.statement.setString(2, new Date().toString());
 			this.statement.setString(3, ordine.getStato());
 			this.statement.setDouble(4, ordine.getImporto());
@@ -66,7 +66,7 @@ public class OrdineDAOPostgres implements OrdineDAO {
 	}
 
 	@Override
-	public Prodotto findByCod(long cod) {
+	public Prodotto findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -76,5 +76,4 @@ public class OrdineDAOPostgres implements OrdineDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

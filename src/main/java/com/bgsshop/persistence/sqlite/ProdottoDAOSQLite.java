@@ -46,13 +46,13 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 	@Override
 	public boolean delete(Prodotto prodotto) {
 		this.data = new DataSourceSQLite();
-		String delete = "delete from prodotto where cod=?";
+		String delete = "delete from prodotto where id=?";
 		int eliminato = 0;
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(delete);
-			this.statement.setLong(1, prodotto.getCod());
+			this.statement.setLong(1, prodotto.getId());
 			eliminato = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
@@ -76,7 +76,7 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 	@Override
 	public boolean update(Prodotto prodotto) {
 		this.data = new DataSourceSQLite();
-		String update = "update prodotto set nome =?, descrizione=?, prezzo=? where cod=?";
+		String update = "update prodotto set nome =?, descrizione=?, prezzo=? where id=?";
 		int aggiornato= 0;
 		
 		try {
@@ -85,7 +85,7 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 			this.statement.setString(1, prodotto.getNome());
 			this.statement.setString(2, prodotto.getDescrizione());
 			this.statement.setDouble(3, prodotto.getPrezzo());
-			this.statement.setLong(4, prodotto.getCod());
+			this.statement.setLong(4, prodotto.getId());
 			aggiornato = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
@@ -107,18 +107,18 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 	}
 
 	@Override
-	public Prodotto findByCod(long cod) {
+	public Prodotto findById(long id) {
 		this.data = new DataSourceSQLite();
-		String query= "select cod, nome, descrizione, prezzo from prodotto where cod=?";
+		String query= "select * from prodotto where id=?";
 		Prodotto prodotto = null;	
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(query);
-			this.statement.setLong(1, cod);
+			this.statement.setLong(1, id);
 			ResultSet r = statement.executeQuery();
 			while (r.next()) 
-				prodotto = new Prodotto(r.getLong("cod"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
+				prodotto = new Prodotto(r.getLong("id"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();				
@@ -141,7 +141,7 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 	@Override
 	public List<Prodotto> findAll() {
 		this.data = new DataSourceSQLite();
-		String query= "select cod, nome, descrizione, prezzo from prodotto";
+		String query= "select * from prodotto";
 		List<Prodotto> prodotti = new LinkedList<Prodotto>();	
 		
 		try {
@@ -149,7 +149,7 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 			this.statement = this.connection.prepareStatement(query);
 			ResultSet r = statement.executeQuery();
 			while (r.next()) {
-				Prodotto prodotto = new Prodotto(r.getLong("cod"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
+				Prodotto prodotto = new Prodotto(r.getLong("id"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
 				prodotti.add(prodotto);
 			}
 		} 

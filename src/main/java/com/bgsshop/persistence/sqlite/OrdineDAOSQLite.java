@@ -61,7 +61,7 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	}
 
 	@Override
-	public Prodotto findByCod(long cod) {
+	public Prodotto findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
