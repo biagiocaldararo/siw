@@ -17,7 +17,7 @@ public class FacadeProdotto {
 		return dao.insert(prodotto);
 	}
 	
-	public Prodotto findById(long id) {
+	public Prodotto getProdotto(long id) {
 		return new ProdottoDAOSQLite().findById(id);
 	}
 }

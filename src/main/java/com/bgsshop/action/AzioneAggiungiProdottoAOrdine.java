@@ -33,7 +33,7 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 			}
 			
 			// TODO: Gestire il caso in cui il prodotto non esista!!
-			Prodotto prodotto = new FacadeProdotto().findById(id);
+			Prodotto prodotto = new FacadeProdotto().getProdotto(id);
 		
 			// TODO: ordineCorrente può essere null :/
 			for(RigaOrdine r: ordineCorrente.getRigheOrdine())

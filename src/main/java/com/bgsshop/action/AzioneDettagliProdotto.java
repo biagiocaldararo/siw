@@ -17,7 +17,7 @@ public class AzioneDettagliProdotto extends Azione {
 			return "dettaglioProdotto";
 		}
 		
-		Prodotto p = new FacadeProdotto().findById(id);
+		Prodotto p = new FacadeProdotto().getProdotto(id);
 		
 		request.setAttribute("prodotto", p);
 		return "dettaglioProdotto";
