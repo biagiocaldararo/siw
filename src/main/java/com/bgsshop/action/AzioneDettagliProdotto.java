@@ -10,7 +10,6 @@ public class AzioneDettagliProdotto extends Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
-
 		long id;
 		try {
 			id = Long.parseLong(request.getParameter("id"));

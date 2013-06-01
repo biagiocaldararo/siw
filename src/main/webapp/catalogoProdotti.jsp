@@ -19,7 +19,7 @@
 				<tr>
 					<td>${prodotto.id}</td>
 					<td>${prodotto.nome}</td>
-					<td><a href="dettagliProdotto.do?cod=${prodotto.id}">Dettagli</a></td>
+					<td><a href="dettagliProdotto.do?id=${prodotto.id}">Dettagli</a></td>
 			   	</tr>
 			</c:forEach>
 			</table>
