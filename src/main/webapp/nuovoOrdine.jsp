@@ -10,7 +10,7 @@
 	<body>
 		<h1>Catalogo Prodotti</h1>
 		<p>
-			<a href="carrello.jsp"><input type="button" value ="Il tuo Carrello (${numeroProdotti})"/></a>
+			<a href="carrello.jsp">Il tuo Carrello (${numeroProdotti})</a>
 		</p>
 		<p><font color="red">${errori["quantita"]}</font></p>
 		<table border = "4">
@@ -23,12 +23,12 @@
 			</tr>			
 		<c:forEach var="prodotto" items ="${prodotti}">
 			<tr>
-				<td> ${prodotto.cod} </td>
+				<td> ${prodotto.id} </td>
 				<td> ${prodotto.nome} </td>
-				<td><a href="dettagliProdotto.do?cod=${prodotto.cod}">Dettagli</a></td>
+				<td><a href="dettagliProdotto.do?id=${prodotto.id}">Dettagli</a></td>
 				<form action="aggiungiAlCarrello.do" method="post">
 				    <td><input type="text" name="quantita" value="1"/>
-				    	<input type="hidden" name="cod" value="${prodotto.cod}" /></td>
+				    	<input type="hidden" name="id" value="${prodotto.id}"/></td>
 					<td><input type="submit" value="Aggiungi al Carrello"/></td>
 				</form>
 			</tr>

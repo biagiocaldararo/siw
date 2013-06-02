@@ -11,20 +11,20 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	private DataSource data;
 	private PreparedStatement statement;
 	private Connection connection;
-	private CodBroker broker = new ProductCodBroker();
+	private IdBroker broker = new ProductIdBroker();
 
 	@Override
 	public boolean insert(Prodotto prodotto) {
 		this.data = new DataSourcePostgres();
-		String insert = "insert into prodotto(cod, nome, descrizione, prezzo) values (?,?,?,?)";
+		String insert = "insert into prodotto(id, nome, descrizione, prezzo) values (?,?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
-			long cod = this.broker.getCod(this.connection);
-			prodotto.setCod(cod);
+			long id = this.broker.getId(this.connection);
+			prodotto.setId(id);
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, cod);
+			this.statement.setLong(1, id);
 			this.statement.setString(2, prodotto.getNome());
 			this.statement.setString(3, prodotto.getDescrizione());
 			this.statement.setDouble(4, prodotto.getPrezzo());
@@ -51,13 +51,13 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	@Override
 	public boolean delete(Prodotto prodotto) {
 		this.data = new DataSourcePostgres();
-		String delete = "delete from prodotto where cod=?";
+		String delete = "delete from prodotto where id=?";
 		int eliminato = 0;
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(delete);
-			this.statement.setLong(1, prodotto.getCod());
+			this.statement.setLong(1, prodotto.getId());
 			eliminato = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
@@ -81,7 +81,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	@Override
 	public boolean update(Prodotto prodotto) {
 		this.data = new DataSourcePostgres();
-		String update = "update prodotto set nome =?, descrizione=?, prezzo=? where cod=?";
+		String update = "update prodotto set nome =?, descrizione=?, prezzo=? where id=?";
 		int aggiornato= 0;
 		
 		try {
@@ -90,7 +90,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 			this.statement.setString(1, prodotto.getNome());
 			this.statement.setString(2, prodotto.getDescrizione());
 			this.statement.setDouble(3, prodotto.getPrezzo());
-			this.statement.setLong(4, prodotto.getCod());
+			this.statement.setLong(4, prodotto.getId());
 			aggiornato = this.statement.executeUpdate();
 		} 
 		catch (SQLException e) {
@@ -112,18 +112,18 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	}
 
 	@Override
-	public Prodotto findByCod(long cod) {
+	public Prodotto findById(long id) {
 		this.data = new DataSourcePostgres();
-		String query= "select cod, nome, descrizione, prezzo from prodotto where cod=?";
+		String query= "select * from prodotto where id=?";
 		Prodotto prodotto = null;	
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(query);
-			this.statement.setLong(1, cod);
+			this.statement.setLong(1, id);
 			ResultSet r = statement.executeQuery();
 			while (r.next()) 
-				prodotto = new Prodotto(r.getLong("cod"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
+				prodotto = new Prodotto(r.getLong("id"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();				
@@ -146,7 +146,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 	@Override
 	public List<Prodotto> findAll() {
 		this.data = new DataSourcePostgres();
-		String query= "select cod, nome, descrizione, prezzo from prodotto";
+		String query= "select * from prodotto";
 		List<Prodotto> prodotti = new LinkedList<Prodotto>();	
 		
 		try {
@@ -154,7 +154,7 @@ public class ProdottoDAOPostgres implements ProdottoDAO {
 			this.statement = this.connection.prepareStatement(query);
 			ResultSet r = statement.executeQuery();
 			while (r.next()) {
-				Prodotto prodotto = new Prodotto(r.getLong("cod"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
+				Prodotto prodotto = new Prodotto(r.getLong("id"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
 				prodotti.add(prodotto);
 			}
 		} 
