@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.bgs_shop.model.*" %>
+<%@ page import="com.bgsshop.model.*" %>
 <%
-   Cliente cliente = (Cliente) session.getAttribute("cliente");
+	Utente cliente = (Utente) session.getAttribute("cliente");
    boolean autorizzato = true;
    
    if (cliente!=null)
@@ -21,9 +21,7 @@
 		<title>BGS-Shop/homeCustomer</title>
 	</head>
 	<body>
-		<form action="nuovoOrdine.do" method="post">
 			<p><i>Ciao, ${cliente.username}!</i></p>
-		    <input type="submit" name="submit" value="Nuovo Ordine"/>
-		</form>
+		    <a href="nuovoOrdine.do">Nuovo Ordine</a>
 	</body>
 </html>

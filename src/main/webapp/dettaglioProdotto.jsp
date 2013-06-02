@@ -8,10 +8,10 @@
 	</head>
 	<body>
 		<h1>Specifiche del Prodotto</h1>
-		<p><b>Cod: </b>${prodotto.cod}</p>
+		<p><b>Cod: </b>${prodotto.id}</p>
 		<p><b>Nome: </b>${prodotto.nome}</p>
 		<p><b>Descrizione: </b>${prodotto.descrizione}</p>
 		<p><b>Prezzo: </b>${prodotto.prezzo}</p>
-		<form><input type="button" value="Indietro" onClick="history.go(-1);"></form>
+		<a href="javascript:history.back();">Indietro</a>
 	</body>
 </html>

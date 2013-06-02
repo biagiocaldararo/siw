@@ -12,6 +12,6 @@
 		<p> Nome: ${prodotto.nome}</p>
 		<p> Descrizione: ${prodotto.descrizione}</p>
 		<p> Prezzo: ${prodotto.prezzo}</p>
-		<a href="inserimentoProdotto.jsp"><input type="button" value="Inserisci un altro Prodotto"/></a>
+		<a href="inserimentoProdotto.jsp">Inserisci un altro Prodotto</a>
 	</body>
 </html>

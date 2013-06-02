@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.bgs_shop.model.*" %>
+<%@ page import="com.bgsshop.model.*" %>
 <%
-   Cliente cliente = (Cliente) session.getAttribute("cliente");
+	Utente cliente = (Utente) session.getAttribute("cliente");
    boolean autorizzato = true;
    
    if (cliente!=null)
@@ -22,6 +22,6 @@
 	</head>
 	<body>
 		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
-		<a href="inserimentoProdotto.jsp"><input type="button" value="Inserisci Prodotto"/></a>
+		<a href="inserimentoProdotto.jsp">Inserisci Prodotto</a>
 	</body>
 </html>

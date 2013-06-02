@@ -9,6 +9,6 @@
 	<body>
 		<h1>Errore!</h1>
 		<p>Ops.. qualcosa è andato storto!</p>
-		<a href="home.jsp"><input type="button" value="Home"/></a>
+		<a href="home.jsp">Home</a>
 	</body>
 </html>

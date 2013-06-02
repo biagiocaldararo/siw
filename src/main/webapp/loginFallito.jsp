@@ -9,6 +9,6 @@
 	<body>
 		<h1>Login Fallito!</h1>
 	    <p> Username/Password non corretti!</p>
-	    <a href="home.jsp"><input type="button" value="Home"/></a>
+	    <a href="home.jsp">Home</a>
 	</body>
 </html>
