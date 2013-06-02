@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Ordine {
-	private long cod;
+	private long id;
 	private Date data;
 	private Cliente cliente;
 	private String stato;
@@ -18,12 +18,12 @@ public class Ordine {
 		this.righeOrdine = new LinkedList<RigaOrdine>();
 	}
 
-	public long getCod() {
-		return cod;
+	public long getId() {
+		return id;
 	}
 
-	public void setCod(long cod) {
-		this.cod = cod;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Date getData() {
@@ -64,9 +64,9 @@ public class Ordine {
 		this.importo += rigaOrdine.getCosto();
 	}
 	
-	public void eliminaRiga(long cod){
+	public void eliminaRiga(long id){
 		for(RigaOrdine riga: this.righeOrdine){
-			if(riga.getProdotto().getCod()==cod) {
+			if(riga.getProdotto().getId()==id) {
 				righeOrdine.remove(riga);
 				this.importo -= riga.getCosto();
 			}

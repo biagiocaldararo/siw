@@ -22,23 +22,22 @@ public class AzioneAggiungiProdottoAOrdine implements Azione {
 		RigaOrdine rigaCorrente = null;
 		boolean trovato = false;
 		
-		request.setAttribute("prodotti", new FacadeProdotto().getProdotti());
+		//sessione.setAttribute("prodotti", new FacadeProdotto().getProdotti());
 		
 		if(helper.convalida()){
-			
-			long cod;
+			long id;
 			try {
-				cod = Long.parseLong(request.getParameter("cod"));
+				id = Long.parseLong(request.getParameter("id"));
 			} catch (NumberFormatException e) {
 				return "nuovoOrdine";
 			}
 			
 			// TODO: Gestire il caso in cui il prodotto non esista!!
-			Prodotto prodotto = new FacadeProdotto().findByCod(cod);
+			Prodotto prodotto = new FacadeProdotto().getProdotto(id);
 		
 			// TODO: ordineCorrente può essere null :/
 			for(RigaOrdine r: ordineCorrente.getRigheOrdine())
-				if (cod == r.getProdotto().getCod()){
+				if (id == r.getProdotto().getId()){
 					trovato = true;
 					rigaCorrente = r;
 					break;
@@ -56,5 +55,4 @@ public class AzioneAggiungiProdottoAOrdine implements Azione {
 		sessione.setAttribute("numeroProdotti", ordineCorrente.getNumeroProdotti());
 		return "nuovoOrdine";
 	}
-
 }

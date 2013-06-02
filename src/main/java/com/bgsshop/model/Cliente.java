@@ -1,6 +1,7 @@
 package com.bgsshop.model;
 
 public class Cliente {
+	private Long id;
 	private String username;
 	private String password;
 	private String nome;
@@ -12,10 +13,19 @@ public class Cliente {
 	public Cliente(){
 	};
 	
-	public Cliente(String username, String password, String ruolo) {
+	public Cliente(Long id, String username, String password, String ruolo) {
+		this.setId(id);
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setRuolo(ruolo);
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

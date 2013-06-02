@@ -13,15 +13,15 @@ public class AzioneDettaglioProdotto implements Azione {
 		
 		String[] parametri = (String[]) request.getAttribute("parametri");
 
-		long cod;
+		long id;
 		try {
-			cod = Long.parseLong(parametri[0]);
+			id = Long.parseLong(parametri[0]);
 		} catch (NumberFormatException e) {
 			return "notfound.jsp";
 		}
 		
 		// TODO: questo metodo dovrebbe sollevare un'eccezione se non trova il prodotto.
-		Prodotto p = new FacadeProdotto().findByCod(cod);
+		Prodotto p = new FacadeProdotto().getProdotto(id);
 		if (p == null)
 			return "notfound.jsp";
 		
@@ -29,3 +29,4 @@ public class AzioneDettaglioProdotto implements Azione {
 		return "dettaglioProdotto.jsp";
 	}
 }
+

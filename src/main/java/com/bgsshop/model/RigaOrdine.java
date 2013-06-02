@@ -46,7 +46,9 @@ public class RigaOrdine {
 	}
 	
 	public void aggiornaRiga(int quantita){
-		this.setQuantita(quantita);
-		this.setCosto(this.quantita*this.prodotto.getPrezzo());
+		this.ordine.setImporto(this.ordine.getImporto()-this.costo);
+		this.quantita = quantita;
+		this.costo = quantita*this.prodotto.getPrezzo();
+		this.ordine.setImporto(this.ordine.getImporto()+this.costo);
 	}
 }

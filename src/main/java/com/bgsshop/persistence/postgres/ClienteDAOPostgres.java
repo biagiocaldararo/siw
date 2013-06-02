@@ -119,7 +119,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 			this.statement.setString(1, username);
 			ResultSet r = this.statement.executeQuery();
 			while (r.next()) 
-				cliente = new Cliente(r.getString("username"), r.getString("password"), r.getString("ruolo"));
+				cliente = new Cliente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();				
@@ -150,7 +150,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 			this.statement = this.connection.prepareStatement(query);
 			ResultSet r = this.statement.executeQuery();
 			while (r.next()) {
-				Cliente cliente = new Cliente(r.getString("username"), r.getString("password"), r.getString("ruolo"));
+				Cliente cliente = new Cliente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
 				clienti.add(cliente);
 			}
 		} 
