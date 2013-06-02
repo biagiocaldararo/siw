@@ -1,14 +1,14 @@
 package com.bgsshop.facade;
 
 import com.bgsshop.model.*;
-import com.bgsshop.persistence.ClienteDAO;
-import com.bgsshop.persistence.sqlite.ClienteDAOSQLite;
+import com.bgsshop.persistence.UtenteDAO;
+import com.bgsshop.persistence.sqlite.UtenteDAOSQLite;
 
 
 public class FacadeAutenticazione {
-	public Cliente login (String username, String password){
-		ClienteDAO dao = new ClienteDAOSQLite();
-		Cliente cliente = dao.findByUsername(username);
+	public Utente login (String username, String password){
+		UtenteDAO dao = new UtenteDAOSQLite();
+		Utente cliente = dao.findByUsername(username);
 		boolean autenticato = true;
 		
 		if(cliente!=null) 

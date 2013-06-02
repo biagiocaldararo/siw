@@ -1,6 +1,6 @@
 package com.bgsshop.model;
 
-public class Cliente {
+public class Utente {
 	private Long id;
 	private String username;
 	private String password;
@@ -10,10 +10,11 @@ public class Cliente {
 	private String indirizzo;
 	private String ruolo;
 	
-	public Cliente(){
+	public Utente(){
 	};
 	
-	public Cliente(Long id, String username, String password, String ruolo) {
+	// TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
+	public Utente(Long id, String username, String password, String ruolo) {
 		this.setId(id);
 		this.setUsername(username);
 		this.setPassword(password);

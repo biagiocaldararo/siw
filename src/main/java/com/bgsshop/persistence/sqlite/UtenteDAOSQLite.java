@@ -8,13 +8,13 @@ import com.bgsshop.model.*;
 import com.bgsshop.persistence.*;
 
 
-public class ClienteDAOSQLite implements ClienteDAO {
+public class UtenteDAOSQLite implements UtenteDAO {
 	private DataSource data;
 	private PreparedStatement statement;
 	private Connection connection;
 
 	@Override
-	public boolean insert(Cliente cliente) {
+	public boolean insert(Utente cliente) {
 		this.data = new DataSourceSQLite();
 		String insert = "insert into cliente(username, password, ruolo) values (?,?,?)";
 		int inserito = 0;
@@ -46,7 +46,7 @@ public class ClienteDAOSQLite implements ClienteDAO {
 	}
 
 	@Override
-	public boolean delete(Cliente cliente) {
+	public boolean delete(Utente cliente) {
 		this.data = new DataSourceSQLite();
 		String delete = "delete from cliente where username=?";
 		int eliminato = 0;
@@ -76,7 +76,7 @@ public class ClienteDAOSQLite implements ClienteDAO {
 	}
 
 	@Override
-	public boolean update(Cliente cliente) {
+	public boolean update(Utente cliente) {
 		this.data = new DataSourceSQLite();
 		String update = "update cliente set password=?, ruolo=? where username=?";
 		int aggiornato= 0;
@@ -108,10 +108,10 @@ public class ClienteDAOSQLite implements ClienteDAO {
 	}
 
 	@Override
-	public Cliente findByUsername(String username) {
+	public Utente findByUsername(String username) {
 		this.data = new DataSourceSQLite();
 		String query= "select * from cliente where username=?";
-		Cliente cliente = null;	
+		Utente cliente = null;	
 		
 		try {
 			this.connection = this.data.getConnection();
@@ -119,7 +119,7 @@ public class ClienteDAOSQLite implements ClienteDAO {
 			this.statement.setString(1, username);
 			ResultSet r = this.statement.executeQuery();
 			while (r.next()) 
-				cliente = new Cliente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
+				cliente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();				
@@ -140,17 +140,17 @@ public class ClienteDAOSQLite implements ClienteDAO {
 	}
 	
 	@Override
-	public List<Cliente> findAll() {
+	public List<Utente> findAll() {
 		this.data = new DataSourceSQLite();
 		String query= "select * from cliente";
-		List<Cliente> clienti = new LinkedList<Cliente>();	
+		List<Utente> clienti = new LinkedList<Utente>();	
 		
 		try {
 			this.connection = this.data.getConnection();
 			this.statement = this.connection.prepareStatement(query);
 			ResultSet r = this.statement.executeQuery();
 			while (r.next()) {
-				Cliente cliente = new Cliente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
+				Utente cliente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
 				clienti.add(cliente);
 			}
 		} 

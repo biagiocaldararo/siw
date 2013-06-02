@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import com.bgsshop.model.Cliente;
+import com.bgsshop.model.Utente;
 import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
 import com.bgsshop.persistence.DataSource;
@@ -68,7 +68,7 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	}
 
 	@Override
-	public List<Ordine> findByCliente(Cliente cliente) {
+	public List<Ordine> findByCliente(Utente cliente) {
 		// TODO Auto-generated method stub
 		return null;
 	}

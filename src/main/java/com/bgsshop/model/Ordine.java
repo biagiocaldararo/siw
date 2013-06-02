@@ -7,12 +7,12 @@ import java.util.List;
 public class Ordine {
 	private long id;
 	private Date data;
-	private Cliente cliente;
+	private Utente cliente;
 	private String stato;
 	private double importo;
 	private List<RigaOrdine> righeOrdine;
 	
-	public Ordine(Cliente cliente){
+	public Ordine(Utente cliente){
 		this.setCliente(cliente);
 		this.setStato("aperto");
 		this.righeOrdine = new LinkedList<RigaOrdine>();
@@ -34,11 +34,11 @@ public class Ordine {
 		this.data = data;
 	}
 
-	public Cliente getCliente() {
+	public Utente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Utente cliente) {
 		this.cliente = cliente;
 	}
 

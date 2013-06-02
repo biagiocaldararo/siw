@@ -16,7 +16,7 @@ public class AzioneLogin extends Azione{
 		FacadeAutenticazione facade = new FacadeAutenticazione();
 		
 		String destinazione = "loginFallito";
-		Cliente cliente = facade.login(username, password);
+		Utente cliente = facade.login(username, password);
 	
 		if(cliente!=null){
 			HttpSession sessione = request.getSession();

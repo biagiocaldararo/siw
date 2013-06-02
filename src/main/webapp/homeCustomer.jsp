@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.bgsshop.model.*" %>
 <%
-   Cliente cliente = (Cliente) session.getAttribute("cliente");
+	Utente cliente = (Utente) session.getAttribute("cliente");
    boolean autorizzato = true;
    
    if (cliente!=null)
