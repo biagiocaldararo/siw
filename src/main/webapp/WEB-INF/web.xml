@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>ProgettoSIW</display-name>
-  <servlet>
+<!-- <servlet>
     <servlet-name>Controller</servlet-name>
     <servlet-class>     
      	com.bgsshop.controller.Controller
@@ -10,5 +10,13 @@
   <servlet-mapping>
     <servlet-name>Controller</servlet-name>
     <url-pattern>/</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
+  
+  <session-config>
+    <session-timeout>2678400</session-timeout>
+    <cookie-config>
+      <!-- 31 giorni -->
+      <max-age>2678400</max-age>
+    </cookie-config>
+  </session-config>
 </web-app>
