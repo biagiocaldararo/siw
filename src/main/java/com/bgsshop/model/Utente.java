@@ -27,6 +27,11 @@ public class Utente {
 		this.setPassword(password);
 		this.setRuolo(ruolo);
 	}
+	public Utente(String username, String password, String ruolo) {
+		this.setUsername(username);
+		this.setPassword(password);
+		this.setRuolo(ruolo);
+	}
 	
 	public Long getId() {
 		return id;

@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.bgsshop.Utils;
@@ -138,48 +140,37 @@ public class AutomaticDAO<T> implements DAO<T> {
 		}		
 		
 	}
-	
-	public T[] all() {
-		Statement stmt = null;
+
+	public List<T> filter(T instance) {
+		PreparedStatement stmt = null;
 		Connection conn = null;
 		ResultSet res = null;
-		conn = datasource.getConnection();
-		int count;
 		
+		Map<String, Object> params = prepareParams(instance);
+		String query = getFilterQuery(params);
 		try {
-			stmt = conn.createStatement();
-			res = stmt.executeQuery(String.format("SELECT COUNT(*) FROM %s", name));
-			res.next();
-			count = res.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new PersistenceException("Qualcosa è andato storto");
-		} finally {
-			try { res.close(); } catch (Exception e) { }
-			try { stmt.close(); } catch (Exception e) { }
-		}
+			conn = datasource.getConnection();
+			stmt = conn.prepareStatement(query);
 			
-		try {
-			String names = Utils.join(fields.keySet(), ", ");
-			String query = String.format("SELECT %s, id FROM %s", names, name);
+			int i = 1;
+			if (params != null)
+				for (Object param : params.values())
+					stmt.setObject(i++, param);
+
+			res = stmt.executeQuery();
 			
-			stmt = conn.createStatement();
-			res = stmt.executeQuery(query);
-			
-			@SuppressWarnings("unchecked")
-			T[] models = (T[]) Array.newInstance(this.model, count);
-			
-			int i = 0;
+			List<T> models = new ArrayList<T>();
+			i = 0;
 			while (res.next()) {
 				T model = this.model.newInstance();
 				for (Field field : fields.values())
 					field.set(model, res.getObject(field.getName()));
-				id.set(model, res.getLong("id"));
-				models[i++] = model;
+				this.id.set(model, res.getLong("id"));
+				models.add(model);
 			}
 			return models;
 			
-		} catch (SQLException | IllegalArgumentException | InstantiationException | IllegalAccessException e) {
+		} catch (SQLException | IllegalArgumentException | IllegalAccessException | InstantiationException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Qualcosa è andato storto");
 		} finally {
@@ -187,8 +178,44 @@ public class AutomaticDAO<T> implements DAO<T> {
 			try { conn.close(); } catch (Exception e) { }
 		}
 	}
-
 	
+	public List<T> all() {
+		return filter(null);
+	}
+	
+	private Map<String, Object> prepareParams(T instance) {
+		if (instance == null)
+			return null;
+		
+		try {
+			Map<String, Object> params = new HashMap<>();
+			for (Field field : fields.values()) {
+				Object param = field.get(instance);
+				if (param != null)
+					params.put(field.getName(), param);
+			}
+			Object id = this.id.get(instance);
+			if (id != null)
+				params.put("id", id);
+			
+			return params;
+			
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			throw new PersistenceException(":P");
+		}
+	}
+	
+	private String getFilterQuery(Map<String, Object> params) {
+		String select = Utils.join(fields.keySet(), ", ");
+		
+		if (params == null)
+			return String.format("SELECT %s, id FROM %s", select, name);
+		
+		String where = Utils.join(params.keySet(), "=? AND ");
+		return String.format("SELECT %s, id FROM %s WHERE %s=?", select, name, where);	
+	}
+
 	private String getInsertQuery() {
 		String query = "INSERT INTO %s(%s) VALUES (%s)";
 		String[] placeholders = new String[fields.size()];
