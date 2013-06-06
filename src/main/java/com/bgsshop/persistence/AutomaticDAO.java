@@ -64,12 +64,8 @@ public class AutomaticDAO<T> implements DAO<T> {
 	}
 	
 	public void insert(T instance) {
-		PreparedStatement stmt = null;
-		Connection conn = null;
-		try {
-			conn = datasource.getConnection();
-			stmt = conn.prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS);
-			
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
 			int i = 1;
 			for (Field field : fields.values())
 				stmt.setObject(i++, field.get(instance));
@@ -79,24 +75,15 @@ public class AutomaticDAO<T> implements DAO<T> {
 			res.next();
 			
 			id.set(instance, res.getLong(1));
-			
-		} catch (IllegalAccessException|SQLException e) {
+		} catch (IllegalAccessException | SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Qualcosa è andato storto");
-		} finally {
-			// http://stackoverflow.com/questions/2225221/closing-database-connections-in-java
-			try { stmt.close(); } catch (Exception e) { }
-			try { conn.close(); } catch (Exception e) { }
 		}		
 	}
 	
 	public void update(T instance) {
-		PreparedStatement stmt = null;
-		Connection conn = null;
-		try {
-			conn = datasource.getConnection();
-			stmt = conn.prepareStatement(getUpdateQuery());
-			
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(getUpdateQuery())) {
 			int i = 1;
 			for (Field field : fields.values())
 				stmt.setObject(i++, field.get(instance));
@@ -108,9 +95,6 @@ public class AutomaticDAO<T> implements DAO<T> {
 		} catch (IllegalAccessException|SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Qualcosa è andato storto");
-		} finally {
-			try { stmt.close(); } catch (Exception e) { }
-			try { conn.close(); } catch (Exception e) { }
 		}
 	}
 	
@@ -119,12 +103,10 @@ public class AutomaticDAO<T> implements DAO<T> {
 		if (id == null)
 			return;
 
-		PreparedStatement stmt = null;
-		Connection conn = null;
-		try {
-			conn = datasource.getConnection();
-			stmt = conn.prepareStatement(String.format("DELETE FROM %s WHERE id=?", name));
-			
+		String query = String.format("DELETE FROM %s WHERE id=?", name);
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(query)) {
+
 			stmt.setLong(1, getId(instance));
 			
 			stmt.executeUpdate();
@@ -132,31 +114,22 @@ public class AutomaticDAO<T> implements DAO<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Qualcosa è andato storto");
-		} finally {
-			try { stmt.close(); } catch (Exception e) { }
-			try { conn.close(); } catch (Exception e) { }
-		}		
-		
+		}
 	}
 
 	public List<T> filter(T instance) {
-		PreparedStatement stmt = null;
-		Connection conn = null;
-		ResultSet res = null;
-		
 		Map<String, Object> params = prepareParams(instance);
 		String query = getFilterQuery(params);
-		try {
-			conn = datasource.getConnection();
-			// System.out.println(query);
-			stmt = conn.prepareStatement(query);
-			
+		
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(query)) {
+
 			int i = 1;
 			if (params != null)
 				for (Object param : params.values())
 					stmt.setObject(i++, param);
 
-			res = stmt.executeQuery();
+			ResultSet res = stmt.executeQuery();
 			
 			List<T> models = new ArrayList<T>();
 			i = 0;
@@ -172,9 +145,6 @@ public class AutomaticDAO<T> implements DAO<T> {
 		} catch (SQLException | IllegalArgumentException | IllegalAccessException | InstantiationException e) {
 			e.printStackTrace();
 			throw new PersistenceException("Qualcosa è andato storto");
-		} finally {
-			try { stmt.close(); } catch (Exception e) { }
-			try { conn.close(); } catch (Exception e) { }
 		}
 	}
 	
