@@ -9,166 +9,88 @@ import com.bgsshop.persistence.*;
 
 
 public class UtenteDAOSQLite implements UtenteDAO {
+	private final static String INSERT_QUERY = "INSERT INTO utente(username, password, ruolo) VALUES (?,?,?)";
+	private final static String DELETE_QUERY = "DELETE FROM utente WHERE username=?";
+	private final static String UPDATE_QUERY = "UPDATE utente SET password=?, ruolo=? WHERE username=?";
+	private final static String FIND_QUERY = "SELECT * FROM utente WHERE username=?";
+	private final static String SELECT_QUERY = "SELECT * FROM utente";
 	private DataSource data;
-	private PreparedStatement statement;
-	private Connection connection;
+	
+	public UtenteDAOSQLite() {
+		data = new DataSourceSQLite();
+	}
 
 	@Override
-	public boolean insert(Utente utente) {
-		this.data = new DataSourceSQLite();
-		String insert = "insert into utente(username, password, ruolo) values (?,?,?)";
+	public boolean insert(Utente utente) {	
 		int inserito = 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setString(1, utente.getUsername());
-			this.statement.setString(2, utente.getPassword());
-			this.statement.setString(3, utente.getRuolo());
-			inserito = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(INSERT_QUERY)) {
+			stmt.setString(1, utente.getUsername());
+			stmt.setString(2, utente.getPassword());
+			stmt.setString(3, utente.getRuolo());
+			inserito = stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
-		return inserito!=0;
+		return inserito != 0;
 	}
 
 	@Override
 	public boolean delete(Utente utente) {
-		this.data = new DataSourceSQLite();
-		String delete = "delete from utente where username=?";
 		int eliminato = 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(delete);
-			this.statement.setString(1, utente.getUsername());
-			eliminato = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(DELETE_QUERY)) {
+			stmt.setString(1, utente.getUsername());
+			eliminato = stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
 		return eliminato!=0;
 	}
 
 	@Override
 	public boolean update(Utente utente) {
-		this.data = new DataSourceSQLite();
-		String update = "update utente set password=?, ruolo=? where username=?";
 		int aggiornato= 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(update);
-			this.statement.setString(1, utente.getPassword());
-			this.statement.setString(2, utente.getRuolo());
-			this.statement.setString(3, utente.getUsername());
-			aggiornato = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
+			stmt.setString(1, utente.getPassword());
+			stmt.setString(2, utente.getRuolo());
+			stmt.setString(3, utente.getUsername());
+			aggiornato = stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
 		return aggiornato!=0;
 	}
 
 	@Override
 	public Utente findByUsername(String username) {
-		this.data = new DataSourceSQLite();
-		String query= "select * from utente where username=?";
 		Utente utente = null;	
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(query);
-			this.statement.setString(1, username);
-			ResultSet r = this.statement.executeQuery();
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
+			stmt.setString(1, username);
+			ResultSet r = stmt.executeQuery();
 			while (r.next()) 
 				utente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
-		} 
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();				
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
 		return utente;
 	}
 	
 	@Override
 	public List<Utente> findAll() {
-		this.data = new DataSourceSQLite();
-		String query= "select * from utente";
 		List<Utente> utenti = new LinkedList<Utente>();	
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(query);
-			ResultSet r = this.statement.executeQuery();
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(SELECT_QUERY)) {
+			ResultSet r = stmt.executeQuery();
 			while (r.next()) {
 				Utente utente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
 				utenti.add(utente);
 			}
-		} 
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();				
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
 		return utenti;
 	}
 }

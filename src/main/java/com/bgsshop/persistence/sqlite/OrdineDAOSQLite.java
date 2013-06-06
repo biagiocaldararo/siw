@@ -13,37 +13,27 @@ import com.bgsshop.persistence.OrdineDAO;
 
 public class OrdineDAOSQLite implements OrdineDAO {
 	private DataSource data;
-	private PreparedStatement statement;
-	private Connection connection;
+	
+	private final static String INSERT_QUERY = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
 
+	public OrdineDAOSQLite() {
+		data = new DataSourceSQLite();
+	}
+	
 	@Override
 	public boolean insert(Ordine ordine, long idUtente) {
-		this.data = new DataSourceSQLite();
-		String insert = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
 		int inserito = 0;
 		
-		try {
-			this.connection = data.getConnection();
-			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, idUtente);
-			this.statement.setString(2, new Date().toString());
-			this.statement.setString(3, ordine.getStato());
-			this.statement.setDouble(4, ordine.getImporto());
-			inserito = this.statement.executeUpdate();
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(INSERT_QUERY)) {
+			stmt.setLong(1, idUtente);
+			stmt.setString(2, new Date().toString());
+			stmt.setString(3, ordine.getStato());
+			stmt.setDouble(4, ordine.getImporto());
+			inserito = stmt.executeUpdate();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return inserito!=0;
