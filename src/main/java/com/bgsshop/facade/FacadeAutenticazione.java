@@ -8,15 +8,15 @@ import com.bgsshop.persistence.sqlite.UtenteDAOSQLite;
 public class FacadeAutenticazione {
 	public Utente login (String username, String password){
 		UtenteDAO dao = new UtenteDAOSQLite();
-		Utente cliente = dao.findByUsername(username);
+		Utente utente = dao.findByUsername(username);
 		boolean autenticato = true;
 		
-		if(cliente!=null) 
-			autenticato &= cliente.getPassword().equals(password);
+		if(utente!=null) 
+			autenticato &= utente.getPassword().equals(password);
 		
 		if(!autenticato)
-			cliente = null;
+			utente = null;
 		
-		return cliente;
+		return utente;
 	}
 }

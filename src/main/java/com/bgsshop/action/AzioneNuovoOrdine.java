@@ -16,7 +16,7 @@ public class AzioneNuovoOrdine extends Azione {
 		FacadeProdotto facade = new FacadeProdotto();
 		sessione.setAttribute("prodotti", facade.getProdotti());
 		
-		Ordine ordineCorrente = new Ordine((Utente) sessione.getAttribute("cliente"));
+		Ordine ordineCorrente = new Ordine((Utente) sessione.getAttribute("utente"));
 		sessione.setAttribute("ordineCorrente", ordineCorrente);
 		sessione.setAttribute("numeroProdotti", 0);
 		

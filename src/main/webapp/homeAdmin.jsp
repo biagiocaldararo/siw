@@ -3,14 +3,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.bgsshop.model.*" %>
 <%
-	Utente cliente = (Utente) session.getAttribute("cliente");
-   boolean autorizzato = true;
+   Utente utente = (Utente) session.getAttribute("utente");
+   boolean autorizzato = false;
    
-   if (cliente!=null)
-       autorizzato &= (cliente.getRuolo().equals("admin"));
+   if (utente!=null)
+       autorizzato = utente.getRuolo().equals("admin");
    
    if (!autorizzato) {
-	   RequestDispatcher rd = application.getRequestDispatcher("/homeCustomer.jsp");
+	   RequestDispatcher rd = application.getRequestDispatcher("/loginFallito.jsp");
    	   rd.forward(request, response);
    }
 %>
@@ -21,7 +21,7 @@
 		<title>BGS-Shop/homeAdmin</title>
 	</head>
 	<body>
-		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
+		<p><i>${utente.username} [${utente.ruolo}]</i></p>
 		<a href="inserimentoProdotto.jsp">Inserisci Prodotto</a>
 	</body>
 </html>

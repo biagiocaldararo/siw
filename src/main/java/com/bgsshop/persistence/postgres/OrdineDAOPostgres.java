@@ -19,9 +19,9 @@ public class OrdineDAOPostgres implements OrdineDAO {
 	private IdBroker broker = new OrderIdBroker();
 
 	@Override
-	public boolean insert(Ordine ordine, long idCliente) {
+	public boolean insert(Ordine ordine, long idUtente) {
 		this.data = new DataSourcePostgres();
-		String insert = "insert into ordine(id, cliente, data, stato, importo) values (?,?,?,?,?)";
+		String insert = "insert into ordine(id, utente, data, stato, importo) values (?,?,?,?,?)";
 		int inserito = 0;
 		
 		try {
@@ -30,7 +30,7 @@ public class OrdineDAOPostgres implements OrdineDAO {
 			ordine.setId(id);
 			this.statement = this.connection.prepareStatement(insert);
 			this.statement.setLong(1, id);
-			this.statement.setLong(2, idCliente);
+			this.statement.setLong(2, idUtente);
 			this.statement.setString(3, new Date().toString());
 			this.statement.setString(4, ordine.getStato());
 			this.statement.setDouble(5, ordine.getImporto());
@@ -73,7 +73,7 @@ public class OrdineDAOPostgres implements OrdineDAO {
 	}
 
 	@Override
-	public List<Ordine> findByCliente(Utente cliente) {
+	public List<Ordine> findByUtente(Utente utente) {
 		// TODO Auto-generated method stub
 		return null;
 	}

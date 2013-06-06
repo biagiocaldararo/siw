@@ -18,10 +18,10 @@ public class AzioneConfermaOrdine extends Azione {
 		if(request.getParameter("risp").equals("Si")){
 			FacadeOrdine facade = new FacadeOrdine();
 			Ordine ordineCorrente = (Ordine) sessione.getAttribute("ordineCorrente");
-			Utente cliente = (Utente) sessione.getAttribute("cliente");
+			Utente utente = (Utente) sessione.getAttribute("utente");
 			
 			ordineCorrente.setStato("chiuso");
-			if(facade.inserisciOrdine(ordineCorrente, cliente))
+			if(facade.inserisciOrdine(ordineCorrente, utente))
 				destinazione = "inserimentoOrdineCompletato";
 		    else 
 		    	destinazione = "erroreInserimento";

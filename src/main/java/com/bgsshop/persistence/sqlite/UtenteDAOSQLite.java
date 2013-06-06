@@ -9,167 +9,89 @@ import com.bgsshop.persistence.*;
 
 
 public class UtenteDAOSQLite implements UtenteDAO {
+	private final static String INSERT_QUERY = "INSERT INTO utente(username, password, ruolo) VALUES (?,?,?)";
+	private final static String DELETE_QUERY = "DELETE FROM utente WHERE username=?";
+	private final static String UPDATE_QUERY = "UPDATE utente SET password=?, ruolo=? WHERE username=?";
+	private final static String FIND_QUERY = "SELECT * FROM utente WHERE username=?";
+	private final static String SELECT_QUERY = "SELECT * FROM utente";
 	private DataSource data;
-	private PreparedStatement statement;
-	private Connection connection;
-
-	@Override
-	public boolean insert(Utente cliente) {
-		this.data = new DataSourceSQLite();
-		String insert = "insert into cliente(username, password, ruolo) values (?,?,?)";
-		int inserito = 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setString(1, cliente.getUsername());
-			this.statement.setString(2, cliente.getPassword());
-			this.statement.setString(3, cliente.getRuolo());
-			inserito = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
-			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return inserito!=0;
+	
+	public UtenteDAOSQLite() {
+		data = new DataSourceSQLite();
 	}
 
 	@Override
-	public boolean delete(Utente cliente) {
-		this.data = new DataSourceSQLite();
-		String delete = "delete from cliente where username=?";
-		int eliminato = 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(delete);
-			this.statement.setString(1, cliente.getUsername());
-			eliminato = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
+	public boolean insert(Utente utente) {	
+		int inserito = 0;
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(INSERT_QUERY)) {
+			stmt.setString(1, utente.getUsername());
+			stmt.setString(2, utente.getPassword());
+			stmt.setString(3, utente.getRuolo());
+			inserito = stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
+		return inserito != 0;
+	}
 
+	@Override
+	public boolean delete(Utente utente) {
+		int eliminato = 0;
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(DELETE_QUERY)) {
+			stmt.setString(1, utente.getUsername());
+			eliminato = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();	
+		}
 		return eliminato!=0;
 	}
 
 	@Override
-	public boolean update(Utente cliente) {
-		this.data = new DataSourceSQLite();
-		String update = "update cliente set password=?, ruolo=? where username=?";
+	public boolean update(Utente utente) {
 		int aggiornato= 0;
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(update);
-			this.statement.setString(1, cliente.getPassword());
-			this.statement.setString(2, cliente.getRuolo());
-			this.statement.setString(3, cliente.getUsername());
-			aggiornato = this.statement.executeUpdate();
-		} 
-		catch (SQLException e) {
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
+			stmt.setString(1, utente.getPassword());
+			stmt.setString(2, utente.getRuolo());
+			stmt.setString(3, utente.getUsername());
+			aggiornato = stmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();	
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
 		return aggiornato!=0;
 	}
 
 	@Override
 	public Utente findByUsername(String username) {
-		this.data = new DataSourceSQLite();
-		String query= "select * from cliente where username=?";
-		Utente cliente = null;	
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(query);
-			this.statement.setString(1, username);
-			ResultSet r = this.statement.executeQuery();
+		Utente utente = null;	
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
+			stmt.setString(1, username);
+			ResultSet r = stmt.executeQuery();
 			while (r.next()) 
-				cliente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
-		} 
-		catch (SQLException e) {
+				utente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
+		} catch (SQLException e) {
 			e.printStackTrace();				
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
-		return cliente;
+		return utente;
 	}
 	
 	@Override
 	public List<Utente> findAll() {
-		this.data = new DataSourceSQLite();
-		String query= "select * from cliente";
-		List<Utente> clienti = new LinkedList<Utente>();	
-		
-		try {
-			this.connection = this.data.getConnection();
-			this.statement = this.connection.prepareStatement(query);
-			ResultSet r = this.statement.executeQuery();
+		List<Utente> utenti = new LinkedList<Utente>();	
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(SELECT_QUERY)) {
+			ResultSet r = stmt.executeQuery();
 			while (r.next()) {
-				Utente cliente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
-				clienti.add(cliente);
+				Utente utente = new Utente(r.getLong("id"), r.getString("username"), r.getString("password"), r.getString("ruolo"));
+				utenti.add(utente);
 			}
-		} 
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();				
-		} 
-		finally {
-			try {
-				if (this.statement != null) 
-					this.statement.close();
-				if (this.connection!= null)
-					this.connection.close();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-
-		return clienti;
+		return utenti;
 	}
 }
 

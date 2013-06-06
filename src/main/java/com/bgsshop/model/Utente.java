@@ -101,3 +101,4 @@ public class Utente {
 		return String.format("<Utente(%s, %s):%d>", username, ruolo, id);
 	}
 }
+

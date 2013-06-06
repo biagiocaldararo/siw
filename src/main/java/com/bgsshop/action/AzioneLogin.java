@@ -16,12 +16,14 @@ public class AzioneLogin extends Azione{
 		FacadeAutenticazione facade = new FacadeAutenticazione();
 		
 		String destinazione = "loginFallito";
-		Utente cliente = facade.login(username, password);
+		Utente utente = facade.login(username, password);
 	
-		if(cliente!=null){
+		if(utente!=null){
 			HttpSession sessione = request.getSession();
-		    sessione.setAttribute("cliente", cliente);
+		    sessione.setAttribute("utente", utente);
 		    destinazione = "homeAdmin";
+		    if(utente.getRuolo().equals("customer"))
+		       destinazione = "homeCustomer";
 		}
 		
 		return destinazione;
