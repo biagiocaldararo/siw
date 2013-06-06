@@ -13,7 +13,7 @@ public class Utente {
 	public Utente(){
 	};
 	
-	// TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
+	//  TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
 	public Utente(Long id, String username, String password, String ruolo) {
 		this.setId(id);
 		this.setUsername(username);
