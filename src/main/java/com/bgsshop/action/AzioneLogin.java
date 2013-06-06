@@ -22,6 +22,8 @@ public class AzioneLogin extends Azione{
 			HttpSession sessione = request.getSession();
 		    sessione.setAttribute("utente", utente);
 		    destinazione = "homeAdmin";
+		    if(utente.getRuolo().equals("customer"))
+		       destinazione = "homeCustomer";
 		}
 		
 		return destinazione;

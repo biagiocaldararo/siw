@@ -3,14 +3,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.bgsshop.model.*" %>
 <%
-	Utente utente = (Utente) session.getAttribute("utente");
-   boolean autorizzato = true;
+   Utente utente = (Utente) session.getAttribute("utente");
+   boolean autorizzato = false;
    
    if (utente!=null)
-       autorizzato &= (utente.getRuolo().equals("admin"));
+       autorizzato = utente.getRuolo().equals("admin");
    
    if (!autorizzato) {
-	   RequestDispatcher rd = application.getRequestDispatcher("/homeCustomer.jsp");
+	   RequestDispatcher rd = application.getRequestDispatcher("/loginFallito.jsp");
    	   rd.forward(request, response);
    }
 %>
