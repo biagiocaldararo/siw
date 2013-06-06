@@ -17,15 +17,15 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	private Connection connection;
 
 	@Override
-	public boolean insert(Ordine ordine, long idCliente) {
+	public boolean insert(Ordine ordine, long idUtente) {
 		this.data = new DataSourceSQLite();
-		String insert = "insert into ordine(cliente, data, stato, importo) values (?,?,?,?)";
+		String insert = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
 		int inserito = 0;
 		
 		try {
 			this.connection = data.getConnection();
 			this.statement = this.connection.prepareStatement(insert);
-			this.statement.setLong(1, idCliente);
+			this.statement.setLong(1, idUtente);
 			this.statement.setString(2, new Date().toString());
 			this.statement.setString(3, ordine.getStato());
 			this.statement.setDouble(4, ordine.getImporto());
@@ -68,7 +68,7 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	}
 
 	@Override
-	public List<Ordine> findByCliente(Utente cliente) {
+	public List<Ordine> findByUtente(Utente Utente) {
 		// TODO Auto-generated method stub
 		return null;
 	}

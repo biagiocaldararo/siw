@@ -11,5 +11,5 @@ public interface OrdineDAO {
 	boolean delete(Ordine Ordine); 
 	boolean update(Ordine Ordine);
 	Prodotto findById(long id);
- 	List<Ordine> findByCliente(Utente cliente);
+ 	List<Ordine> findByUtente(Utente cliente);
 }
