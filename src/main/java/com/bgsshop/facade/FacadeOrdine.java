@@ -7,8 +7,8 @@ import com.bgsshop.persistence.sqlite.OrdineDAOSQLite;
 
 public class FacadeOrdine {
 	
-	public boolean inserisciOrdine(Ordine ordine, Utente cliente){
+	public boolean inserisciOrdine(Ordine ordine, Utente utente){
 		OrdineDAO dao = new OrdineDAOSQLite();
-		return dao.insert(ordine, cliente.getId());
+		return dao.insert(ordine, utente.getId());
 	}
 }
