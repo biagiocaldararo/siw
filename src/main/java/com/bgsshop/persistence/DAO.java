@@ -10,4 +10,5 @@ public interface DAO<T> {
 	void save(T object);
 	List<T> filter(T object);
 	List<T> all();
+	T get(T object);
 }

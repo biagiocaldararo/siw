@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {
 	public enum ColumnType {
-		ID, COLUMN, MODEL
+		ID, COLUMN
 	}
 
 	ColumnType value() default ColumnType.COLUMN;

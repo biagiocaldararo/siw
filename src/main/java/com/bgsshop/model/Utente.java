@@ -1,9 +1,7 @@
 package com.bgsshop.model;
 
-import com.bgsshop.persistence.AutomaticDAO;
 import com.bgsshop.persistence.Column;
 import com.bgsshop.persistence.Column.ColumnType;
-import com.bgsshop.persistence.DAO;
 
 public class Utente {
 	
@@ -16,9 +14,9 @@ public class Utente {
 	private String indirizzo;
 	@Column private String ruolo;
 	
-	public static DAO<Utente> dao = new AutomaticDAO<Utente>(Utente.class);
-	
 	public Utente() {};
+	public Utente(Number id) { this.id = id.longValue(); }
+	public Utente(String username) { this.username = username; }
 	
 	// TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
 	public Utente(Long id, String username, String password, String ruolo) {
@@ -27,6 +25,7 @@ public class Utente {
 		this.setPassword(password);
 		this.setRuolo(ruolo);
 	}
+	
 	public Utente(String username, String password, String ruolo) {
 		this.setUsername(username);
 		this.setPassword(password);

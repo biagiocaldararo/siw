@@ -1,7 +1,5 @@
 package com.bgsshop.persistence;
 
-
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -150,6 +148,7 @@ public class AutomaticDAO<T> implements DAO<T> {
 		String query = getFilterQuery(params);
 		try {
 			conn = datasource.getConnection();
+			// System.out.println(query);
 			stmt = conn.prepareStatement(query);
 			
 			int i = 1;
@@ -181,6 +180,13 @@ public class AutomaticDAO<T> implements DAO<T> {
 	
 	public List<T> all() {
 		return filter(null);
+	}
+	
+	public T get(T instance) {
+		List<T> objects = filter(instance);
+		if (objects.size() != 1)
+			throw new PersistenceException("Multiple objects returned");
+		return objects.get(0);
 	}
 	
 	private Map<String, Object> prepareParams(T instance) {
