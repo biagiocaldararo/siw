@@ -7,9 +7,9 @@ import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
 
 public interface OrdineDAO {
-	boolean insert(Ordine Ordine, long idCliente); 
+	boolean insert(Ordine Ordine, long idUtente); 
 	boolean delete(Ordine Ordine); 
 	boolean update(Ordine Ordine);
 	Prodotto findById(long id);
- 	List<Ordine> findByUtente(Utente cliente);
+ 	List<Ordine> findByUtente(Utente utente);
 }
