@@ -5,10 +5,6 @@ import com.bgsshop.model.Utente;
 import com.bgsshop.model.Ordine;
 import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
-import com.bgsshop.persistence.OrdineDAO;
-import com.bgsshop.persistence.RigaOrdineDAO;
-import com.bgsshop.persistence.sqlite.OrdineDAOSQLite;
-import com.bgsshop.persistence.sqlite.RigaOrdineDAOSQLite;
 
 public class FacadeOrdine {
 	

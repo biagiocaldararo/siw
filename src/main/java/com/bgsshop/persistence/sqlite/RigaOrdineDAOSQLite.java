@@ -3,14 +3,10 @@ package com.bgsshop.persistence.sqlite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
-
-import com.bgsshop.model.Ordine;
 import com.bgsshop.model.RigaOrdine;
 import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DataSource;
-import com.bgsshop.persistence.RigaOrdineDAO;
 
 public class RigaOrdineDAOSQLite implements DAO<RigaOrdine> {
 	private DataSource data;

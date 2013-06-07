@@ -1,14 +1,9 @@
 package com.bgsshop.facade;
 
 import java.util.*;
-
-import com.bgsshop.model.Ordine;
 import com.bgsshop.model.Prodotto;
 import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
-import com.bgsshop.persistence.ProdottoDAO;
-import com.bgsshop.persistence.sqlite.ProdottoDAOSQLite;
-
 
 public class FacadeProdotto {
 	public List<Prodotto> getProdotti(){

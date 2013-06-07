@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import com.bgsshop.model.Utente;
 import com.bgsshop.model.Ordine;
-import com.bgsshop.model.Prodotto;
 import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DataSource;
-import com.bgsshop.persistence.OrdineDAO;
 
 public class OrdineDAOSQLite implements DAO<Ordine> {
 	private DataSource data;
