@@ -34,7 +34,7 @@ public class Ordine {
 		this.data = data;
 	}
 
-	public Utente getCliente() {
+	public Utente getUtente() {
 		return utente;
 	}
 
