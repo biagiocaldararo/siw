@@ -2,13 +2,14 @@ package com.bgsshop.facade;
 
 import com.bgsshop.model.Utente;
 import com.bgsshop.model.Ordine;
-import com.bgsshop.persistence.OrdineDAO;
-import com.bgsshop.persistence.sqlite.OrdineDAOSQLite;
+import com.bgsshop.persistence.DAO;
+import com.bgsshop.persistence.DAOFactory;
 
 public class FacadeOrdine {
 	
 	public boolean inserisciOrdine(Ordine ordine, Utente utente){
-		OrdineDAO dao = new OrdineDAOSQLite();
-		return dao.insert(ordine, utente.getId());
+		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
+		dao.insert(ordine);
+		return true;
 	}
 }

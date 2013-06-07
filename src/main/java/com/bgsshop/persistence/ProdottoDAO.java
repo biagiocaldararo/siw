@@ -4,11 +4,11 @@ import java.util.*;
 
 import com.bgsshop.model.*;
 
-
+// TODO: da eliminare
 public interface ProdottoDAO {	
-	boolean insert(Prodotto prodotto); 
-	boolean delete(Prodotto prodotto); 
-	boolean update(Prodotto prodotto);
+	void insert(Prodotto prodotto); 
+	void delete(Prodotto prodotto); 
+	void update(Prodotto prodotto);
 	Prodotto findById(long id);
- 	List<Prodotto> findAll();
+ 	List<Prodotto> all();
 }
