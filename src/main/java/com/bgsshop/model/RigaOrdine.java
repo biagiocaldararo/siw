@@ -22,6 +22,15 @@ public class RigaOrdine {
 		this(ordine);
 		this.prodotto = prodotto;
 	}
+
+	public long getId() {
+		return id.longValue();
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public RigaOrdine(Number ordine, Number prodotto, int quantita) {
 		this(ordine, prodotto);
 		this.quantita = quantita;
