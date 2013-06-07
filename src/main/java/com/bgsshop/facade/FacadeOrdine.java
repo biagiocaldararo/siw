@@ -12,7 +12,7 @@ public class FacadeOrdine {
 	
 	public boolean inserisciOrdine(Ordine ordine, Utente utente){
 		OrdineDAO dao = new OrdineDAOSQLite();
-		return dao.insert(ordine, utente.getId());
+		return dao.insert(ordine);
 	}
 	
 	public boolean inserisciRigaOrdine(RigaOrdine rigaOrdine){

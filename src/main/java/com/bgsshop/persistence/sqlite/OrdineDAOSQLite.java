@@ -21,12 +21,12 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	}
 	
 	@Override
-	public boolean insert(Ordine ordine, long idUtente) {
+	public boolean insert(Ordine ordine) {
 		int inserito = 0;
 		
 		try (Connection conn = data.getConnection();
 			 PreparedStatement stmt = conn.prepareStatement(INSERT_QUERY)) {
-			stmt.setLong(1, idUtente);
+			stmt.setLong(1, ordine.getUtente().getId());
 			stmt.setString(2, new Date().toString());
 			stmt.setString(3, ordine.getStato());
 			stmt.setDouble(4, ordine.getImporto());
