@@ -1,32 +1,21 @@
 package com.bgsshop.model;
 
-import com.bgsshop.persistence.Column;
-import com.bgsshop.persistence.Column.ColumnType;
-
 public class Utente {
-	
-	@Column(ColumnType.ID) private Long id;
-	@Column private String username;
-	@Column private String password;
+	private Long id;
+	private String username;
+	private String password;
 	private String nome;
 	private String cognome;
 	private String email;
 	private String indirizzo;
-	@Column private String ruolo;
+	private String ruolo;
 	
-	public Utente() {};
-	public Utente(Number id) { this.id = id.longValue(); }
-	public Utente(String username) { this.username = username; }
+	public Utente(){
+	};
 	
-	// TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
+	//  TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
 	public Utente(Long id, String username, String password, String ruolo) {
 		this.setId(id);
-		this.setUsername(username);
-		this.setPassword(password);
-		this.setRuolo(ruolo);
-	}
-	
-	public Utente(String username, String password, String ruolo) {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setRuolo(ruolo);
@@ -35,7 +24,7 @@ public class Utente {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -95,10 +84,6 @@ public class Utente {
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("<Utente(%s, %s):%d>", username, ruolo, id);
-	}
 }
+
 

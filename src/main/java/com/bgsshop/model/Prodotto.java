@@ -1,16 +1,13 @@
 package com.bgsshop.model;
 
-import com.bgsshop.persistence.Column;
-import com.bgsshop.persistence.Column.ColumnType;
-
 public class Prodotto {
-	@Column(ColumnType.ID) private Long id;
-	@Column private String nome;
-	@Column private String descrizione;
-	@Column private Double prezzo;
+	private long id;
+	private String nome;
+	private String descrizione;
+	private double prezzo;
 	
-	public Prodotto(Number id) { this.id = id.longValue(); }
-	public Prodotto(){}
+	public Prodotto(){
+	}
 	
 	public Prodotto(long id, String nome, String descrizione, double prezzo){
 		this.setId(id);
@@ -18,14 +15,8 @@ public class Prodotto {
 		this.setDescrizione(descrizione);
 		this.setPrezzo(prezzo);
 	}
-	
-	public Prodotto(String nome, String descrizione, double prezzo){
-		this.setNome(nome);
-		this.setDescrizione(descrizione);
-		this.setPrezzo(prezzo);
-	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
