@@ -1,4 +1,4 @@
-CREATE TABLE cliente (
+CREATE TABLE utente (
 id integer not null primary key asc autoincrement,
 username varchar(30) not null unique,
 password varchar not null,
@@ -10,7 +10,7 @@ ruolo varchar(8) not null);
 
 CREATE TABLE ordine (
 id integer not null primary key asc autoincrement,
-cliente integer not null references cliente(id),
+utente integer not null references utente(id),
 data varchar not null,
 stato varchar(6) not null,
 importo float not null);

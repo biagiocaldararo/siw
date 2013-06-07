@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.bgsshop.model.*" %>
+<%
+   Utente utente = (Utente) session.getAttribute("utente");
+   boolean autorizzato = false;
+   
+   if (utente!=null)
+       autorizzato = utente.getRuolo().equals("admin");
+   
+   if (!autorizzato) {
+	   RequestDispatcher rd = application.getRequestDispatcher("/loginFallito.jsp");
+   	   rd.forward(request, response);
+   }
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -7,9 +21,10 @@
 		<title>BGS-Shop/inserisciProdotto</title>
 	</head>
 	<body>
-		<p><i>${cliente.username} [${cliente.ruolo}]</i></p>
+		<p><i>${utente.username} [${utente.ruolo}]</i>
+		   <a href="logout.do">Logout</a></p>
 		<form action="inserisciProdotto.do" method="post">
-			<h1> Inserimento Prodotto</h1>
+			<h1>Inserimento Prodotto</h1>
 			
 			<p> Nome* <input type="text" name="nome"/>
 			<font color="red">${errori["nome"]}</font></p>
