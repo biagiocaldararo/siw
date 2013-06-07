@@ -36,7 +36,7 @@ public class RigaOrdine {
 
 	public Ordine getOrdine() {
 		DAO<Ordine> ordineDAO = DAOFactory.getDAOFactory().getOrdineDAO();
-		return ordineDAO.get(new Ordine(ordine));
+		return ordineDAO.findOne("id", ordine);
 	}
 
 	public void setOrdine(Ordine ordine) {
@@ -45,7 +45,7 @@ public class RigaOrdine {
 
 	public Prodotto getProdotto() {
 		DAO<Prodotto> prodottoDAO = DAOFactory.getDAOFactory().getProdottoDAO();
-		return prodottoDAO.get(new Prodotto(prodotto));
+		return prodottoDAO.findOne("id", prodotto);
 	}
 
 	public void setProdotto(Prodotto prodotto) {

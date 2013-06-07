@@ -148,7 +148,7 @@ public class AutomaticDAO<T> implements DAO<T> {
 		}
 	}
 	
-	public List<T> all() {
+	public List<T> findAll() {
 		return filter(null);
 	}
 	
@@ -213,6 +213,18 @@ public class AutomaticDAO<T> implements DAO<T> {
 				e.printStackTrace();
 				throw new PersistenceException("Qualcosa è andato storto");
 			}
+	}
+
+	@Override
+	public List<T> findBy(String field, Object value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T findOne(String field, Object value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

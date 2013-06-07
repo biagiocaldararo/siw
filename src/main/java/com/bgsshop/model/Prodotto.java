@@ -7,7 +7,7 @@ public class Prodotto {
 	@Column(ColumnType.ID) private Long id;
 	@Column private String nome;
 	@Column private String descrizione;
-	@Column private double prezzo;
+	@Column private Double prezzo;
 	
 	public Prodotto(Number id) { this.id = id.longValue(); }
 	public Prodotto(){}
@@ -18,8 +18,14 @@ public class Prodotto {
 		this.setDescrizione(descrizione);
 		this.setPrezzo(prezzo);
 	}
+	
+	public Prodotto(String nome, String descrizione, double prezzo){
+		this.setNome(nome);
+		this.setDescrizione(descrizione);
+		this.setPrezzo(prezzo);
+	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

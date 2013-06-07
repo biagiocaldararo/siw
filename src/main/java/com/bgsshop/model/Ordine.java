@@ -1,8 +1,6 @@
 package com.bgsshop.model;
 
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.bgsshop.persistence.Column;
@@ -47,7 +45,7 @@ public class Ordine {
 
 	public Utente getCliente() {
 		DAO<Utente> utenteDAO = DAOFactory.getDAOFactory().getUtenteDAO();
-		return utenteDAO.get(new Utente(cliente));
+		return utenteDAO.findOne("id", cliente);
 	}
 
 	public void setCliente(Utente cliente) {
@@ -59,7 +57,7 @@ public class Ordine {
 
 	public List<RigaOrdine> getRigheOrdine() {
 		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
-		return dao.filter(new RigaOrdine(id));
+		return dao.findBy("ordine", id);
 	}
 
 	public void setRigheOrdine(List<RigaOrdine> righeOrdine) {
@@ -110,6 +108,10 @@ public class Ordine {
 //		
 //		return numeroProdotti;
 		throw new UnsupportedOperationException("getNumeroProdotti non è implementato :(");
+	}
+	
+	public Long getIdCliente() {
+		return cliente.longValue();
 	}
 	
 	@Override
