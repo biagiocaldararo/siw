@@ -51,8 +51,8 @@ public class Ordine {
 	public void setUtente(Utente utente) {
 		this.utente = utente.getId();
 	}
-	public void setCliente(Number id) {
-		this.cliente = id;
+	public void setUtente(Number id) {
+		this.utente = id;
 	}
 
 	public List<RigaOrdine> getRigheOrdine() {
