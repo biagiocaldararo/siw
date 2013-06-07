@@ -21,7 +21,8 @@
 		<title>BGS-Shop/homeAdmin</title>
 	</head>
 	<body>
-		<p><i>${utente.username} [${utente.ruolo}]</i></p>
+		<p><i>${utente.username} [${utente.ruolo}]</i> 
+		   <a href="logout.do">Logout</a></p>
 		<a href="inserimentoProdotto.jsp">Inserisci Prodotto</a>
 	</body>
 </html>

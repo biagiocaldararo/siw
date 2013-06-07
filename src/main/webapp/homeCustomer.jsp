@@ -21,7 +21,8 @@
 		<title>BGS-Shop/homeCustomer</title>
 	</head>
 	<body>
-			<p><i>Ciao, ${utente.username}!</i></p>
+			<p><i>Ciao, ${utente.username}!</i>
+			   <a href="logout.do">Logout</a></p>
 		    <a href="nuovoOrdine.do">Nuovo Ordine</a>
 	</body>
 </html>
