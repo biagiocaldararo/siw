@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Ordine {
-	private long id;
+	private Long id;
 	private Date data;
 	private Utente utente;
 	private String stato;
@@ -34,7 +34,7 @@ public class Ordine {
 		this.data = data;
 	}
 
-	public Utente getCliente() {
+	public Utente getUtente() {
 		return utente;
 	}
 

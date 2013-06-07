@@ -7,13 +7,12 @@ import com.bgsshop.persistence.*;
 
 
 public class ProdottoDAOSQLite implements ProdottoDAO {
+	private DataSource data;
 	private final static String INSERT_QUERY = "INSERT INTO prodotto(nome, descrizione, prezzo) VALUES (?,?,?)";
 	private final static String DELETE_QUERY = "DELETE FROM prodotto WHERE id=?";
 	private final static String UPDATE_QUERY = "UPDATE prodotto SET nome =?, descrizione=?, prezzo=? WHERE id=?";
 	private final static String FIND_QUERY = "SELECT * FROM prodotto WHERE id=?";
 	private final static String SELECT_QUERY = "SELECT * FROM prodotto";
-	
-	private DataSource data;
 	
 	public ProdottoDAOSQLite() {
 		data = new DataSourceSQLite();

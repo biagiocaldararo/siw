@@ -13,8 +13,7 @@ import com.bgsshop.persistence.OrdineDAO;
 
 public class OrdineDAOSQLite implements OrdineDAO {
 	private DataSource data;
-	
-	private final static String INSERT_QUERY = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
+	private final static String INSERT_QUERY = "insert into ordine(utente, data, stato, importo) values (?,?,?,?)";
 
 	public OrdineDAOSQLite() {
 		data = new DataSourceSQLite();
@@ -58,9 +57,8 @@ public class OrdineDAOSQLite implements OrdineDAO {
 	}
 
 	@Override
-	public List<Ordine> findByUtente(Utente Utente) {
+	public List<Ordine> findByUtente(Utente utente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
