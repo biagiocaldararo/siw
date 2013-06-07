@@ -15,6 +15,10 @@ public class OrdineDAOSQLite implements DAO<Ordine> {
 	private DataSource data;
 	
 	private final static String INSERT_QUERY = "insert into ordine(utente, data, stato, importo) values (?,?,?,?)";
+	private final static String DELETE_QUERY = "DELETE FROM ordine WHERE  id=?";
+	private final static String UPDATE_QUERY = "UPDATE ordine SET utente=?, data =?, stato=?, importo=? WHERE id=?";
+	private final static String FIND_QUERY = "SELECT * FROM ordine WHERE %s=?";
+	private final static String SELECT_QUERY = "SELECT * FROM ordine";
 
 	public OrdineDAOSQLite() {
 		data = new DataSourceSQLite();
@@ -36,14 +40,31 @@ public class OrdineDAOSQLite implements DAO<Ordine> {
 	}
 
 	@Override
-	public void delete(Ordine object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Ordine ordine) {
+		try(Connection conn = data.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(DELETE_QUERY)) {
+			stmt.setLong(1, ordine.getId());
+			stmt.executeUpdate();
+		}
+		catch (SQLException e){
+			throw new PersistenceException("Errore nell'eliminazione dell'Ordine.",e);
+		}
 	}
 
 	@Override
-	public void update(Ordine object) {
-		// TODO Auto-generated method stub
+	public void update(Ordine ordine) {
+		try(Connection conn = data.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
+			stmt.setLong(1, ordine.getIdCliente());
+			stmt.setString(2, new Date().toString());
+			stmt.setString(3, ordine.getStato());
+			stmt.setDouble(4, ordine.getImporto());
+			stmt.setLong(5, ordine.getId());
+			stmt.executeUpdate();
+		}
+		catch (SQLException e){
+			throw new PersistenceException("Errore nell'aggiornamento dell'Ordine.",e);
+		}
 		
 	}
 
