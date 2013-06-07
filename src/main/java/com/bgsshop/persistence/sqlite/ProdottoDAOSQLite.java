@@ -6,7 +6,7 @@ import com.bgsshop.model.*;
 import com.bgsshop.persistence.*;
 
 
-public class ProdottoDAOSQLite implements ProdottoDAO {
+public class ProdottoDAOSQLite implements DAO<Prodotto> {
 	private final static String INSERT_QUERY = "INSERT INTO prodotto(nome, descrizione, prezzo) VALUES (?,?,?)";
 	private final static String DELETE_QUERY = "DELETE FROM prodotto WHERE id=?";
 	private final static String UPDATE_QUERY = "UPDATE prodotto SET nome =?, descrizione=?, prezzo=? WHERE id=?";
@@ -94,5 +94,11 @@ public class ProdottoDAOSQLite implements ProdottoDAO {
 			e.printStackTrace();				
 		}
 		return prodotti;
+	}
+
+	@Override
+	public Prodotto findByString(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

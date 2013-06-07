@@ -8,10 +8,11 @@ import java.util.List;
 
 import com.bgsshop.model.Ordine;
 import com.bgsshop.model.RigaOrdine;
+import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DataSource;
 import com.bgsshop.persistence.RigaOrdineDAO;
 
-public class RigaOrdineDAOSQLite implements RigaOrdineDAO {
+public class RigaOrdineDAOSQLite implements DAO<RigaOrdine> {
 	private DataSource data;
 	private final static String INSERT_QUERY = "insert into rigaOrdine(ordine,prodotto,quantita,costo) values (?,?,?,?)";
 	
@@ -50,7 +51,19 @@ public class RigaOrdineDAOSQLite implements RigaOrdineDAO {
 	}
 
 	@Override
-	public List<RigaOrdine> findByOrdine(Ordine ordine) {
+	public RigaOrdine findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RigaOrdine findByString(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RigaOrdine> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

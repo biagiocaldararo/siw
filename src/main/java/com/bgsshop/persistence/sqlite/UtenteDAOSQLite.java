@@ -8,7 +8,7 @@ import com.bgsshop.model.*;
 import com.bgsshop.persistence.*;
 
 
-public class UtenteDAOSQLite implements UtenteDAO {
+public class UtenteDAOSQLite implements DAO<Utente> {
 	private final static String INSERT_QUERY = "INSERT INTO utente(username, password, ruolo) VALUES (?,?,?)";
 	private final static String DELETE_QUERY = "DELETE FROM utente WHERE username=?";
 	private final static String UPDATE_QUERY = "UPDATE utente SET password=?, ruolo=? WHERE username=?";
@@ -64,7 +64,7 @@ public class UtenteDAOSQLite implements UtenteDAO {
 	}
 
 	@Override
-	public Utente findByUsername(String username) {
+	public Utente findByString(String username) {
 		Utente utente = null;	
 		try (Connection conn = data.getConnection();
 			 PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
@@ -92,6 +92,12 @@ public class UtenteDAOSQLite implements UtenteDAO {
 			e.printStackTrace();				
 		}
 		return utenti;
+	}
+
+	@Override
+	public Utente findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 
