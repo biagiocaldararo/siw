@@ -14,7 +14,7 @@ import com.bgsshop.persistence.PersistenceException;
 public class OrdineDAOSQLite implements DAO<Ordine> {
 	private DataSource data;
 	
-	private final static String INSERT_QUERY = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
+	private final static String INSERT_QUERY = "insert into ordine(utente, data, stato, importo) values (?,?,?,?)";
 
 	public OrdineDAOSQLite() {
 		data = new DataSourceSQLite();
@@ -25,6 +25,7 @@ public class OrdineDAOSQLite implements DAO<Ordine> {
 		try (Connection conn = data.getConnection();
 			 PreparedStatement stmt = conn.prepareStatement(INSERT_QUERY)) {
 			stmt.setLong(1, ordine.getIdCliente());
+            // TODO: questo non penso si faccia così
 			stmt.setString(2, new Date().toString());
 			stmt.setString(3, ordine.getStato());
 			stmt.setDouble(4, ordine.getImporto());

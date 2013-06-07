@@ -11,7 +11,7 @@ import com.bgsshop.persistence.Column.ColumnType;
 public class Ordine {
 	@Column(ColumnType.ID) private Long id;
 	@Column private Long data;
-	@Column private Number cliente;
+	@Column private Number utente;
 	@Column private String stato;
 	@Column private Double importo;
 	// private List<RigaOrdine> righeOrdine;
@@ -21,8 +21,8 @@ public class Ordine {
 	
 	public Ordine() {}
 	
-	public Ordine(Utente cliente){
-		this.setCliente(cliente);
+	public Ordine(Utente utente){
+		this.setUtente(utente);
 		this.setStato("aperto");
 		// this.righeOrdine = new LinkedList<RigaOrdine>();
 	}
@@ -43,13 +43,13 @@ public class Ordine {
 		this.data = data.getTime();
 	}
 
-	public Utente getCliente() {
+	public Utente getUtente() {
 		DAO<Utente> utenteDAO = DAOFactory.getDAOFactory().getUtenteDAO();
-		return utenteDAO.findOne("id", cliente);
+		return utenteDAO.findOne("id", utente);
 	}
 
-	public void setCliente(Utente cliente) {
-		this.cliente = cliente.getId();
+	public void setUtente(Utente utente) {
+		this.utente = utente.getId();
 	}
 	public void setCliente(Number id) {
 		this.cliente = id;
@@ -110,8 +110,9 @@ public class Ordine {
 		throw new UnsupportedOperationException("getNumeroProdotti non è implementato :(");
 	}
 	
+    // TODO: refactor in getIdUtente
 	public Long getIdCliente() {
-		return cliente.longValue();
+		return utente.longValue();
 	}
 	
 	@Override
@@ -119,4 +120,3 @@ public class Ordine {
 		return String.format("<%s: %s %s€>", id, stato, importo);
 	}
 }
-
