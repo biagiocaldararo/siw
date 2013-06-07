@@ -11,13 +11,13 @@ public class FacadeProdotto {
 		return dao.findAll();
 	}
 	
-	public boolean inserisciProdotto(Prodotto prodotto){
-		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
-		return dao.insert(prodotto);
-	}
-	
 	public Prodotto getProdotto(long id) {
 		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
 		return dao.findById(id);
+	}
+	
+	public boolean inserisciProdotto(Prodotto prodotto){
+		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
+		return dao.insert(prodotto);
 	}
 }
