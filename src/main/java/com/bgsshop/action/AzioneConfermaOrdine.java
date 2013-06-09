@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bgsshop.facade.FacadeOrdine;
-import com.bgsshop.model.RigaOrdine;
 import com.bgsshop.model.Utente;
 import com.bgsshop.model.Ordine;
 
@@ -15,7 +14,6 @@ public class AzioneConfermaOrdine extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		HttpSession sessione = request.getSession();
 		String destinazione = "homeCustomer";
-		boolean inserito;
 		
 		if(request.getParameter("risp").equals("Si")){
 			FacadeOrdine facade = new FacadeOrdine();
@@ -23,12 +21,7 @@ public class AzioneConfermaOrdine extends Azione {
 			Utente utente = (Utente) sessione.getAttribute("utente");
 			
 			ordineCorrente.setStato("chiuso");
-			
-			inserito = facade.inserisciOrdine(ordineCorrente, utente);
-			for(RigaOrdine rigaOrdine: ordineCorrente.getRigheOrdine())
-				inserito &= facade.inserisciRigaOrdine(rigaOrdine);
-			
-			if(inserito)
+			if(facade.inserisciOrdine(ordineCorrente, utente))
 				destinazione = "inserimentoOrdineCompletato";
 		    else 
 		    	destinazione = "erroreInserimento";
