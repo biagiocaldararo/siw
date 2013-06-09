@@ -23,6 +23,7 @@
 	<body>
 			<p><i>Ciao, ${utente.username}!</i>
 			   <a href="logout.do">Logout</a></p>
-		    <a href="nuovoOrdine.do">Nuovo Ordine</a>
+		    <p><a href="nuovoOrdine.do">Nuovo Ordine</a></p>
+		    <p><a href="visualizzaOrdini.do">Visualizza Ordini</a></p>
 	</body>
 </html>
