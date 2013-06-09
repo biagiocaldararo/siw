@@ -1,16 +1,26 @@
 package com.bgsshop.model;
 
 public class RigaOrdine {
+	private Long id;
 	private Ordine ordine;
 	private Prodotto prodotto;
 	private int quantita;
 	private double costo;
 	
 	public RigaOrdine (Ordine ordine, Prodotto prodotto, int quantita){
+		this.setId(null);
 		this.setOrdine(ordine);
 		this.setProdotto(prodotto);
 		this.setQuantita(quantita);
 		this.setCosto(this.quantita*this.prodotto.getPrezzo());
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Ordine getOrdine() {
