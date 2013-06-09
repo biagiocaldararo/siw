@@ -15,7 +15,7 @@ import com.bgsshop.persistence.DataSource;
 public class OrdineDAOSQLite implements DAO<Ordine> {
 	private DataSource data;
 	
-	private final static String INSERT_QUERY = "insert into ordine(Utente, data, stato, importo) values (?,?,?,?)";
+	private final static String INSERT_QUERY = "insert into ordine(utente, data, stato, importo) values (?,?,?,?)";
 	private final static String FIND_USER_QUERY = "select id, data, stato, importo from ordine where utente = ?";
 
 	public OrdineDAOSQLite() {

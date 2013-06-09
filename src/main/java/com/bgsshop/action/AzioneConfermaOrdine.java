@@ -3,9 +3,8 @@ package com.bgsshop.action;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import com.bgsshop.facade.FacadeOrdine;
-import com.bgsshop.model.Utente;
+import com.bgsshop.model.RigaOrdine;
 import com.bgsshop.model.Ordine;
 
 public class AzioneConfermaOrdine extends Azione {
@@ -14,22 +13,25 @@ public class AzioneConfermaOrdine extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		HttpSession sessione = request.getSession();
 		String destinazione = "homeCustomer";
+		boolean inserito = false;
 		
 		if(request.getParameter("risp").equals("Si")){
 			FacadeOrdine facade = new FacadeOrdine();
 			Ordine ordineCorrente = (Ordine) sessione.getAttribute("ordineCorrente");
-			Utente utente = (Utente) sessione.getAttribute("utente");
-			
 			ordineCorrente.setStato("chiuso");
-			if(facade.inserisciOrdine(ordineCorrente, utente))
-				destinazione = "inserimentoOrdineCompletato";
-		    else 
-		    	destinazione = "erroreInserimento";
+			inserito = facade.inserisciOrdine(ordineCorrente);
+			
+			for(RigaOrdine r: ordineCorrente.getRigheOrdine())
+				inserito &= facade.inserisciRigaOrdine(r);
 		}
+		
+		if(inserito)
+			destinazione = "inserimentoOrdineCompletato";
+		else 
+		    destinazione = "erroreInserimento";
 		
 		sessione.removeAttribute("ordineCorrente");
 		
 		return destinazione;
 	}
-
 }

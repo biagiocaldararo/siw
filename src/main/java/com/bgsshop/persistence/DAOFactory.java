@@ -1,12 +1,13 @@
 package com.bgsshop.persistence;
 
 import com.bgsshop.model.*;
-import com.bgsshop.persistence.sqlite.SQLiteDAOFactory;
+import com.bgsshop.persistence.postgres.PostgresDAOFactory;
 
 public abstract class DAOFactory {
-
-	// Basta modificare questa riga per cambiare Factory.
-	private static final DAOFactory factory = new SQLiteDAOFactory();
+	
+	            /* Change this line to change factory */
+	private static final DAOFactory factory = new PostgresDAOFactory();
+	
 	
 	public static DAOFactory getDAOFactory() {
 		return factory;

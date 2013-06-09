@@ -10,7 +10,7 @@ import com.bgsshop.persistence.DAOFactory;
 
 public class FacadeOrdine {
 	
-	public boolean inserisciOrdine(Ordine ordine, Utente utente){
+	public boolean inserisciOrdine(Ordine ordine){
 		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
 		return dao.insert(ordine);
 	}

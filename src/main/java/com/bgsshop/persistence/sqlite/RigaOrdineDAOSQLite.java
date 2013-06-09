@@ -10,7 +10,7 @@ import com.bgsshop.persistence.DataSource;
 
 public class RigaOrdineDAOSQLite implements DAO<RigaOrdine> {
 	private DataSource data;
-	private final static String INSERT_QUERY = "insert into rigaOrdine(ordine,prodotto,quantita,costo) values (?,?,?,?)";
+	private final static String INSERT_QUERY = "insert into rigaOrdine (ordine, prodotto, quantita, costo) values (?,?,?,?)";
 	
 	public RigaOrdineDAOSQLite() {
 		data = new DataSourceSQLite();

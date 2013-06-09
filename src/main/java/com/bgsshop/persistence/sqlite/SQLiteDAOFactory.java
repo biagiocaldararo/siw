@@ -12,8 +12,7 @@ public class SQLiteDAOFactory extends DAOFactory {
 	private static final DAO<Utente> utenteDAO = new UtenteDAOSQLite();
 	private static final DAO<Ordine> ordineDAO = new OrdineDAOSQLite();
 	private static final DAO<Prodotto> prodottoDAO = new ProdottoDAOSQLite();
-	// TODO: manca RigaOrdineDAO
-	private static final DAO<RigaOrdine> rigaOrdineDAO = null;//new RigaOrdineDAOSQLite();
+	private static final DAO<RigaOrdine> rigaOrdineDAO = new RigaOrdineDAOSQLite();
 	
 	@Override
 	public DAO<Utente> getUtenteDAO() {
