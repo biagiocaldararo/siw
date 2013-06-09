@@ -99,5 +99,11 @@ public class UtenteDAOSQLite implements DAO<Utente> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Utente> findByObject(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

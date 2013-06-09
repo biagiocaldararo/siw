@@ -70,7 +70,6 @@ public class ProdottoDAOSQLite implements DAO<Prodotto> {
 			 PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
 			stmt.setLong(1, id);
 			ResultSet r = stmt.executeQuery();
-			// TODO: a che serve il while se poi ne prendiamo uno solo?
 			while (r.next()) 
 				prodotto = new Prodotto(r.getLong("id"), r.getString("nome"), r.getString("descrizione"), r.getDouble("prezzo"));
 		} catch (SQLException e) {
@@ -98,6 +97,12 @@ public class ProdottoDAOSQLite implements DAO<Prodotto> {
 
 	@Override
 	public Prodotto findByString(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Prodotto> findByObject(Object object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

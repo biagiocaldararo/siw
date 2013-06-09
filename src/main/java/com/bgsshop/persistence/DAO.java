@@ -8,5 +8,6 @@ public interface DAO<T> {
 	boolean update(T object);
 	T findById(long id);
 	T findByString(String string);
+	List<T> findByObject(Object object);
 	List<T> findAll();
 }

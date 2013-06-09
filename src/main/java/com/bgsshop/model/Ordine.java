@@ -1,16 +1,22 @@
 package com.bgsshop.model;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Ordine {
 	private long id;
-	private Date data;
+	private String data;
 	private Utente utente;
 	private String stato;
 	private double importo;
 	private List<RigaOrdine> righeOrdine;
+	
+	public Ordine(long id, String data, String stato, double importo){
+		this.setId(id);
+		this.setData(data);
+		this.setStato(stato);
+		this.setImporto(importo);
+	}
 	
 	public Ordine(Utente utente){
 		this.setUtente(utente);
@@ -26,11 +32,11 @@ public class Ordine {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

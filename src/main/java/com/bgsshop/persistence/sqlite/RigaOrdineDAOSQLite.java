@@ -64,4 +64,10 @@ public class RigaOrdineDAOSQLite implements DAO<RigaOrdine> {
 		return null;
 	}
 
+	@Override
+	public List<RigaOrdine> findByObject(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
