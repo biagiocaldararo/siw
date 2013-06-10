@@ -7,77 +7,83 @@ import com.bgsshop.persistence.Column.ColumnType;
 
 
 public class RigaOrdine {
-	
-	@Column(ColumnType.ID) Long id;
-	@Column private Number ordine;
-	@Column private Number prodotto;
+
+	/* Dati provenienti dal DB */
+	@Column(ColumnType.ID) private Number id;
+	@Column private Number ordineId;
+	@Column private Number prodottoId;
 	@Column private Integer quantita;
-	@Column private Double costo;
+	
+	/* Campi lazy */
+	private Ordine ordine;
+	private Prodotto prodotto;	
 	
 	public RigaOrdine() {};
-	public RigaOrdine(Number ordine) {
-		this.ordine = ordine;
-	}
-	public RigaOrdine(Number ordine, Number prodotto) {
-		this(ordine);
-		this.prodotto = prodotto;
-	}
-	public RigaOrdine(Number ordine, Number prodotto, int quantita) {
-		this(ordine, prodotto);
+	public RigaOrdine(Number ordineId, Number prodottoId, Integer quantita) {
+		this.ordineId = ordineId;
+		this.prodottoId = prodottoId;
 		this.quantita = quantita;
 	}
 	
-	public RigaOrdine(Ordine ordine, Prodotto prodotto, int quantita){
-		this.setOrdine(ordine);
-		this.setProdotto(prodotto);
-		this.setQuantita(quantita);
-		//this.setCosto(this.quantita*this.prodotto.getPrezzo());
-	}
-
 	public Ordine getOrdine() {
-		DAO<Ordine> ordineDAO = DAOFactory.getDAOFactory().getOrdineDAO();
-		return ordineDAO.findOne("id", ordine);
+		if (ordineId != null && (ordine == null || ordine.getId() != ordineId)) {
+			DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
+			ordine = dao.findOne("id", ordineId);
+		}
+		return ordine;
 	}
-
+	
 	public void setOrdine(Ordine ordine) {
-		this.ordine = ordine.getId();
+		this.ordine = ordine;
+		this.ordineId = ordine.getId();
 	}
-
+	
 	public Prodotto getProdotto() {
-		DAO<Prodotto> prodottoDAO = DAOFactory.getDAOFactory().getProdottoDAO();
-		return prodottoDAO.findOne("id", prodotto);
+		if (prodottoId != null && (prodotto == null || prodotto.getId() != prodottoId)) {
+			DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
+			prodotto = dao.findOne("id", prodottoId);
+		}
+		return prodotto;
 	}
-
+	
 	public void setProdotto(Prodotto prodotto) {
-		this.prodotto = prodotto.getId();
+		this.prodotto = prodotto;
+		this.prodottoId = prodotto.getId();
 	}
 
-	public int getQuantita() {
+	public void incrementaQuantita(int quantita) {
+		if (this.quantita == null)
+			this.quantita = quantita;
+		else
+			this.quantita += quantita;
+	}
+	
+	public Number getId() {
+		return id;
+	}
+
+	public Number getOrdineId() {
+		return ordineId;
+	}
+
+	public void setOrdineId(Number ordineId) {
+		this.ordineId = ordineId;
+	}
+
+	public Number getProdottoId() {
+		return prodottoId;
+	}
+
+	public void setProdottoId(Number prodottoId) {
+		this.prodottoId = prodottoId;
+	}
+
+	public Integer getQuantita() {
 		return quantita;
 	}
 
-	public void setQuantita(int quantita) {
+	public void setQuantita(Integer quantita) {
 		this.quantita = quantita;
 	}
 
-	public double getCosto() {
-		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
-	
-	public void aggiornaRiga(int quantita){
-//		this.ordine.setImporto(this.ordine.getImporto()-this.costo);
-//		this.quantita = quantita;
-//		this.costo = quantita*this.prodotto.getPrezzo();
-//		this.ordine.setImporto(this.ordine.getImporto()+this.costo);
-		throw new UnsupportedOperationException("aggiornaRiga non è implementato :(");
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("RigaOrdine(%s, %s, %s)", ordine, prodotto, quantita);
-	}
 }

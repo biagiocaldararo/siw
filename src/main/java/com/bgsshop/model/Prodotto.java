@@ -1,10 +1,12 @@
 package com.bgsshop.model;
 
 import com.bgsshop.persistence.Column;
+import com.bgsshop.persistence.DAO;
+import com.bgsshop.persistence.DAOFactory;
 import com.bgsshop.persistence.Column.ColumnType;
 
-public class Prodotto {
-	@Column(ColumnType.ID) private Long id;
+public class Prodotto extends Model {
+	@Column(ColumnType.ID) private Number id;
 	@Column private String nome;
 	@Column private String descrizione;
 	@Column private Double prezzo;
@@ -24,12 +26,21 @@ public class Prodotto {
 		this.setDescrizione(descrizione);
 		this.setPrezzo(prezzo);
 	}
+	
+	/* metodo di utilità */
+	public void save() {
+		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
+		if (id == null)
+			dao.insert(this);
+		else
+			dao.update(this);
+	}
 
-	public Long getId() {
+	public Number getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Number id) {
 		this.id = id;
 	}
 

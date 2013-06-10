@@ -1,67 +1,111 @@
 package com.bgsshop.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.bgsshop.persistence.Column;
 import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
+import com.bgsshop.persistence.ModelNotFoundException;
 import com.bgsshop.persistence.Column.ColumnType;
 
-public class Ordine {
-	@Column(ColumnType.ID) private Long id;
+public class Ordine extends Model {
+	
+	public enum Stato {
+		APERTO, CHIUSO, EVASO;
+	}
+	
+	/* Dati provenienti dal DB */
+	@Column(ColumnType.ID) private Number id;
+	@Column private Number utenteId;
 	@Column private Long data;
-	@Column private Number utente;
 	@Column private String stato;
-	@Column private Double importo;
-	// private List<RigaOrdine> righeOrdine;
-	
-	
-	public Ordine(Number id) { this.id = id.longValue(); }
-	
-	public Ordine() {}
-	
-	public Ordine(Utente utente){
-		this.setUtente(utente);
-		this.setStato("aperto");
-		// this.righeOrdine = new LinkedList<RigaOrdine>();
-	}
+	@Column private Double totale;
+	@Column private Integer numProdotti;
 
-	public long getId() {
-		return id.longValue();
+	/* Campi lazy */
+	private Utente utente;
+	
+	public Ordine() {};
+	
+	public Utente getUtente() {
+		if (utenteId != null && (utente == null || utente.getId() != utenteId)) {
+			DAO<Utente> dao = DAOFactory.getDAOFactory().getUtenteDAO();
+			utente = dao.findOne("id", utenteId);
+		}
+		return utente;
 	}
-
-	public void setId(long id) {
-		this.id = id;
+	
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+		this.utenteId = utente.getId();
 	}
-
+	
 	public Date getData() {
-		return new Date(data);
+		if (data != null)
+			return new Date(data);
+		return null;
 	}
 
 	public void setData(Date data) {
 		this.data = data.getTime();
 	}
-
-	public Utente getUtente() {
-		DAO<Utente> utenteDAO = DAOFactory.getDAOFactory().getUtenteDAO();
-		return utenteDAO.findOne("id", utente);
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente.getId();
-	}
-	public void setUtente(Number id) {
-		this.utente = id;
-	}
-
-	public List<RigaOrdine> getRigheOrdine() {
+	
+	public List<RigaOrdine> getRighe() {
 		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
-		return dao.findBy("ordine", id);
+		return dao.findBy("ordineId", id);
+	}
+	
+	public void add(long prodotto, int quantita) {
+		// TODO non settare la quantità negativa
+		// a zero rimuovere la riga
+		RigaOrdine query = new RigaOrdine(id, prodotto, null);
+		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
+		RigaOrdine riga;
+		try {
+			riga = dao.get(query);
+		} catch (ModelNotFoundException e) {
+			riga = query;
+		}
+		riga.incrementaQuantita(quantita);
+		dao.save(riga);
+		
+		this.numProdotti += quantita;
+		this.totale += quantita * riga.getProdotto().getPrezzo();	
 	}
 
-	public void setRigheOrdine(List<RigaOrdine> righeOrdine) {
-		throw new UnsupportedOperationException("setRigheordine non è implementato :(");
+	public void del(long prodotto) {
+		RigaOrdine query = new RigaOrdine(id, prodotto, null);
+		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
+		RigaOrdine riga = dao.get(query);
+		this.numProdotti -= riga.getQuantita();
+		this.totale -= riga.getQuantita() * riga.getProdotto().getPrezzo();
+		dao.delete(riga);
+	}
+	
+	/* metodo di utilità */
+	public void save() {
+		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
+		dao.save(this);
+	}
+
+	
+	/* getter e setter */
+
+	public Number getId() {
+		return id;
+	}
+
+	public void setId(Number id) {
+		this.id = id;
+	}
+
+	public Number getUtenteId() {
+		return utenteId;
+	}
+
+	public void setUtenteId(Number utenteId) {
+		this.utenteId = utenteId;
 	}
 
 	public String getStato() {
@@ -71,52 +115,21 @@ public class Ordine {
 	public void setStato(String stato) {
 		this.stato = stato;
 	}
-	
-	public void aggiungiRiga(Prodotto prodotto, int quantita){
-		aggiungiRiga(prodotto.getId(), quantita);
-	}
-	
-	public void aggiungiRiga(Number prodotto, int quantita) {
-		RigaOrdine riga = new RigaOrdine(id, prodotto, quantita);
-		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
-		dao.insert(riga);
-	}
-	
-	public void eliminaRiga(long prodotto){
-//		for(RigaOrdine riga: this.righeOrdine){
-//			if(riga.getProdotto().getId()==id) {
-//				righeOrdine.remove(riga);
-//				this.importo -= riga.getCosto();
-//			}
-//		}
-		throw new UnsupportedOperationException("eliminaRiga non è implementato :(");
+
+	public Double getTotale() {
+		return totale;
 	}
 
-	public double getImporto() {
-		return importo;
+	public void setTotale(Double importo) {
+		this.totale = importo;
+	}
+	
+	public Integer getNumProdotti() {
+		return numProdotti;
 	}
 
-	public void setImporto(double importo) {
-		this.importo = importo;
+	public void setNumProdotti(Integer numProdotti) {
+		this.numProdotti = numProdotti;
 	}
-	
-	public int getNumeroProdotti(){
-//		int numeroProdotti = 0;
-//		
-//		for(RigaOrdine r: this.righeOrdine)
-//			numeroProdotti += r.getQuantita();
-//		
-//		return numeroProdotti;
-		throw new UnsupportedOperationException("getNumeroProdotti non è implementato :(");
-	}
-	
-    // TODO: refactor in getIdUtente
-	public Long getIdCliente() {
-		return utente.longValue();
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("<%s: %s %s€>", id, stato, importo);
-	}
+
 }

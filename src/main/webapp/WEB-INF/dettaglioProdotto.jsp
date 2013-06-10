@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>BGS-Shop/Product</title>
-	</head>
-	<body>
-		<h1>Specifiche del Prodotto</h1>
-		<p><b>Cod: </b>${prodotto.id}</p>
-		<p><b>Nome: </b>${prodotto.nome}</p>
-		<p><b>Descrizione: </b>${prodotto.descrizione}</p>
-		<p><b>Prezzo: </b>${prodotto.prezzo}</p>
-		<a href="javascript:history.back();">Indietro</a>
-	</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<t:base title="Catalogo">
+<h2>${prodotto.nome}</h2>
+<p>${prodotto.descrizione}</p>
+<p>Prezzo: ${prodotto.prezzo}€</p>
+<form action="/bgsshop/carrello/aggiungi/${ prodotto.id }" method="POST">
+  <label for="qty">Quantità</label>
+  <input type="number" name="qty" value="1" style="width: 4em;" />
+  <input type="submit" value="Aggiungi al Carrello" />
+</form>
+</t:base>

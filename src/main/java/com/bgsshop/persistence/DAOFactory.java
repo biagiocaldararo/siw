@@ -6,7 +6,7 @@ import com.bgsshop.persistence.sqlite.SQLiteDAOFactory;
 public abstract class DAOFactory {
 
 	// Basta modificare questa riga per cambiare Factory.
-	private static final DAOFactory factory = new SQLiteDAOFactory();
+	private static final DAOFactory factory = new AutomaticDAOFactory();
 	
 	public static DAOFactory getDAOFactory() {
 		return factory;

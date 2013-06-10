@@ -1,26 +1,27 @@
 package com.bgsshop.action;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import com.bgsshop.facade.FacadeProdotto;
 import com.bgsshop.model.Prodotto;
+import com.bgsshop.mvc.AzioneProtetta;
+import com.bgsshop.persistence.DAO;
+import com.bgsshop.persistence.DAOFactory;
 
-public class AzioneConfermaProdotto implements Azione {
+public class AzioneConfermaProdotto extends AzioneProtetta {
+	
+	public int get() {
+		return ok("confermaProdotto.jsp");
+	}
+	
+	public int post() {
+		Prodotto prodotto = (Prodotto) request.getSession().getAttribute("prodotto");
+		if (prodotto != null) {
+			DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
+			dao.insert(prodotto);
+		}
+		return redirect("/bgsshop/");
+	}
 
 	@Override
-	public String esegui(HttpServletRequest request) throws ServletException {
-		HttpSession sessione = request.getSession();
-		String destinazione = "inserimentoProdotto";
-		
-		if (request.getParameter("risp").equals("Si")){
-			FacadeProdotto facade = new FacadeProdotto();
-		    if(facade.inserisciProdotto((Prodotto) sessione.getAttribute("prodotto")))
-		    	destinazione = "inserimentoProdottoCompletato";
-		    else 
-		    	destinazione = "erroreInserimento";
-		}
-		
-		return destinazione;   
+	public String getRuolo() {
+		return "admin";
 	}
 }

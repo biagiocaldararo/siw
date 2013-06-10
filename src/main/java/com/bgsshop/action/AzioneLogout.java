@@ -1,15 +1,11 @@
 package com.bgsshop.action;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import com.bgsshop.mvc.Azione;
 
-public class AzioneLogout implements Azione {
+public class AzioneLogout extends Azione {
 
-	@Override
-	public String esegui(HttpServletRequest request) throws ServletException {
-		HttpSession sessione = request.getSession();
-		sessione.invalidate();
-		return "home";
+	public int get() {
+		request.getSession().invalidate();
+		return redirect("/bgsshop/");
 	}
 }

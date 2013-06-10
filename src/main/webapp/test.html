@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BGSShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bgsshop.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <h3 class="muted">BGSShop</h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
+                <li><a href="#"><i class="icon-th-list"></i> Catalogo</a></li>
+                <li><a href="#"><i class="icon-list-alt"></i> Ordini</a></li>
+                <li><a href="#"><i class="icon-shopping-cart"></i> Carrello</a></li>
+                <li><a href="#"><i class="icon-plus-sign"></i> Aggiungi Prodotto</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- /.navbar -->
+      </div>
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Totale</th>
+            <th>Stato</th>
+          </tr>
+        </thead>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+          <tr><td>1</td><td>12/10/13 12:20</td><td>200.4 €</td><td>APERTO</td></tr>
+        <tbody>
+        </tbody>
+      </table>
+
+
+  <form class="form-center" action="" method="post">
+    <div>
+    <label for="prodotto-nome">Nome</label>
+    <input type="text" id="prodotto-nome" name="nome" value="${ prodotto.nome }"/>
+    <label for="prodotto-desc">Descrizione</label>
+    <textarea rows="15" cols="60" style="width:auto" name="descrizione">${ prodotto.descrizione }</textarea>
+    <label for="prodotto-prezzo">Prezzo</label>
+    <input type="text" name="prezzo" class="input-large" value="${ prodotto.prezzo }"/>
+    </div>
+    <button type="submit" class="btn btn-large btn-primary">Salva</button>
+  </form>
+
+
+
+
+
+
+
+      <div class="row">
+        <div class="span4">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span>282,15 €</span>
+          </div>
+        </div>
+
+        <div class="span4">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span>282,15 €</span>
+          </div>
+        </div>
+
+        <div class="span4">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span>282,15 €</span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="span9">
+          Prodotto
+        </div>
+        <div class="span2">
+          Prezzo
+        </div>
+        <div class="span1">
+          Quantità
+        </div>
+      </div>
+
+      <div class="row riga-carrello">
+        <div class="span9">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span><a href="#">Rimuovi</a></span>
+          </div>
+        </div>
+        <div class="span2">
+          200.34 €
+        </div>
+        <div class="span1">
+          <form method="POST">
+          <input type="number" min="0" autocomplete="off" data-value="1" value="1">
+            <button class="btn btn-small" type="submit">Aggiorna</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="row carrello">
+        <div class="span9">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span><a href="#">Rimuovi</a></span>
+          </div>
+        </div>
+        <div class="span2">
+          200.34 €
+        </div>
+        <div class="span1">
+          <input type="number" style="width: 80%;">
+        </div>
+      </div>
+
+      <div class="row carrello">
+        <div class="span9">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span><a href="#">Rimuovi</a></span>
+          </div>
+        </div>
+        <div class="span2">
+          200.34 €
+        </div>
+        <div class="span1">
+          <input type="number" style="width: 80%;">
+        </div>
+      </div>
+
+      <div class="row carrello">
+        <div class="span9">
+          <a class="pull-left" href="#">
+            <img style="padding-right: 5px" src="http://ecx.images-amazon.com/images/I/41l-6v-9tdL._AA160_.jpg" class="img-rounded">
+          </a>
+          <div style="padding-left: 5px">
+            <h4><a href="#">Asus X501A Notebook, Processore Pentium, 2.40 GHz, bit 64, RAM 2 GB</a></h4>
+            <span><a href="#">Rimuovi</a></span>
+          </div>
+        </div>
+        <div class="span2">
+          <div>200.34 €</div>
+        </div>
+        <div class="span1">
+          <input type="number" style="width: 80%;">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="span3">
+          Robaccia
+        </div>
+        <div class="span9">
+          Dettagli
+        </div>
+      </div>
+
+
+
+      <div class="footer">
+        <p>&copy; Company 2013</p>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/holder.js"></script>
+    <script>
+      $(function() {
+        $(".carrello input").change(function() {
+          if ($(this).val() != $(this).data("value"))
+            $(this).next("button").show();
+          else
+            $(this).next("button").hide();
+        });
+      });
+    </script>
+  </body>
+</html>

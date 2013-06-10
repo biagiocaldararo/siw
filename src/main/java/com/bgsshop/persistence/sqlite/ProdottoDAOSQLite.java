@@ -37,7 +37,7 @@ public class ProdottoDAOSQLite implements DAO<Prodotto> {
 	public void delete(Prodotto prodotto) {		
 		try (Connection conn = data.getConnection();
 			 PreparedStatement stmt = conn.prepareStatement(DELETE_QUERY)) {
-			stmt.setLong(1, prodotto.getId());
+			stmt.setObject(1, prodotto.getId());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException("Errore nell'eliminazione del Prodotto.", e);
@@ -51,7 +51,7 @@ public class ProdottoDAOSQLite implements DAO<Prodotto> {
 			stmt.setString(1, prodotto.getNome());
 			stmt.setString(2, prodotto.getDescrizione());
 			stmt.setDouble(3, prodotto.getPrezzo());
-			stmt.setLong(4, prodotto.getId());
+			stmt.setObject(4, prodotto.getId());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException("Errore nell'aggiornamento del Prodotto.", e);	
@@ -113,5 +113,29 @@ public class ProdottoDAOSQLite implements DAO<Prodotto> {
 		p.setDescrizione(r.getString("descrizione"));
 		p.setPrezzo(r.getDouble("prezzo"));
 		return p;
+	}
+
+	@Override
+	public List<Prodotto> select(Prodotto query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Prodotto get(Prodotto query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Prodotto> in(String field, Collection<?> values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer count(Prodotto query) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

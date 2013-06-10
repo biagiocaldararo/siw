@@ -1,30 +1,28 @@
 package com.bgsshop.model;
 
+import java.util.List;
+
+import com.bgsshop.Password;
 import com.bgsshop.persistence.Column;
+import com.bgsshop.persistence.DAO;
+import com.bgsshop.persistence.DAOFactory;
 import com.bgsshop.persistence.Column.ColumnType;
 
-public class Utente {
+public class Utente extends Model {
 	
-	@Column(ColumnType.ID) private Long id;
+	/* Dati provenienti dal DB */
+	@Column(ColumnType.ID) private Number id;
 	@Column private String username;
 	@Column private String password;
-	private String nome;
-	private String cognome;
-	private String email;
-	private String indirizzo;
 	@Column private String ruolo;
+	@Column private Number carrelloId;
+	
+	/* Campi lazy */
+	private Ordine carrello;
 	
 	public Utente() {};
 	public Utente(Number id) { this.id = id.longValue(); }
 	public Utente(String username) { this.username = username; }
-	
-	// TODO: l'id non dovrebbe essere settato manualmente, ma in maniera automatica dal DAO.
-	public Utente(Long id, String username, String password, String ruolo) {
-		this.setId(id);
-		this.setUsername(username);
-		this.setPassword(password);
-		this.setRuolo(ruolo);
-	}
 	
 	public Utente(String username, String password, String ruolo) {
 		this.setUsername(username);
@@ -32,14 +30,55 @@ public class Utente {
 		this.setRuolo(ruolo);
 	}
 	
-	public Long getId() {
+	public Ordine getCarrello() {
+		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
+		if (carrelloId == null) {
+			Ordine carrello = new Ordine();
+			carrello.setStato("aperto");
+			carrello.setUtenteId(id);
+			carrello.setTotale(0.0);
+			carrello.setNumProdotti(0);
+			dao.insert(carrello);
+			setCarrello(carrello);
+			save();
+		} else if (carrello == null || carrello.getId() != carrelloId) {
+			carrello = dao.findOne("id", carrelloId);
+		}
+		return carrello;
+	}
+	
+	public void setCarrello(Ordine carrello) {
+		this.carrello = carrello;
+		this.carrelloId = carrello.getId();
+	}
+	
+	public List<Ordine> getOrdini() {
+		Ordine query = new Ordine();
+		query.setUtenteId(id);
+		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
+		return dao.select(query);
+	}
+	
+	public boolean isAdmin() {
+		return "admin".equals(this.getRuolo());
+	}
+	
+	/* metodo di utilità */
+	public void save() {
+		DAO<Utente> dao = DAOFactory.getDAOFactory().getUtenteDAO();
+		if (id == null)
+			dao.insert(this);
+		else
+			dao.update(this);
+	}
+	
+	
+	/* getter e setter */
+	
+	public Number getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -53,39 +92,12 @@ public class Utente {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+		try {
+			this.password = Password.getSaltedHash(password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getRuolo() {
@@ -94,6 +106,14 @@ public class Utente {
 
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
+	}
+	
+	public Number getCarrelloId() {
+		return carrelloId;
+	}
+	
+	public void setCarrelloId(Number carrelloId) {
+		this.carrelloId = carrelloId;
 	}
 	
 	@Override

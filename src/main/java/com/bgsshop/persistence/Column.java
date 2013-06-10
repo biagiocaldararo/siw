@@ -13,4 +13,5 @@ public @interface Column {
 	}
 
 	ColumnType value() default ColumnType.COLUMN;
+	String name() default "";
 }

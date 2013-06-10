@@ -1,17 +1,14 @@
 package com.bgsshop.action;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 import com.bgsshop.facade.FacadeProdotto;
+import com.bgsshop.mvc.Azione;
 
-public class AzioneCatalogo implements Azione {
+public class AzioneCatalogo extends Azione {
 
-	@Override
-	public String esegui(HttpServletRequest request) throws ServletException {
+	public int get() {
 		FacadeProdotto facade = new FacadeProdotto();
 		request.setAttribute("prodotti", facade.getProdotti());
 
-		return "catalogo.jsp";
+		return ok("catalogo.jsp");
 	}
 }

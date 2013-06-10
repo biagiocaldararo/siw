@@ -18,9 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-// TODO: guardare Servlet.authenticate / login / logout per l'autenticazione:
-// http://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#authenticate(javax.servlet.http.HttpServletResponse)
-
 @WebFilter(filterName="Controller", urlPatterns={"/*"})
 //@WebServlet(name="Controller", urlPatterns={"/"})
 public class Controller implements Filter {
@@ -35,13 +32,25 @@ public class Controller implements Filter {
 				{"/", "AzioneHome"},
 				{"/login", "AzioneLogin"},
 				{"/logout", "AzioneLogout"},
-				{"/prodotti", "AzioneCatalogo"},
-				{"/prodotti/inserisci", "AziendeInserisciProdotto"},
+				
+				{"/prodotti/?", "AzioneCatalogo"},
 				{"/prodotti/(\\d+)", "AzioneDettaglioProdotto"},
-				{"/carrello/", "AzioneDettaglioCarrello"},
+
+				{"/carrello/?", "AzioneDettaglioCarrello"},
 				{"/carrello/aggiungi/(\\d+)", "AzioneCarrelloAggiungi"},
 				{"/carrello/rimuovi/(\\d+)", "AzioneCarrelloRimuovi"},
-				{"/carrello/checkout", "AzioneCheckout"},	
+				{"/carrello/checkout", "AzioneCheckout"},
+				
+				{"/ordini/?", "AzioneOrdini"},
+				{"/ordini/(\\d+)", "AzioneDettaglioOrdine"},
+				
+				{"/admin", "AzioneAmministrazione"},
+				{"/admin/ordini", "AzioneAmministrazioneOrdini"},
+				{"/admin/ordini/(\\d+)/spedisci", "AzioneSpedisciOrdine"},
+				{"/admin/utenti/(\\d+)", "AzioneModificaUtente"},
+				{"/admin/utenti/aggiungi", "AzioneAggiungiUtente"},
+				{"/admin/prodotti/(\\d+)", "AzioneModificaProdotto"},
+				{"/admin/prodotti/aggiungi", "AzioneAggiungiProdotto"},
 		};
 	
 		azioni = new HashMap<Pattern, Class<Azione>>();
@@ -67,6 +76,10 @@ public class Controller implements Filter {
 		System.out.println("Service");
 		try {
 			Azione azione = getAzione(request, response);
+			if (azione == null) {
+				chain.doFilter(req, res);
+				return;
+			}
 			System.out.println("Eseguo azione: " + azione);
 			int code = azione.esegui();
 			String template = azione.getTemplate();
@@ -77,6 +90,7 @@ public class Controller implements Filter {
 				dispatch(request, response, template);
 			}
 		} catch (HttpException e) {
+			System.err.println("httpexception");
 			response.sendError(e.getStatus(), e.getLocalizedMessage());
 		} catch (RuntimeException | ServletException | IOException exc) {
 			System.out.println("scazzo");
@@ -110,7 +124,8 @@ public class Controller implements Filter {
 			}
 		}
 		// TODO return Azione per gli errori
-		throw new NotFoundException("Non è stata registrata un'azione per questo indirizzo.");
+		//throw new NotFoundException("Non è stata registrata un'azione per questo indirizzo.");
+		return null;
 	}
 	
 	

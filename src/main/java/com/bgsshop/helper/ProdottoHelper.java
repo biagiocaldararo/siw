@@ -1,55 +1,35 @@
 package com.bgsshop.helper;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
 
-public class ProdottoHelper extends Helper{
-	private String nome;
-	private String descrizione;
-	private double prezzo;
-	private Map<String,String> errori;
-	
-	public ProdottoHelper(HttpServletRequest request){
-		super(request);
-		this.nome = request.getParameter("nome");
-		this.descrizione = request.getParameter("descrizione");
-		this.prezzo = 0;
-		this.errori = new HashMap<String,String>();
+import com.bgsshop.model.Prodotto;
+
+public class ProdottoHelper extends Helper<Prodotto> {
+
+	public ProdottoHelper(HttpServletRequest request, Prodotto prodotto) {
+		super(request, prodotto);
+	}
+	public ProdottoHelper(HttpServletRequest request) {
+		super(request, new Prodotto());
+	}
+
+	@Override
+	public String[] getFields() {
+		return new String[] {"nome", "descrizione", "prezzo"};
+	}
+
+	@Override
+	public void cleanModel() {
+		object.setNome((String) cleanedData.get("nome"));
+		object.setDescrizione((String) cleanedData.get("descrizione"));
+		object.setPrezzo((double) cleanedData.get("prezzo"));
 	}
 	
-	public boolean convalida(){		
-		boolean tuttoOk = true;
-		String stringPrezzo = request.getParameter("prezzo");
-		String campoObbligatorio = "Campo obligatorio";
-		String errorePrezzo = "Valore non valido";
-		
-		if (this.nome == null || nome.isEmpty()){
-			this.errori.put("nome", campoObbligatorio);
-		    tuttoOk = false;
-		}
-		if (this.descrizione == null || this.descrizione.isEmpty()){
-			this.errori.put("descrizione", campoObbligatorio);
-			tuttoOk = false;
-		}
-		if (stringPrezzo == null || stringPrezzo.isEmpty()){
-			this.errori.put("prezzo", campoObbligatorio);
-		    tuttoOk = false;
-		}
-		else {
-			try {
-				this.prezzo = Double.valueOf(stringPrezzo);
-				if (this.prezzo <= 0){
-					this.errori.put("prezzo", errorePrezzo);
-					tuttoOk = false;
-				}
-			}
-			catch (NumberFormatException e){
-				this.errori.put("prezzo", errorePrezzo);
-				tuttoOk = false;
-			}
-		}
-		
-		this.request.setAttribute("errori", this.errori);
-		return tuttoOk;
+	@Override
+	public Validator getValidator(String field) {
+		if ("prezzo".equals(field))
+			return new DoubleValidator();
+		return new NotEmptyValidator();
 	}
+
 }

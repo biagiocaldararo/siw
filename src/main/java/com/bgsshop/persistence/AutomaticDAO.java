@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,6 @@ import com.bgsshop.persistence.sqlite.DataSourceSQLite;
 
 public class AutomaticDAO<T> implements DAO<T> {
 
-	// private Class<? extends Model> model;
-	// private Field[] fields;
 	private Map<String, Field> fields;
 	private Field id;
 	private DataSource datasource;
@@ -76,8 +75,7 @@ public class AutomaticDAO<T> implements DAO<T> {
 			
 			id.set(instance, res.getLong(1));
 		} catch (IllegalAccessException | SQLException e) {
-			e.printStackTrace();
-			throw new PersistenceException("Qualcosa è andato storto");
+			throw new PersistenceException("Qualcosa è andato storto", e);
 		}		
 	}
 	
@@ -117,7 +115,7 @@ public class AutomaticDAO<T> implements DAO<T> {
 		}
 	}
 
-	public List<T> filter(T instance) {
+	public List<T> select(T instance) {
 		Map<String, Object> params = prepareParams(instance);
 		String query = getFilterQuery(params);
 		
@@ -129,10 +127,35 @@ public class AutomaticDAO<T> implements DAO<T> {
 				for (Object param : params.values())
 					stmt.setObject(i++, param);
 
+			return createModels(stmt.executeQuery());
+			
+		} catch (SQLException | IllegalArgumentException e) {
+			throw new PersistenceException("Qualcosa è andato storto", e);
+		}
+	}
+	
+	public Integer count(T instance) {
+		String query = String.format("SELECT COUNT(*) FROM %s%s",
+				name, getWhereQuery(prepareParams(instance)));
+		
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(query)) {
+			
 			ResultSet res = stmt.executeQuery();
 			
+			res.next();
+			return res.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Qualcosa è andato storto", e);
+		}
+		
+	}
+	
+	private List<T> createModels(ResultSet res) {
+		try {
 			List<T> models = new ArrayList<T>();
-			i = 0;
 			while (res.next()) {
 				T model = this.model.newInstance();
 				for (Field field : fields.values())
@@ -141,22 +164,22 @@ public class AutomaticDAO<T> implements DAO<T> {
 				models.add(model);
 			}
 			return models;
-			
-		} catch (SQLException | IllegalArgumentException | IllegalAccessException | InstantiationException e) {
-			e.printStackTrace();
-			throw new PersistenceException("Qualcosa è andato storto");
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SQLException e) {
+			throw new PersistenceException("Errore nella creazione del modello", e);
 		}
 	}
 	
 	public List<T> findAll() {
-		return filter(null);
+		return select(null);
 	}
 	
 	public T get(T instance) {
-		List<T> objects = filter(instance);
-		if (objects.size() != 1)
-			throw new PersistenceException("Multiple objects returned");
-		return objects.get(0);
+		List<T> models = select(instance);
+		if (models == null || models.size() == 0)
+			throw new ModelNotFoundException();
+		if (models.size() > 1)
+			throw new MultipleObjectsException();
+		return models.get(0);
 	}
 	
 	private Map<String, Object> prepareParams(T instance) {
@@ -181,24 +204,28 @@ public class AutomaticDAO<T> implements DAO<T> {
 			throw new PersistenceException(":P");
 		}
 	}
-	
+		
 	private String getFilterQuery(Map<String, Object> params) {
 		String select = Utils.join(fields.keySet(), ", ");
-		
-		if (params == null)
-			return String.format("SELECT %s, id FROM %s", select, name);
-		
-		String where = Utils.join(params.keySet(), "=? AND ");
-		return String.format("SELECT %s, id FROM %s WHERE %s=?", select, name, where);	
+		return String.format("SELECT %s, id FROM %s%s", select, name, getWhereQuery(params));
+	}
+	
+	private String getWhereQuery(Map<String, Object> params) {
+		if (params == null) return "";
+		return String.format(" WHERE %s=?", Utils.join(params.keySet(), "=? AND "));
+	}
+	
+	private String placeholders(int count) {
+		String[] placeholders = new String[count];
+		for (int i = 0; i < count; i++)
+			placeholders[i] = "?";
+		return Utils.join(placeholders, ",");
 	}
 
 	private String getInsertQuery() {
 		String query = "INSERT INTO %s(%s) VALUES (%s)";
-		String[] placeholders = new String[fields.size()];
-		for (int i = 0; i < fields.size(); i++)
-			placeholders[i] = "?";
 		String names = Utils.join(fields.keySet(), ",");
-		return String.format(query, name, names, Utils.join(placeholders, ","));
+		return String.format(query, name, names, placeholders(fields.size()));
 	}
 	
 	private String getUpdateQuery() {
@@ -207,24 +234,51 @@ public class AutomaticDAO<T> implements DAO<T> {
 	}
 	
 	public Long getId(T instance) {
-			try {
-				return (Long) id.get(instance);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-				throw new PersistenceException("Qualcosa è andato storto");
-			}
+		try {
+			return (Long) id.get(instance);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			throw new PersistenceException("Qualcosa è andato storto");
+		}
 	}
 
 	@Override
 	public List<T> findBy(String field, Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			T model = this.model.newInstance();
+			("id".equals(field) ? id : fields.get(field)).set(model, value);
+			return select(model);
+		} catch (InstantiationException | IllegalAccessException | NullPointerException e) {
+			throw new PersistenceException("Qualcosa è andato storto", e);
+		}
 	}
 
 	@Override
 	public T findOne(String field, Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		List<T> models = findBy(field, value);
+		if (models == null || models.size() == 0)
+			throw new PersistenceException("Model non trovato.");
+		if (models.size() > 1)
+			throw new PersistenceException("Più di un model trovato con findOne.");
+		return models.get(0);
+	}
+	
+	public List<T> in(String field, Collection<?> values) {
+		String query = String.format("SELECT %s, id FROM %s WHERE %s IN (%s)",
+				Utils.join(fields.keySet(), ","), name, field, placeholders(values.size()));
+		try (Connection conn = datasource.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(query)) {
+			
+			int i = 1;
+			for (Object value : values)
+				stmt.setObject(i++, value);
+			
+			return createModels(stmt.executeQuery());
+			
+		} catch (SQLException e) {
+			throw new PersistenceException("Qualcosa è andato storto", e);
+		}
+		
 	}
 	
 }

@@ -115,5 +115,29 @@ public class UtenteDAOSQLite implements DAO<Utente> {
 		return u;
 	}
 
+	@Override
+	public List<Utente> select(Utente query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utente get(Utente query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Utente> in(String field, Collection<?> values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer count(Utente query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
