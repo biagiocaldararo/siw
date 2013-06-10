@@ -9,8 +9,7 @@ public class AzioneCatalogo extends Azione {
 
 	@Override
 	public String esegui(HttpServletRequest request) throws ServletException {
-		FacadeProdotto facade = new FacadeProdotto();
-		request.setAttribute("prodotti", facade.getProdotti());
+		request.setAttribute("prodotti", FacadeProdotto.getProdotti());
 
 		return "catalogoProdotti";
 	}

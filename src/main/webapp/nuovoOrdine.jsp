@@ -34,5 +34,7 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<p></p>
+		<a href="homeCustomer.jsp">Indietro</a>
 	</body>
 </html>

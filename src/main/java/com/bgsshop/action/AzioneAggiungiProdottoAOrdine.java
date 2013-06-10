@@ -36,7 +36,7 @@ public class AzioneAggiungiProdottoAOrdine extends Azione {
 				rigaCorrente.aggiornaRiga(nuovaQuantita);
 			}
 			else {
-				Prodotto prodotto = new FacadeProdotto().getProdotto(id);
+				Prodotto prodotto = FacadeProdotto.getProdotto(id);
 				ordineCorrente.aggiungiRiga(prodotto, Integer.valueOf(request.getParameter("quantita")));
 			}
 		}

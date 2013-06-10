@@ -14,8 +14,7 @@ public class AzioneConfermaProdotto extends Azione {
 		String destinazione = "inserimentoProdotto";
 		
 		if (request.getParameter("risp").equals("Si")){
-			FacadeProdotto facade = new FacadeProdotto();
-		    if(facade.inserisciProdotto((Prodotto) sessione.getAttribute("prodotto")))
+		    if(FacadeProdotto.inserisciProdotto((Prodotto) sessione.getAttribute("prodotto")))
 		    	destinazione = "inserimentoProdottoCompletato";
 		    else 
 		    	destinazione = "erroreInserimento";

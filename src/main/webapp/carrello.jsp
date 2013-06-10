@@ -30,15 +30,13 @@
 			<th colspan="4">Totale:${ordineCorrente.importo}</th>
 		</table>
 		<p></p>
-		<p>
-			<a href="nuovoOrdine.jsp">Indietro</a>
+			<p><a href="nuovoOrdine.jsp">Indietro</a></p>
 			<% 
 			   Ordine ordine = (Ordine) request.getSession().getAttribute("ordineCorrente");
 			   String s = "";
 			   if(ordine.getRigheOrdine().size()!=0) 
 				   s = "Procedi all'Acquisto";
 			 %>  
-			<a href="confermaOrdine.jsp"><%= s %></a>
-		</p>
+			<p><a href="confermaOrdine.jsp"><%= s %></a></p>
 		</body>
 </html>

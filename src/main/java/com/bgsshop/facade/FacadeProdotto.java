@@ -6,18 +6,17 @@ import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
 
 public class FacadeProdotto {
-	public List<Prodotto> getProdotti(){
-		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
-		return dao.findAll();
+	private static final DAO<Prodotto> DAO = DAOFactory.getDAOFactory().getProdottoDAO();
+	
+	public static List<Prodotto> getProdotti(){
+		return DAO.findAll();
 	}
 	
-	public Prodotto getProdotto(long id) {
-		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
-		return dao.findById(id);
+	public static Prodotto getProdotto(long id) {
+		return DAO.findById(id);
 	}
 	
-	public boolean inserisciProdotto(Prodotto prodotto){
-		DAO<Prodotto> dao = DAOFactory.getDAOFactory().getProdottoDAO();
-		return dao.insert(prodotto);
+	public static boolean inserisciProdotto(Prodotto prodotto){
+		return DAO.insert(prodotto);
 	}
 }

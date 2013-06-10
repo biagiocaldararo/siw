@@ -16,13 +16,12 @@ public class AzioneConfermaOrdine extends Azione {
 		boolean inserito = false;
 		
 		if(request.getParameter("risp").equals("Si")){
-			FacadeOrdine facade = new FacadeOrdine();
 			Ordine ordineCorrente = (Ordine) sessione.getAttribute("ordineCorrente");
 			ordineCorrente.setStato("chiuso");
-			inserito = facade.inserisciOrdine(ordineCorrente);
+			inserito = FacadeOrdine.inserisciOrdine(ordineCorrente);
 			
 			for(RigaOrdine r: ordineCorrente.getRigheOrdine())
-				inserito &= facade.inserisciRigaOrdine(r);
+				inserito &= FacadeOrdine.inserisciRigaOrdine(r);
 			
 			if(inserito)
 				destinazione = "inserimentoOrdineCompletato";

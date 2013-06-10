@@ -9,19 +9,18 @@ import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
 
 public class FacadeOrdine {
+	private static final DAO<Ordine> O_DAO = DAOFactory.getDAOFactory().getOrdineDAO();
+	private static final DAO<RigaOrdine> R_DAO = DAOFactory.getDAOFactory().getRigaOrdineDAO();
 	
-	public boolean inserisciOrdine(Ordine ordine){
-		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
-		return dao.insert(ordine);
+	public static boolean inserisciOrdine(Ordine ordine){
+		return O_DAO.insert(ordine);
 	}
 	
-	public boolean inserisciRigaOrdine(RigaOrdine rigaOrdine){
-		DAO<RigaOrdine> dao = DAOFactory.getDAOFactory().getRigaOrdineDAO();
-		return dao.insert(rigaOrdine);
+	public static boolean inserisciRigaOrdine(RigaOrdine rigaOrdine){
+		return R_DAO.insert(rigaOrdine);
 	}
 	
-	public List<Ordine> getOrdiniUtente(Utente utente){
-		DAO<Ordine> dao = DAOFactory.getDAOFactory().getOrdineDAO();
-		return dao.findByObject(utente);
+	public static List<Ordine> getOrdiniUtente(Utente utente){
+		return O_DAO.findByObject(utente);
 	}
 }

@@ -14,8 +14,15 @@ public class AzioneDettagliOrdine extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		HttpSession sessione = request.getSession();
 		
+		long id;
+		try {
+			id = Long.valueOf(request.getParameter("id"));
+		} catch (NumberFormatException e) {
+			return "erroreInserimento";
+		}
+		
 		for(Ordine ordine: (List<Ordine>) sessione.getAttribute("ordini"))
-			if(ordine.getId()==Long.valueOf(request.getParameter("id"))){
+			if(ordine.getId()==id){
 				sessione.setAttribute("righeOrdine", ordine.getRigheOrdine());
 				break;
 			}

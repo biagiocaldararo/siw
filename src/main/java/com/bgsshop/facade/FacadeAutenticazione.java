@@ -5,8 +5,9 @@ import com.bgsshop.persistence.DAO;
 import com.bgsshop.persistence.DAOFactory;
 
 public class FacadeAutenticazione {
-	public Utente login (String username, String password){
-		DAO<Utente> dao = DAOFactory.getDAOFactory().getUtenteDAO();
+	private static final DAO<Utente> dao = DAOFactory.getDAOFactory().getUtenteDAO();
+	
+	public static Utente login (String username, String password){
 		Utente utente = dao.findByString(username);
 		boolean autenticato = true;
 		

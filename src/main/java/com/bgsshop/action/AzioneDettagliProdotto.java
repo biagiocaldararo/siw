@@ -12,12 +12,12 @@ public class AzioneDettagliProdotto extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		long id;
 		try {
-			id = Long.parseLong(request.getParameter("id"));
+			id = Long.valueOf(request.getParameter("id"));
 		} catch (NumberFormatException e) {
-			return "dettagliProdotto";
+			return "erroreInserimento";
 		}
 		
-		Prodotto p = new FacadeProdotto().getProdotto(id);
+		Prodotto p = FacadeProdotto.getProdotto(id);
 		
 		request.setAttribute("prodotto", p);
 		return "dettagliProdotto";

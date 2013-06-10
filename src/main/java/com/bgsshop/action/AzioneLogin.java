@@ -13,10 +13,9 @@ public class AzioneLogin extends Azione{
 	public String esegui(HttpServletRequest request) throws ServletException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		FacadeAutenticazione facade = new FacadeAutenticazione();
 		
 		String destinazione = "loginFallito";
-		Utente utente = facade.login(username, password);
+		Utente utente = FacadeAutenticazione.login(username, password);
 	
 		if(utente!=null){
 			HttpSession sessione = request.getSession();

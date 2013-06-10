@@ -17,9 +17,9 @@ public class AzioneRimuoviProdottoDalCarrello extends Azione {
 		
 		long id;
 		try {
-			id = Long.parseLong(request.getParameter("id"));
+			id = Long.valueOf(request.getParameter("id"));
 		} catch (NumberFormatException e) {
-			return "carrello";
+			return "erroreInserimento";
 		}
 		
 		for (RigaOrdine riga : ordineCorrente.getRigheOrdine()) {
