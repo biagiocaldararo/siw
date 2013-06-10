@@ -3,10 +3,6 @@ package com.bgsshop.persistence;
 import java.util.Collection;
 import java.util.List;
 
-import com.bgsshop.model.RigaOrdine;
-
-// levare filter / get dall'interfaccia
-// sono troppo difficili per un DAO semplice
 public interface DAO<T> {
 	void insert(T object); 
 	void delete(T object); 

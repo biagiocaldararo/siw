@@ -31,4 +31,5 @@ CREATE TABLE prodotto (
 	prezzo float not null
 );
 
-vSJbCvv/YVMsFrqigmfmHLn6fPc4/zq6HbIOQIedTDY=$e7J3s1DPl91c/5ntRuVb9/0HvKZ3wEv/CogNKaaNCEg=
+ /* la password è "ciao" */
+INSERT INTO utente (username, password, ruolo) VALUES ("admin", "vSJbCvv/YVMsFrqigmfmHLn6fPc4/zq6HbIOQIedTDY=$e7J3s1DPl91c/5ntRuVb9/0HvKZ3wEv/CogNKaaNCEg=", "admin");

@@ -1,14 +1,11 @@
 package com.bgsshop.helper;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.bgsshop.model.Model;
-import com.bgsshop.model.Prodotto;
 
 public abstract class Helper<T extends Model> {
 	
@@ -18,12 +15,6 @@ public abstract class Helper<T extends Model> {
 	
 	protected Boolean isValid;
 	protected T object;
-	
-//	public void clean() {
-//		values = new HashMap<>();
-//		for (String field : getFields())
-//			values.put(field, request.getParameter(field));
-//	}
 	
 	public Helper(HttpServletRequest request, T object) {
 		this.data = new HashMap<>();
