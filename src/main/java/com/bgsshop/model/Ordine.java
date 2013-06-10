@@ -71,12 +71,12 @@ public class Ordine {
 	}
 	
 	public void eliminaRiga(long id){
-		for(RigaOrdine riga: this.righeOrdine){
+		for(RigaOrdine riga: this.righeOrdine)
 			if(riga.getProdotto().getId()==id) {
 				righeOrdine.remove(riga);
 				this.importo -= riga.getCosto();
+				break;
 			}
-		}
 	}
 
 	public double getImporto() {
