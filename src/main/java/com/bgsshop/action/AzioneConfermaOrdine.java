@@ -23,12 +23,12 @@ public class AzioneConfermaOrdine extends Azione {
 			
 			for(RigaOrdine r: ordineCorrente.getRigheOrdine())
 				inserito &= facade.inserisciRigaOrdine(r);
+			
+			if(inserito)
+				destinazione = "inserimentoOrdineCompletato";
+			else 
+			    destinazione = "erroreInserimento";
 		}
-		
-		if(inserito)
-			destinazione = "inserimentoOrdineCompletato";
-		else 
-		    destinazione = "erroreInserimento";
 		
 		sessione.removeAttribute("ordineCorrente");
 		

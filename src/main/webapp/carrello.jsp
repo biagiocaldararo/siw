@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.bgsshop.model.Ordine" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,7 +32,13 @@
 		<p></p>
 		<p>
 			<a href="nuovoOrdine.jsp">Indietro</a>
-			<a href="confermaOrdine.jsp">Procedi all'Acquisto</a>
+			<% 
+			   Ordine ordine = (Ordine) request.getSession().getAttribute("ordineCorrente");
+			   String s = "";
+			   if(ordine.getRigheOrdine().size()!=0) 
+				   s = "Procedi all'Acquisto";
+			 %>  
+			<a href="confermaOrdine.jsp"><%= s %></a>
 		</p>
 		</body>
 </html>
