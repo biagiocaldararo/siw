@@ -71,7 +71,7 @@ public class Controller extends HttpServlet {
 		this.esiti.put("loginFallito","/loginFallito.jsp");
 		this.esiti.put("homeAdmin","/homeAdmin.jsp");
 		this.esiti.put("catalogoProdotti","/catalogoProdotti.jsp");
-		this.esiti.put("dettaglioProdotto","/dettaglioProdotto.jsp");
+		this.esiti.put("dettagliProdotto","/dettagliProdotto.jsp");
 		this.esiti.put("inserimentoProdotto","/inserimentoProdotto.jsp");
 		this.esiti.put("confermaProdotto","/confermaProdotto.jsp");
 		this.esiti.put("inserimentoProdottoCompletato","/inserimentoProdottoCompletato.jsp");

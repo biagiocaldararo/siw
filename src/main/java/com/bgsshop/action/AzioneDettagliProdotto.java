@@ -14,12 +14,12 @@ public class AzioneDettagliProdotto extends Azione {
 		try {
 			id = Long.parseLong(request.getParameter("id"));
 		} catch (NumberFormatException e) {
-			return "dettaglioProdotto";
+			return "dettagliProdotto";
 		}
 		
 		Prodotto p = new FacadeProdotto().getProdotto(id);
 		
 		request.setAttribute("prodotto", p);
-		return "dettaglioProdotto";
+		return "dettagliProdotto";
 	}
 }
