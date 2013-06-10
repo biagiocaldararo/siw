@@ -9,10 +9,10 @@
 	</head>
 	<body>
 		<h1>Ordine:</h1>
-		<p>Codice: ${ordine.id}</p>
-		<p>Data: ${ordine.data}</p>
-		<p>Stato: ${ordine.stato}</p>
-		<p>Importo: ${ordine.importo}</p>
+		<p><b>Codice:</b> ${ordine.id}</p>
+		<p><b>Data:</b> ${ordine.data}</p>
+		<p><b>Stato:</b> ${ordine.stato}</p>
+		<p><b>Importo:</b> ${ordine.importo}</p>
 		<h2>Dettagli ordine:</h2>   
 		<table border = "4">
 			<tr>
