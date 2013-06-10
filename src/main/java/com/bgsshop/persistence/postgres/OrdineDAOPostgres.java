@@ -16,6 +16,7 @@ public class OrdineDAOPostgres implements DAO<Ordine> {
 	private DataSource data;
 	private IdBroker broker;
 	private final static String INSERT_QUERY = "insert into ordine(id, utente, data, stato, importo) values (?,?,?,?,?)";
+	private final static String FIND_QUERY = "select * from ordine where id = ?";
 	private final static String FIND_USER_QUERY = "select id, data, stato, importo from ordine where utente = ?";
 
 	public OrdineDAOPostgres() {
@@ -71,8 +72,17 @@ public class OrdineDAOPostgres implements DAO<Ordine> {
 
 	@Override
 	public Ordine findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Ordine ordine = null;		
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(FIND_QUERY)) {
+			stmt.setLong(1, id);
+			ResultSet r = stmt.executeQuery();
+			while (r.next()) 
+				ordine = new OrdineProxy(r.getLong("id"), r.getString("data"), r.getString("stato"), r.getDouble("importo"));
+		} catch (SQLException e) {
+			e.printStackTrace();				
+		}
+		return ordine;
 	}
 
 	@Override

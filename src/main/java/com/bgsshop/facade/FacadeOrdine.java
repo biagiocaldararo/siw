@@ -23,4 +23,8 @@ public class FacadeOrdine {
 	public static List<Ordine> getOrdiniUtente(Utente utente){
 		return O_DAO.findByObject(utente);
 	}
+	
+	public static Ordine getOrdine(long id){
+		return O_DAO.findById(id);
+	}
 }

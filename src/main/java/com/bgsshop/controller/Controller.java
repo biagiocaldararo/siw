@@ -68,6 +68,7 @@ public class Controller extends HttpServlet {
 		this.comandi.put("/logout.do","com.bgsshop.action.AzioneLogout");
 		this.comandi.put("/visualizzaOrdini.do","com.bgsshop.action.AzioneVisualizzaOrdini");
 		this.comandi.put("/dettagliOrdine.do","com.bgsshop.action.AzioneDettagliOrdine");
+		this.comandi.put("/evadiOrdine.do","com.bgsshop.action.AzioneVisualizzaOrdineDaEvadere");
 		this.esiti= new HashMap<String, String>();
 		this.esiti.put("loginFallito","/loginFallito.jsp");
 		this.esiti.put("homeAdmin","/homeAdmin.jsp");
@@ -84,5 +85,10 @@ public class Controller extends HttpServlet {
 		this.esiti.put("home","/home.jsp");
 		this.esiti.put("visualizzaOrdini","/visualizzaOrdini.jsp");
 		this.esiti.put("dettagliOrdine","/dettagliOrdine.jsp");
+		this.esiti.put("evasioneOrdine","/evasioneOrdine.jsp");
+		this.esiti.put("visualizzaOrdineDaEvadere","/visualizzaOrdineDaEvadere.jsp");
+		this.esiti.put("ordineNonTrovato","/ordineNonTrovato.jsp");
+		
+		
 	}
 }

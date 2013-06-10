@@ -23,6 +23,7 @@
 	<body>
 		<p><i>${utente.username} [${utente.ruolo}]</i> 
 		   <a href="logout.do">Logout</a></p>
-		<a href="inserimentoProdotto.jsp">Inserisci Prodotto</a>
+		<p><a href="inserimentoProdotto.jsp">Inserisci Prodotto</a></p>
+		<p><a href="evasioneOrdine.jsp">Segnala Evasione Ordine</a></p>
 	</body>
 </html>
