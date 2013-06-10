@@ -15,6 +15,13 @@ public class RigaOrdine {
 		this.setCosto(this.quantita*this.prodotto.getPrezzo());
 	}
 	
+	public RigaOrdine(long id, Prodotto prodotto, int quantita, double costo){
+		this.setId(id);
+		this.setProdotto(prodotto);
+		this.setQuantita(quantita);
+		this.setCosto(costo);
+	}
+	
 	public Long getId() {
 		return id;
 	}

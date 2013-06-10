@@ -12,7 +12,7 @@ public class AzioneVisualizzaOrdini extends Azione {
 	public String esegui(HttpServletRequest request) throws ServletException {
 		HttpSession sessione = request.getSession();
 		FacadeOrdine facade = new FacadeOrdine();
-		request.setAttribute("ordini", facade.getOrdiniUtente((Utente) sessione.getAttribute("utente")));
+		sessione.setAttribute("ordini", facade.getOrdiniUtente((Utente) sessione.getAttribute("utente")));
 		
 		return "visualizzaOrdini";
 	}

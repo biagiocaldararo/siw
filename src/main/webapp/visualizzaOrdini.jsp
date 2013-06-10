@@ -15,6 +15,7 @@
 				<th>Data</th>
 				<th>Stato</th>
 				<th>Importo</th>
+				<th></th>
 			</tr>			
 			<c:forEach var="ordine" items ="${ordini}">
 				<tr>
@@ -22,6 +23,7 @@
 					<td>${ordine.data}</td>
 					<td>${ordine.stato}</td>
 					<td>${ordine.importo}</td>
+					<td><a href="dettagliOrdine.do?id=${ordine.id}">Dettagli</a></td>
 			   	</tr>
 			</c:forEach>
 		</table>
