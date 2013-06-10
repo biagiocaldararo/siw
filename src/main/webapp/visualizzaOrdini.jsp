@@ -25,5 +25,6 @@
 			   	</tr>
 			</c:forEach>
 		</table>
+		<a href="homeCustomer.jsp">Indietro</a>
 	</body>
 </html>

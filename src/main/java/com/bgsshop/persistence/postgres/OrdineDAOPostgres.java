@@ -84,7 +84,7 @@ public class OrdineDAOPostgres implements DAO<Ordine> {
 			stmt.setLong(1, utente.getId());
 			ResultSet r = stmt.executeQuery();
 			while (r.next()) {
-				Ordine ordine = new Ordine(r.getLong("id"), r.getString("data"), r.getString("stato"), r.getDouble("importo"));
+				Ordine ordine = new OrdineProxy(r.getLong("id"), r.getString("data"), r.getString("stato"), r.getDouble("importo"));
 				ordini.add(ordine);
 			}
 		} 
