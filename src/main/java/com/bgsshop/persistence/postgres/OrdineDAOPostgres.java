@@ -15,11 +15,12 @@ import com.bgsshop.persistence.DataSource;
 public class OrdineDAOPostgres implements DAO<Ordine> {
 	private DataSource data;
 	private IdBroker broker;
-	private final static String INSERT_QUERY = "insert into ordine(id, utente, data, stato, importo) values (?,?,?,?,?)";
+	private final static String INSERT_QUERY = "insert into ordine (id, utente, data, stato, importo) values (?,?,?,?,?)";
 	private final static String FIND_QUERY = "select * from ordine where id = ?";
 	private final static String FIND_USER_QUERY = "select id, data, stato, importo from ordine where utente = ?";
+	private final static String UPDATE_QUERY = "update ordine set stato = ? where id = ?";
 
-	public OrdineDAOPostgres() {
+	public OrdineDAOPostgres() {       
 		data = new DataSourcePostgres();
 		broker = new IdBroker("ordine_id_seq");
 	}
@@ -53,9 +54,17 @@ public class OrdineDAOPostgres implements DAO<Ordine> {
 	}
 
 	@Override
-	public boolean update(Ordine Ordine) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Ordine ordine) {
+		int aggiornato= 0;
+		try (Connection conn = data.getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(UPDATE_QUERY)) {
+			stmt.setString(1, ordine.getStato());
+			stmt.setLong(2, ordine.getId());
+			aggiornato = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();	
+		}
+		return aggiornato!=0;
 	}
 
 	@Override

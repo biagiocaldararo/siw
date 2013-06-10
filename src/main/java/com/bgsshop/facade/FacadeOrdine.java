@@ -27,4 +27,8 @@ public class FacadeOrdine {
 	public static Ordine getOrdine(long id){
 		return O_DAO.findById(id);
 	}
+	
+	public static boolean aggiornaOrdine(Ordine ordine){
+		return O_DAO.update(ordine);
+	}
 }

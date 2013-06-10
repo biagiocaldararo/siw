@@ -33,6 +33,7 @@
 			</c:forEach>
 		</table>
 		<p></p>
-		<a href="evasioneOrdine.jsp">Indietro</a>
+		<p><a href="evasioneOrdine.jsp">Indietro</a></p>
+		<p><a href="confermaEvasione.jsp">Segnala Ordine Evaso</a></p>
 	</body>
 </html>
